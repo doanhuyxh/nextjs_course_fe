@@ -1,0 +1,67 @@
+.ql-font-arial {
+    font-family: Arial, sans-serif;
+}
+.ql-font-georgia {
+    font-family: Georgia, serif;
+}
+.ql-font-impact {
+    font-family: Impact, sans-serif;
+}
+.ql-font-tahoma {
+    font-family: Tahoma, sans-serif;
+}
+.ql-font-times-new-roman {
+    font-family: "Times New Roman", serif;
+}
+.ql-font-verdana {
+    font-family: Verdana, sans-serif;
+}
+
+.ql-size-small {
+    font-size: 0.75em;
+}
+.ql-size-normal {
+    font-size: 1em;
+}
+.ql-size-large {
+    font-size: 1.5em;
+}
+.ql-size-huge {
+    font-size: 2.5em;
+}
+
+#editorjs {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    background-color: #fff;
+    font-family: Arial, sans-serif;
+    min-height: 300px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .editor-toolbar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .editor-toolbar button {
+    background: #f4f4f4;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .editor-toolbar button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .editor-toolbar button.active {
+    background-color: #d4d4d4;
+    font-weight: bold;
+  }
+  

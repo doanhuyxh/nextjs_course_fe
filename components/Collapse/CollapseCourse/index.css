@@ -1,0 +1,38 @@
+.collapseContainer{
+    background-color: #fff;
+    cursor: pointer;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.txt_title{
+    font-size: var(--f-sz-name);
+    font-weight: 600;
+    max-width: 80%;
+}
+
+
+.tag-pro {
+    background: radial-gradient(50% 50% at 50% 50%, #2072c9 0, #103863 100%);
+    border: .1rem solid #c09148;
+    color: #f5d31e;
+}
+
+
+@media screen and (width <= 800px) {
+    .d-none{
+        display: none !important;
+    }
+    .txt_title{
+        font-size: 1.4rem;
+    }
+    .text_mobile{
+        font-size: 1.1rem;
+    }
+}
+
+
+@media screen and (width > 1200px) {
+    .title_course{
+        margin-bottom: 8px;
+    }
+}
