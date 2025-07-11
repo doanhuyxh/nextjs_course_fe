@@ -4,7 +4,7 @@ import fetchData from '@/libs/configs/fetchDataServer';
 
 import dynamic from "next/dynamic";
 import {cookies} from "next/headers";
-import '../_styles/home_khanh_hung.css'
+import '@/styles/home_khanh_hung.css'
 import fetchDataServer from "@/libs/configs/fetchDataServer";
 import { redirect } from 'next/navigation';
 

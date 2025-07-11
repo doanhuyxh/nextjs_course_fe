@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
-import TrackingSeo from "../../components/TrackingSeo";
-const Header = dynamic(() => import("../../components/Header/CustomerKhanhHung"));
-import "../_styles/study.css";
+import TrackingSeo from "@/components/TrackingSeo";
+const Header = dynamic(() => import("@/components/Header/CustomerKhanhHung"));
+import "@/styles/study.css";
 
 export default async function LearnLayout({ children }: { children: React.ReactNode }) {
 

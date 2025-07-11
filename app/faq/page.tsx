@@ -1,4 +1,4 @@
-import '../_styles/home_khanh_hung.css'
+import '@/styles/home_khanh_hung.css'
 
 import dynamic from "next/dynamic";
 const Header = dynamic(() => import('@/components/Header/CustomerKhanhHung'));
