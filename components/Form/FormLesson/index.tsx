@@ -1,4 +1,5 @@
-import { ImageUpload, VideoUpload, FileUploadPDF } from "@/components/FileHandle";
+import { ImageUpload,  FileUploadPDF } from "@/components/FileHandle";
+import VideoUploadFull from "@/components/FileHandle/video/uploadFullVideo";
 import EditorReactQuill from "../../Editor/ReactQuill";
 import { LessonItem } from "@/libs/types";
 import { generateSlug } from "@/libs/utils";
@@ -127,7 +128,7 @@ export default function FormLesson({ lesson, setLesson, saveLesson }: { lesson: 
             </div>
 
             {lessonTemp.type === "video" && (<div className="flex flex-col gap-2">
-                <VideoUpload initialLink={lessonTemp.video} onChange={(value) => setLessonTemp({ ...lessonTemp, video: value })} setDuration={(value) => setLessonTemp({ ...lessonTemp, duration: value })} />
+                <VideoUploadFull initialLink={lessonTemp.video} onChange={(value) => setLessonTemp({ ...lessonTemp, video: value })} setDuration={(value) => setLessonTemp({ ...lessonTemp, duration: value })} />
             </div>
             )}
 

@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ImageUpload, VideoUpload } from "@/components/FileHandle";
+import { ImageUpload } from "@/components/FileHandle";
+import VideoUploadFull from "@/components/FileHandle/video/uploadFullVideo";
 import { EditorReactQuill } from "@/components/Editor";
 import axiosInstance, { postFormData } from "@/libs/configs/axiosAdminConfig";
 import toast from "react-hot-toast";
@@ -165,7 +166,7 @@ export default function CourseForm() {
 
                         <ImageUpload initialLink={course.Image} onChange={(value) => setCourse({ ...course, Image: value })} />
 
-                        <VideoUpload setDuration={()=>{}} initialLink={course.VideoIntro} onChange={(value) => setCourse({ ...course, VideoIntro: value })} />
+                        <VideoUploadFull setDuration={()=>{}} initialLink={course.VideoIntro} onChange={(value) => setCourse({ ...course, VideoIntro: value })} />
 
                         <div className="flex justify-end">
                             <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600" onClick={HandleSaveCourse}>
