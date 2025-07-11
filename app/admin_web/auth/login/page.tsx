@@ -8,7 +8,7 @@ import axiosInstance from '@/libs/configs/axiosAdminConfig';
 import { ResponseData } from '@/libs/types';
 
 export default function Login() {
-    const [email, setEmail] = useState<string>('admin@gmail.comin');
+    const [email, setEmail] = useState<string>('admin@gmail.com');
     const [password, setPassword] = useState<string>('dantrivn');
     const router = useRouter()
 
