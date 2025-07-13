@@ -3,7 +3,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { Button, Input, Table, Dropdown, Space, message, Spin, Menu, Popconfirm } from 'antd';
 import type { MenuProps } from 'antd';
 import { useRouter } from 'next/navigation';
-import axiosInstance from '@/libs/configs/axiosAdminConfig';
+import axiosInstance from '@/libs/configs/ApiConfig/axiosAdminConfig';
 import { ResponseData } from "@/libs/types";
 
 export default function Course() {

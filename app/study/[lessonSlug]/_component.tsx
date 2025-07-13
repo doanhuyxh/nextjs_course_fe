@@ -5,7 +5,7 @@ import VideoPlayer from "@/components/LessonViewControl/VideoLessonPlayer"
 import {LessonList} from "@/components/Lesson";
 import {LessonItem} from "@/libs/types";
 
-import axiosCustomerConfig from "@/libs/configs/axiosCustomerConfig";
+import axiosCustomerConfig from "@/libs/configs/ApiConfig/axiosCustomerConfig";
 import Loading from "@/components/Loading";
 import PdfLessonView from "@/components/LessonViewControl/PdfLessonView";
 

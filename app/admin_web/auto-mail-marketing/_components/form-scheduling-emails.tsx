@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Form, Input, Select, TimePicker, DatePicker, Row, Col } from 'antd';
 import { ConditionSelected } from "@/libs/types";
-import axiosInstance from "@/libs/configs/axiosAdminConfig";
+import axiosInstance from "@/libs/configs/ApiConfig/axiosAdminConfig";
 import ConditionSelector from "@/components/ConditionSelectAutoMail";
 import moment from "moment";
 

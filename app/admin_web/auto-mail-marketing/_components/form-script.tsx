@@ -1,7 +1,7 @@
 
 import React, {useEffect, useState} from "react";
 import {Button, Form, Input, Modal, Select, Switch} from "antd";
-import axiosInstance from "@/libs/configs/axiosAdminConfig";
+import axiosInstance from "@/libs/configs/ApiConfig/axiosAdminConfig";
 import {ConditionSelected, ResponseData, ScriptAutoEmailMarketing} from "@/libs/types";
 import ConditionSelector from "@/components/ConditionSelectAutoMail";
 import toast from "react-hot-toast";

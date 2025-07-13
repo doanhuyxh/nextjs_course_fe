@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import axiosCustomerConfig from '@/libs/configs/axiosCustomerConfig';
+import axiosCustomerConfig from '@/libs/configs/ApiConfig/axiosCustomerConfig';
 
 interface ImageUploadProps {
   initialLink: string;
@@ -23,13 +23,13 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ initialLink = "", onChange })
     if (file) {
       const formData = new FormData();
       formData.append('file', file);
-      const res = await axiosCustomerConfig.post('/upload/image', formData, {
+      const res = await axiosCustomerConfig.post('/upload/image_safe_host', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
-      setImageUrl(res.data)
-      onChange(res.data)
+      setImageUrl(`${process.env.MEDIA_UPLOAD_URL}${res.data}`);
+      onChange(`${process.env.MEDIA_UPLOAD_URL}${res.data}`)
     }
   };
 

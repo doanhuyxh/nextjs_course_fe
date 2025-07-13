@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import EditorReactQuill from "@/components/Editor/ReactQuill";
 import { Modal, Input, Button, Select, message } from "antd";
-import axiosAdminConfig from "@/libs/configs/axiosAdminConfig";
+import axiosAdminConfig from "@/libs/configs/ApiConfig/axiosAdminConfig";
 const { Option } = Select;
 
 export default function AddTemplate({ openModal, setOpenModal, reloadPage }: { openModal: boolean, setOpenModal: () => void, reloadPage: () => void }) {

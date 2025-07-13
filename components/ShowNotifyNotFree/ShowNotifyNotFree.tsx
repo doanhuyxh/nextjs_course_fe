@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import Image from "next/image";
 
 import ButtonUpgrade from "../Button/ButtonUpgrade";
-import axiosCustomerConfig from "@/libs/configs/axiosCustomerConfig";
+import axiosCustomerConfig from "@/libs/configs/ApiConfig/axiosCustomerConfig";
 
 export default function ShowNotifyNotFree() {
 

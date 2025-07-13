@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { Customer } from "@/libs/types";
-import axiosInstance from "@/libs/configs/axiosAdminConfig";
+import axiosInstance from "@/libs/configs/ApiConfig/axiosAdminConfig";
 import { formatTime } from "@/libs/utils";
 import { useRouter } from "next/navigation";
 import { Table, Input, Button, Pagination, Avatar, Space, Popconfirm, Breadcrumb, DatePicker, Modal, Select } from "antd";

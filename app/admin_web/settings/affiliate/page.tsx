@@ -2,7 +2,7 @@
 
 import { EditorReactQuill } from "@/components/Editor";
 import Editor from "@/components/Editor/Editor";
-import axiosInstance from "@/libs/configs/axiosAdminConfig";
+import axiosInstance from "@/libs/configs/ApiConfig/axiosAdminConfig";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 

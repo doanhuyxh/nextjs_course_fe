@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from 'react-hot-toast';
-import axiosInstance from "@/libs/configs/axiosAdminConfig";
+import axiosInstance from "@/libs/configs/ApiConfig/axiosAdminConfig";
 import { ResponseData } from "@/libs/types";
 
 export default function ForgotPassword(){

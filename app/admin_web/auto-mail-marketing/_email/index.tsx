@@ -3,7 +3,7 @@
 import {useEffect, useState} from "react";
 import {Table, Space, Button, Switch} from 'antd';
 import {ResponseData} from "@/libs/types";
-import axiosInstance from "@/libs/configs/axiosAdminConfig";
+import axiosInstance from "@/libs/configs/ApiConfig/axiosAdminConfig";
 
 
 

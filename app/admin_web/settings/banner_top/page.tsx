@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Table, Button, Modal, Input, Select, Space, notification } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import axiosInstance from '@/libs/configs/axiosAdminConfig';
+import axiosInstance from '@/libs/configs/ApiConfig/axiosAdminConfig';
 import { BannerHeaderTop } from '../../../../libs/types';
 
 const { Option } = Select;

@@ -7,7 +7,7 @@ import Loading from "@/components/Loading"
 import {FormNotification} from "@/components/Form"
 import ModalScroll from "@/components/Modal/ModalScroll"
 import {unixToDatetime, dateToUnixTimestamp} from "@/libs/utils"
-import axiosInstance, {postFormData} from "@/libs/configs/axiosAdminConfig"
+import axiosInstance, {postFormData} from "@/libs/configs/ApiConfig/axiosAdminConfig"
 import Pagination from "@/components/Pagination"
 import {DataPage} from "@/libs/types"
 

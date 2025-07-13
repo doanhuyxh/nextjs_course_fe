@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Table, message, Button, Popconfirm } from "antd";
-import axiosAdminConfig from "@/libs/configs/axiosAdminConfig";
+import axiosAdminConfig from "@/libs/configs/ApiConfig/axiosAdminConfig";
 import { TemplateMail } from "@/libs/types";
 
 import AddTemplate from "./_components/add_template";

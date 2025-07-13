@@ -3,7 +3,7 @@
 import React, {useEffect, useState} from "react";
 import {Table, Button, Space, Modal, Form, Input, Tooltip, Avatar, Checkbox, Select, DatePicker} from "antd";
 import {GroupUser, ResponseData} from "@/libs/types";
-import axiosInstance from "@/libs/configs/axiosAdminConfig";
+import axiosInstance from "@/libs/configs/ApiConfig/axiosAdminConfig";
 import {formatTime} from "@/libs/utils";
 import {toast} from "react-hot-toast";
 import moment from "moment";

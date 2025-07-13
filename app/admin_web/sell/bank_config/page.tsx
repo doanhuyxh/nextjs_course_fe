@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Form, Input, Button, Card, InputNumber } from 'antd';
-import axiosInstance from '@/libs/configs/axiosAdminConfig';
+import axiosInstance from '@/libs/configs/ApiConfig/axiosAdminConfig';
 import toast from 'react-hot-toast';
 
 export default function BankConfig() {

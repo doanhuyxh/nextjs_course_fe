@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ImageUpload } from "@/components/FileHandle";
-import VideoUploadFull from "@/components/FileHandle/video/uploadFullVideo";
+import  ImageUpload from "@/components/FileHandle/Image";
+import VideoUploadFull from "@/components/FileHandle/video";
 import { EditorReactQuill } from "@/components/Editor";
-import axiosInstance, { postFormData } from "@/libs/configs/axiosAdminConfig";
+import axiosInstance, { postFormData } from "@/libs/configs/ApiConfig/axiosAdminConfig";
 import toast from "react-hot-toast";
 import { generateSlug } from "@/libs/utils";
 

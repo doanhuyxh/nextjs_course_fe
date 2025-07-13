@@ -9,7 +9,8 @@ import Table from '@tiptap/extension-table'
 import TableRow from '@tiptap/extension-table-row'
 import TableCell from '@tiptap/extension-table-cell'
 import TableHeader from '@tiptap/extension-table-header'
-import { ImageUpload, VideoUpload } from '@/components/FileHandle'
+import ImageUpload from '../FileHandle/Image'
+import VideoUpload from '@/components/FileHandle/video'
 import { useState } from 'react'
 
 const Tiptap = ({ value = '' }) => {

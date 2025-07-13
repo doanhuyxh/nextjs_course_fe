@@ -33,7 +33,6 @@ const menuGroups = [
         route: "#",
         children: [
           { label: "Khoá học", route: "/admin_web/course" },
-          { label: "Bình luận", route: "/admin_web/course/lesson-comments" },
         ],
       },
     ],
@@ -52,20 +51,6 @@ const menuGroups = [
       },
     ],
   },
-  // {
-  //   name: "",
-  //   menuItems: [
-  //     {
-  //       icon: <i className="fa-solid fa-users"></i>,
-  //       label: "Chăm sóc khách hàng",
-  //       route: "#",
-  //       children: [
-  //         // { label: "Thông báo", route: "/admin_web/customer/notification" },
-  //         // { label: "Ticket", route: "/admin_web/customer/ticket" },
-  //       ],
-  //     },
-  //   ],
-  // },
   {
     name: "",
     menuItems: [

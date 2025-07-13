@@ -1,21 +1,21 @@
 
 import type { Metadata } from 'next'
-import fetchData from '@/libs/configs/fetchDataServer';
+import fetchData from '@/libs/configs/ApiConfig/fetchDataServer';
 
 import dynamic from "next/dynamic";
-import {cookies} from "next/headers";
+import { cookies } from "next/headers";
 import '@/styles/home_khanh_hung.css'
-import fetchDataServer from "@/libs/configs/fetchDataServer";
+import fetchDataServer from "@/libs/configs/ApiConfig/fetchDataServer";
 import { redirect } from 'next/navigation';
 
 const LessonList = dynamic(() => import('@/components/Lesson/LessonList/LessonList'))
-const FormAuth = dynamic(() => import('@/components/HomePageSection/KhanhHung/BannerReceive/FormAuth'))
+const FormAuth = dynamic(() => import('@/components/HomePageSection/AuthTabs'))
 
 
-const response = await fetchData('/public/seo', '');
+const response = await fetchData('/public/seo');
 const data = JSON.parse(response.data);
 export const metadata: Metadata = {
-    title:data.title,
+    title: data.title,
     description: data.description,
     keywords: data.keywords,
     openGraph: {
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
         title: data.title,
         description: data.description,
         card: 'summary_large_image',
-        images:[
+        images: [
             {
                 url: data.logo,
                 alt: data.title,
@@ -53,7 +53,7 @@ export default async function StudyPage() {
     const isLogin = accToken ? true : false
 
     if (isLogin) {
-        const res = await fetchDataServer('/course/get-last-lesson',(await cookies()).toString())
+        const res = await fetchDataServer('/course/get-last-lesson')
         if (res.code === 200) {
             redirect(`/study/${res.data}`);
 
@@ -65,7 +65,7 @@ export default async function StudyPage() {
     return (
         <div className=" max-w-[2100px] m-auto flex flex-col lg:flex-row justify-center items-center gap-20 mt-10 lg:mt-20">
             <div className="">
-                <FormAuth/>
+                <FormAuth />
             </div>
             <div className="video_list lg:w-1/3 w-full max-w-[600px]">
                 <LessonList

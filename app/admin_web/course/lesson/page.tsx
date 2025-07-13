@@ -4,7 +4,7 @@ import { ReactSortable } from "react-sortablejs";
 import { useCallback, useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 
-import axiosInstance, { postFormData } from '@/libs/configs/axiosAdminConfig';
+import axiosInstance, { postFormData } from '@/libs/configs/ApiConfig/axiosAdminConfig';
 import Loading from '@/components/Loading';
 import ModalScroll from '@/components/Modal/ModalScroll';
 import { FormLesson } from '@/components/Form';

@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { Collapse, Input, Form, Button, Row, Col, Select } from "antd";
-import axiosInstance from "@/libs/configs/axiosAdminConfig";
+import axiosInstance from "@/libs/configs/ApiConfig/axiosAdminConfig";
 import { ResponseData } from "@/libs/types";
 import toast from "react-hot-toast";
 

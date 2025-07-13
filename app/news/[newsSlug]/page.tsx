@@ -1,4 +1,4 @@
-import fetchData from "@/libs/configs/fetchDataServer";
+import fetchData from "@/libs/configs/ApiConfig/fetchDataServer";
 
 
 type Props = {

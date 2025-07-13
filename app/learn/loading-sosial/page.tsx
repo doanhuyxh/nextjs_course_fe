@@ -2,15 +2,17 @@
 
 import { useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import axiosCustomerConfig from '@/libs/configs/axiosCustomerConfig';
+import axiosCustomerConfig from '@/libs/configs/ApiConfig/axiosCustomerConfig';
+import { cookies } from 'next/headers';
 export default function LoadingSocial() {
   const query = useSearchParams();
   const code = query.get("code");
   const router = useRouter();
   const ChangeStudyPage = async () => {
-      const response = await axiosCustomerConfig.get("/course/get-last-lesson");
-      const data = response.data;
-      window.location.href = `/study/${data}`;
+    const response = await axiosCustomerConfig.get("/course/get-last-lesson");
+    console.log(response.data);
+    const data = response.data;
+    //window.location.href = `/study/${data}`;
   }
 
   useEffect(() => {
@@ -18,6 +20,9 @@ export default function LoadingSocial() {
       axiosCustomerConfig.get(`/Auth/google-callback?code=${code}`)
         .then((response: any) => {
           if (response.code === 200) {
+            localStorage.setItem("RefreshToken", response.data.refreshToken);
+            // set cookies
+            document.cookie = `AccessToken=${response.data.accessToken}; path=/;`;
             ChangeStudyPage()
           } else {
             router.push('/');

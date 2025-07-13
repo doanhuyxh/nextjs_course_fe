@@ -6,7 +6,7 @@ import HeaderMenuItem from "./HeaderMenuItem";
 import Auth from "./Auth";
 
 import { Customer } from "@/libs/types";
-import axiosCustomerConfig from "@/libs/configs/axiosCustomerConfig";
+import axiosCustomerConfig from "@/libs/configs/ApiConfig/axiosCustomerConfig";
 import { useSearchParams, usePathname } from "next/navigation";
 
 // Định nghĩa kiểu dữ liệu cho item trong menu

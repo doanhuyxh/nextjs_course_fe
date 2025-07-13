@@ -1,10 +1,10 @@
 import { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import { cookies } from 'next/headers'
-import fetchData from '@/libs/configs/fetchDataServer'
+import fetchData from '@/libs/configs/ApiConfig/fetchDataServer'
 import { LessonItem } from '@/libs/types'
 const LessonList = dynamic(() => import('@/components/Lesson/LessonList/LessonList'))
-const FormAuth = dynamic(() => import('@/components/HomePageSection/KhanhHung/BannerReceive/FormAuth'))
+const FormAuth = dynamic(() => import('@/components/HomePageSection/AuthTabs'))
 
 const StudyPageComponent = dynamic(() => import('./_component'), { ssr: true })
 
@@ -13,7 +13,7 @@ type Props = {
 }
 
 export async function getLessonData(lessonSlug: string): Promise<LessonItem> {
-  const response = await fetchData(`/public/get-lesson-share?slug=${lessonSlug}`, '')
+  const response = await fetchData(`/public/get-lesson-share?slug=${lessonSlug}`)
   return response.data
 }
 

@@ -5,9 +5,9 @@ import Image from "next/image";
 import BlockItem from "./BlockItem";
 import { useEffect, useState } from "react";
 import { Customer } from "@/libs/types";
-import axiosCustomerConfig from "@/libs/configs/axiosCustomerConfig";
+import axiosCustomerConfig from "@/libs/configs/ApiConfig/axiosCustomerConfig";
 import Link from "next/link";
-import { getLastStudyLesion } from "@/_libs/services/ApiCustomerServices";
+import { getLastStudyLesion } from "@/libs/services/ApiCustomerServices";
 import { useRouter } from "next/navigation";  
 
 function Sidebar() {

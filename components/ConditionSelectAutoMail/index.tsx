@@ -7,7 +7,6 @@ import {switch_display_label, switch_display_subLabel, switch_display_value} fro
 
 
 const ConditionSelector = ({data, onChange, intData}) =>{
-    const conditionRef = useRef(null);
     const [selectedCondition, setSelectedCondition] = useState<ConditionSelected>({
         label: '',
         subLabel: '',

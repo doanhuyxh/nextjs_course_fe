@@ -5,7 +5,7 @@ import {Card, Row, Col, Statistic} from 'antd';
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Label} from 'recharts';
 import {DatePicker} from 'antd';
 import moment from 'moment';
-import axiosInstance from '@/libs/configs/axiosAdminConfig';
+import axiosInstance from '@/libs/configs/ApiConfig/axiosAdminConfig';
 
 const {MonthPicker, YearPicker} = DatePicker;
 

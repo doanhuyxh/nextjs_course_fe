@@ -3,7 +3,7 @@
 import './index.css'
 import Image from "next/image";
 import {useEffect, useState} from 'react';
-import axiosCustomerConfig from "@/libs/configs/axiosCustomerConfig";
+import axiosCustomerConfig from "@/libs/configs/ApiConfig/axiosCustomerConfig";
 export default function Footer(){
     const [logo, setLogo] = useState<string>('')
     useEffect(()=>{

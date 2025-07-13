@@ -2,7 +2,7 @@
 
 import {Table, Tag, Select, DatePicker, Popconfirm, Button} from 'antd';
 import React, {useEffect, useState} from 'react';
-import axiosInstance from "@/libs/configs/axiosAdminConfig";
+import axiosInstance from "@/libs/configs/ApiConfig/axiosAdminConfig";
 import {ResponseData, Customer, TemplateMail} from "@/libs/types";
 import {formatTime} from "@/libs/utils";
 import dayjs from "dayjs";

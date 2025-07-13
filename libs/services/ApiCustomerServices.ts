@@ -1,4 +1,4 @@
-import axiosCustomerConfig from "../configs/axiosCustomerConfig";
+import axiosCustomerConfig from "@/libs/configs/ApiConfig/axiosCustomerConfig";
 
 
 const getLastStudyLesion = async () => {

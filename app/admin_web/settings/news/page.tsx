@@ -1,7 +1,7 @@
 'use client'
 
 import {useState, useEffect} from 'react';
-import axiosInstance from '@/libs/configs/axiosAdminConfig';
+import axiosInstance from '@/libs/configs/ApiConfig/axiosAdminConfig';
 import toast from 'react-hot-toast';
 import {Page} from '@/libs/types';
 import EditorReactQuill from '@/components/Editor/ReactQuill';

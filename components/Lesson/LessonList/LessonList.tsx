@@ -5,7 +5,7 @@ import { CollapseCourse } from "@/components/Collapse";
 import TabButtons from "./TabButtons";
 import Description from "./Description";
 import {CourseData, LessonData} from "@/libs/types";
-import axiosCustomerConfig from "@/libs/configs/axiosCustomerConfig";
+import axiosCustomerConfig from "@/libs/configs/ApiConfig/axiosCustomerConfig";
 
 
 const LessonList = () => {

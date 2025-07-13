@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import axiosInstance from "@/libs/configs/axiosAdminConfig";
+import axiosInstance from "@/libs/configs/ApiConfig/axiosAdminConfig";
 import { Seo } from "@/libs/types";
 import FileUploadImage from "@/components/FileHandle/FileUploadImage";
 

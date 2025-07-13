@@ -1,7 +1,7 @@
 import GuestActions from './Actions/GuestActions';
 import UserActions from './Actions/UserActions';
 import { Customer } from '@/libs/types';
-import fetchDataServer from "@/libs/configs/fetchDataServer";
+import fetchDataServer from "@/libs/configs/ApiConfig/fetchDataServer";
 import { cookies } from 'next/headers'
 
 const Auth = async () => {

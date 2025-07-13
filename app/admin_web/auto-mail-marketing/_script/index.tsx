@@ -17,7 +17,7 @@ import {
 } from '@dnd-kit/sortable';
 import {CSS} from '@dnd-kit/utilities';
 import {ResponseData, ScriptAutoEmailMarketing, ScriptAutoSchedulingEmails} from "@/libs/types";
-import axiosInstance from "@/libs/configs/axiosAdminConfig";
+import axiosInstance from "@/libs/configs/ApiConfig/axiosAdminConfig";
 import {Button, Card, Col, Row, Space, Tooltip} from "antd";
 import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
 import ScriptItem from "@/app/admin_web/auto-mail-marketing/_components/script-item";

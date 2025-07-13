@@ -28,7 +28,7 @@ export default function FileUploadPDF({ initialLink, onChange }: FileUploadPDFPr
         const formData = new FormData();
         formData.append("file", file!);
         setIsUploading(true)
-        fetch(`${process.env.API_URL}/api/v1/upload/pdf`, {
+        fetch(`${process.env.API_URL}/api/v1/upload/pdf_safe_host`, {
             method: "POST",
             body: formData
         }).then(res => res.json()).then(res => {

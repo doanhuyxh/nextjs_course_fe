@@ -1,5 +1,5 @@
 import { ImageUpload,  FileUploadPDF } from "@/components/FileHandle";
-import VideoUploadFull from "@/components/FileHandle/video/uploadFullVideo";
+import VideoUploadFull from "@/components/FileHandle/video";
 import EditorReactQuill from "../../Editor/ReactQuill";
 import { LessonItem } from "@/libs/types";
 import { generateSlug } from "@/libs/utils";
