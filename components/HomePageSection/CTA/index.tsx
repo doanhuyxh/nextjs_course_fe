@@ -14,11 +14,10 @@ export default function CTA() {
                     </p>
                     <div className="flex flex-col sm:flex-row gap-3.5 items-center">
                         <Button
-                            variant="primary"
                             size="lg"
-                            className="bg-white text-[#16a34a] shadow-[0px_8px_10px_#00000019] rounded-xl"
+                            className="bg-white !text-[#16a34a] rounded-xl hover:!bg-[#f0fdf4] hover:!text-[#15803d] transition-colors duration-200"
                             leftImage={{
-                                src: "/images_v2/img_svg_green_700.svg",
+                                src: "/images_v2/img_svg_amber_a200_v2.svg",
                                 width: 24,
                                 height: 24
                             }}
