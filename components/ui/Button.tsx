@@ -96,7 +96,6 @@ const Button: React.FC<ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElemen
         inline-flex
         items-center
         justify-center
-        min-h-[44px] sm:min-h-[48px]
         touch-manipulation
         ${className}
       `.trim().replace(/\s+/g, ' ')}

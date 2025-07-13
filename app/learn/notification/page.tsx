@@ -1,7 +1,7 @@
 'use client'
 
 import Pagination from "@/components/Pagination";
-import axiosCustomerConfig from "@/libs/configs/axiosCustomerConfig";
+import axiosCustomerConfig from "@/libs/configs/ApiConfig/axiosCustomerConfig";
 import ModalViewHtml from "@/components/Modal/ModalViewHtml";
 import { formatTime } from "@/libs/utils";
 import { NotificationItem } from "@/libs/types";

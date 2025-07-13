@@ -13,7 +13,7 @@ type Props = {
 }
 
 export async function getLessonData(lessonSlug: string): Promise<LessonItem> {
-  const response = await fetchData(`/public/get-lesson-share?slug=${lessonSlug}`)
+  const response = await fetchData(`/public/get-lesson-share?slug=${lessonSlug}`, '');
   return response.data
 }
 

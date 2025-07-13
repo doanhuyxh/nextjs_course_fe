@@ -1,6 +1,6 @@
 'use client';
 
-import axiosCustomerConfig from "@/libs/configs/axiosCustomerConfig";
+import axiosCustomerConfig from "@/libs/configs/ApiConfig/axiosCustomerConfig";
 import React, { useEffect, useState } from "react";
 
 const HeaderNews = () => {

@@ -1,3 +1,5 @@
+import { replace } from "lodash";
+
 function unixToDatetime(unixTimestamp: number) {
   const date = new Date(unixTimestamp * 1000);
 
@@ -32,20 +34,22 @@ function formatTime(time: string) {
     ":" +
     String(date.getSeconds()).padStart(2, "0");
 
-    return formattedDate;
+  return formattedDate;
 }
-
 function generateSlug(title: string) {
-  const from =
-    "áàảãạăắằẳẵặâấầẩẫậéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵđ";
-  const to =
-    "aaaaaaaaaaaaaaaaaeeeeeeeeeeeiiiiiooooooooooooooooouuuuuuuuuuuyyyyyd";
-  const regex = new RegExp(from.split("").join("|"), "g");
-  title = title.replace(/[^\w\s]/gi, "");
-
-  title = title.toLowerCase().replace(regex, (c) => to.charAt(from.indexOf(c)));
-  return title.replace(/ /g, "-");
+  return title
+    .normalize("NFD")                          // Tách dấu tiếng Việt
+    .replace(/[\u0300-\u036f]/g, "")           // Xóa dấu
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, "")              // Loại bỏ ký tự đặc biệt
+    .replace(/\s+/g, "-")                      // Thay khoảng trắng bằng dấu -
+    .replace(/-+/g, "-")                       // Gộp các dấu - liên tiếp
+    .replace(/^-+|-+$/g, "")                   // Xóa - ở đầu/cuối
+    .substring(0, 100);                        // Giới hạn độ dài
 }
+
+// http://100.76.244.107:5053/upload/image/638880404615374477.png
 
 function switch_display_value(value: string) {
   let displayValue = value;

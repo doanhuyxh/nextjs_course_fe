@@ -34,7 +34,11 @@ const HeaderBottom = () => {
 
 
   useEffect(() => {
-    axiosCustomerConfig.get("/customer/get-info")
+    axiosCustomerConfig.get("/customer/get-info", {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem("AccessToken") || ""}`,
+      },
+    })
       .then((res: any) => {
         const code = res.code;
         if (code === 200) {

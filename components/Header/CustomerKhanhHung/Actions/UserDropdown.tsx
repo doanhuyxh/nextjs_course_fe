@@ -10,10 +10,7 @@ export default function UserDropdown({ isDropdown, user, setIsDropdown }: { isDr
     const handleLogout = () => {
         sessionStorage.clear()
         localStorage.clear()
-
-        axiosCustomerConfig.get(`Auth/LogOut?id=${user.id}`).then(() => {
-            window.location.href = "/"
-        })
+        window.location.href = "/"
     }
 
     return (

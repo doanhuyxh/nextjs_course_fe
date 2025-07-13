@@ -2,7 +2,7 @@
 
 import toast from "react-hot-toast"
 import { useState } from "react"
-import axiosCustomerConfig from "@/libs/configs/axiosCustomerConfig"
+import axiosCustomerConfig from "@/libs/configs/ApiConfig/axiosCustomerConfig"
 
 export default function ChangePassword() {
 

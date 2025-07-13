@@ -12,9 +12,9 @@ const Footer: React.FC = () => {
             {/* Brand Section */}
             <div className="flex flex-col gap-5 w-full lg:w-1/3">
               <div className="flex items-center gap-2">
-                <img 
-                  src="/images/img_svg_deep_purple_a200.svg" 
-                  alt="FlashBot Logo" 
+                <img
+                  src="/images_v2/img_svg_deep_purple_a200.svg"
+                  alt="FlashBot Logo"
                   className="w-6 h-6"
                 />
                 <h2 className="text-lg font-bold text-white">FlashBot</h2>
@@ -37,9 +37,9 @@ const Footer: React.FC = () => {
               <ul className="flex flex-col gap-3.5">
                 <li>
                   <a href="#" className="flex items-center gap-2 text-sm text-[#9ca3af] hover:text-white transition-colors">
-                    <img 
-                      src="/images/img_svg_blue_gray_300.svg" 
-                      alt="" 
+                    <img
+                      src="/images_v2/img_svg_blue_gray_300.svg"
+                      alt=""
                       className="w-4 h-4"
                     />
                     Video hướng dẫn
@@ -47,30 +47,24 @@ const Footer: React.FC = () => {
                 </li>
                 <li className="relative">
                   <div className="flex flex-col gap-2">
-                    <div className="flex items-center justify-center w-6 h-2 ml-1">
-                      <img 
-                        src="/images/img_vector_blue_gray_300.svg" 
-                        alt="" 
-                        className="w-auto h-2"
+                    <div className="flex items-center gap-2 text-sm text-[#9ca3af] hover:text-white transition-colors mt-4">
+                      <img
+                        src="/images_v2/img_vector_blue_gray_300_v2.svg"
+                        alt=""
+                        className="w-4 h-4"
                       />
+                      Mẫu ngành
                     </div>
-                    <img 
-                      src="/images/img_vector_blue_gray_300_4x12.svg" 
-                      alt="" 
-                      className="w-3 h-1 ml-0.5"
-                    />
                     <a href="#" className="flex items-center gap-2 text-sm text-[#9ca3af] hover:text-white transition-colors mt-4">
-                      <img 
-                        src="/images/img_svg_blue_gray_300_16x16.svg" 
-                        alt="" 
+                      <img
+                        src="/images_v2/img_svg_blue_gray_300_16x16.svg"
+                        alt=""
                         className="w-4 h-4"
                       />
                       Hướng dẫn thiết lập
                     </a>
                   </div>
-                  <a href="#" className="text-sm text-[#9ca3af] hover:text-white transition-colors ml-6 mt-8 block">
-                    Mẫu ngành
-                  </a>
+
                 </li>
               </ul>
             </div>
@@ -81,32 +75,32 @@ const Footer: React.FC = () => {
               <ul className="flex flex-col gap-3.5">
                 <li>
                   <a href="mailto:support@flashbot.vn" className="flex items-center gap-2 text-sm text-[#9ca3af] hover:text-white transition-colors">
-                    <img 
-                      src="/images/img_svg_16x16.svg" 
-                      alt="" 
+                    <img
+                      src="/images_v2/img_svg_16x16.svg"
+                      alt=""
                       className="w-4 h-4"
                     />
                     support@flashbot.vn
                   </a>
                 </li>
-                <li className="relative">
-                  <div className="flex flex-col gap-3.5">
-                    <img 
-                      src="/images/img_vector_blue_gray_300_12x12.svg" 
-                      alt="" 
-                      className="w-3 h-3 ml-0.5"
+                <li>
+                  <a href="#" className="flex items-center gap-2 text-base text-[#9ca3af] hover:text-white transition-colors">
+                    <img
+                      src="/images_v2/img_vector_blue_gray_300_12x12.svg"
+                      alt=""
+                      className="w-4 h-4 ml-0.5"
                     />
-                    <a href="#" className="flex items-center gap-2 text-base text-[#9ca3af] hover:text-white transition-colors">
-                      <img 
-                        src="/images/img_svg_1.svg" 
-                        alt="" 
-                        className="w-4 h-4"
-                      />
-                      Nhóm cộng đồng
-                    </a>
-                  </div>
-                  <a href="#" className="text-base text-[#9ca3af] hover:text-white transition-colors block mt-8">
                     Trợ giúp trò chuyện trực tiếp
+                  </a>
+                </li>
+                <li className="relative">
+                  <a href="#" className="flex items-center gap-2 text-base text-[#9ca3af] hover:text-white transition-colors">
+                    <img
+                      src="/images_v2/img_svg_1.svg"
+                      alt=""
+                      className="w-4 h-4"
+                    />
+                    Nhóm cộng đồng
                   </a>
                 </li>
               </ul>

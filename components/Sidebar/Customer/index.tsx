@@ -93,11 +93,7 @@ function Sidebar() {
           imageSrc: "/assets/images/ic-chanel-3-side-menu.svg",
           link: "/#thong-tin-ve-chung-toi"
         },
-        {
-          name: "Q&A",
-          imageSrc: "/assets/images/ic-chanel-6-side-menu.svg",
-          link: "/faq"
-        }
+
       ]
     }
   ])

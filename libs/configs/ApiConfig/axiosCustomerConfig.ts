@@ -8,7 +8,6 @@ const axiosCustomerConfig = axios.create({
   timeout: 20000,
   headers: {
     'Content-Type': 'application/json',
-    "Authorization": `Bearer ${""}` // lấy từ cookies
   },
   withCredentials: true,
 });
@@ -18,9 +17,15 @@ axiosCustomerConfig.interceptors.response.use(
   async (response) => {
     const code = response.data.code
     if (code == 401) {
-      const res_refresh: ResponseData = await axiosCustomerConfig.post("/Auth/RefreshToken")
+      const headers = {
+        "RefreshToken": localStorage.getItem("RefreshToken") || ""
+      };
+      const res_refresh: ResponseData = await axiosCustomerConfig.post("/Auth/RefreshToken", {}, { headers });
       const code_res = res_refresh.code
       if (code_res == 200) {
+        localStorage.setItem("RefreshToken", res_refresh.data.refreshToken);
+        localStorage.setItem("AccessToken", res_refresh.data.accessToken);
+        axiosCustomerConfig.defaults.headers.common['Authorization'] = `Bearer ${res_refresh.data.accessToken}`;
         return axiosCustomerConfig
       } else {
         //localStorage.clear()
@@ -34,7 +39,9 @@ axiosCustomerConfig.interceptors.response.use(
     if (error.response) {
 
       if (error.code == 401) {
-        await axiosCustomerConfig.post("/Auth/RefreshToken")
+        await axiosCustomerConfig.post("/Auth/RefreshToken", {}, {
+          headers: { "RefreshToken": localStorage.getItem("RefreshToken") || "" }
+        })
         return axiosCustomerConfig
 
       } else {
@@ -58,6 +65,12 @@ export const postFormData = (url: string, data: any) => {
   return axiosCustomerConfig.post(url, formData, {
     headers: { 'Content-Type': 'multipart/form-data' }
   });
+}
+if (typeof window !== 'undefined') {
+  const token = localStorage.getItem('AccessToken');
+  if (token) {
+    axiosCustomerConfig.defaults.headers.Authorization = `Bearer ${token}`;
+  }
 }
 
 export default axiosCustomerConfig;

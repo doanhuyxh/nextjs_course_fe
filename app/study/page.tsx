@@ -12,7 +12,7 @@ const LessonList = dynamic(() => import('@/components/Lesson/LessonList/LessonLi
 const FormAuth = dynamic(() => import('@/components/HomePageSection/AuthTabs'))
 
 
-const response = await fetchData('/public/seo');
+const response = await fetchData('/public/seo', '');
 const data = JSON.parse(response.data);
 export const metadata: Metadata = {
     title: data.title,
@@ -53,7 +53,7 @@ export default async function StudyPage() {
     const isLogin = accToken ? true : false
 
     if (isLogin) {
-        const res = await fetchDataServer('/course/get-last-lesson')
+        const res = await fetchDataServer('/course/get-last-lesson', accToken?.value || '');
         if (res.code === 200) {
             redirect(`/study/${res.data}`);
 
