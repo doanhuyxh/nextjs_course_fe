@@ -1,53 +1,17 @@
-
 import type { Metadata } from 'next'
-import fetchData from '@/libs/configs/ApiConfig/fetchDataServer';
-
-import dynamic from "next/dynamic";
 import { cookies } from "next/headers";
 import '@/styles/home_khanh_hung.css'
 import fetchDataServer from "@/libs/configs/ApiConfig/fetchDataServer";
 import { redirect } from 'next/navigation';
+import LessonList from "@/components/Lesson/LessonList/LessonList";
+import FormAuth from "@/components/HomePageSection/AuthTabs";
 
-const LessonList = dynamic(() => import('@/components/Lesson/LessonList/LessonList'))
-const FormAuth = dynamic(() => import('@/components/HomePageSection/AuthTabs'))
-
-
-const response = await fetchData('/public/seo', '');
-const data = JSON.parse(response.data);
 export const metadata: Metadata = {
-    title: data.title,
-    description: data.description,
-    keywords: data.keywords,
-    openGraph: {
-        type: 'website',
-        url: data.url,
-        title: data.title,
-        description: data.description,
-        images: [
-            {
-                url: data.logo,
-                width: 800,
-                height: 600,
-                alt: data.title,
-            },
-        ],
-    },
-    twitter: {
-        title: data.title,
-        description: data.description,
-        card: 'summary_large_image',
-        images: [
-            {
-                url: data.logo,
-                alt: data.title,
-            }
-        ]
-    },
+    title: 'Hứng dẫn sử dụng bot',
+    description: 'Hứng dẫn sử dụng bot nâng cao của Study Flash AI',
 }
 
-
 export default async function StudyPage() {
-
     const cookie = await cookies()
     const accToken = cookie.get('AccessToken')
     const isLogin = accToken ? true : false
@@ -68,8 +32,7 @@ export default async function StudyPage() {
                 <FormAuth />
             </div>
             <div className="video_list lg:w-1/3 w-full max-w-[600px]">
-                <LessonList
-                />
+                <LessonList />
             </div>
         </div>
     );

@@ -118,6 +118,10 @@ const AdminSideBar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       fetch(process.env.API_URL+"/api/v1"+"/public/social-key?key=logo")
       .then(res=>res.json())
       .then(res=>{
+        if (res.data === "") {
+          setLogo("/images/logo/logo.svg");
+          return;
+        }
         setLogo(res.data)
       })
       .catch(err=>{

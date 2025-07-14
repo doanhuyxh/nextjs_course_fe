@@ -5,6 +5,7 @@ import ImageUploadUser from "@/components/FileHandle/Image"
 import { useState } from "react";
 import toast from 'react-hot-toast';
 import axiosCustomerConfig from '@/libs/configs/ApiConfig/axiosCustomerConfig';
+import Swal from 'sweetalert2';
 
 
 function ProfilePage() {
@@ -66,25 +67,21 @@ function ProfilePage() {
     const handleUpdateInfo = async () => {
         axiosCustomerConfig.post("/customer/update-info", info)
             .then(() => {
-                toast.success("Cập nhật thông tin thành công", {
-                    duration: 3000,
+                Swal.fire({
+                    icon: 'success',
+                    title: "Cập nhật thông tin thành công",
                     position: 'top-right',
-                    style:{
-                        backgroundColor: '#10B981',
-                        color: '#fff',
-                        fontSize: '1.6rem',
-                    }
+                    showConfirmButton: false,
+                    timer: 1500,
                 })
             })
             .catch(() => {
-                toast.error("Cập nhật thông tin thất bại",{
-                    duration: 3000,
+                Swal.fire({
+                    icon: 'error',
+                    title: "Cập nhật thông tin thất bại",
                     position: 'top-right',
-                    style:{
-                        backgroundColor: 'red',
-                        color: '#fff',
-                        fontSize: '1.6rem',
-                    }
+                    showConfirmButton: false,
+                    timer: 1500,
                 })
             })
     }
@@ -98,7 +95,7 @@ function ProfilePage() {
 
     return (
 
-        <div className="container mt-10 lg:mt-20 px-5">
+        <div className="mt-10 lg:mt-20 px-5">
             <div className="w-full flex flex-col justify-center items-center mb-5 lg:mb-10">
                 <h1 className="lg:text-5xl text-3xl font-bold transform scale-150 text-color-secondary text-center animate-jump-in animate-once animate-ease-out">Thông tin cá nhân</h1>
             </div>
@@ -256,7 +253,7 @@ function ProfilePage() {
 
                         <div className="flex justify-end items-center ">
                             <button className="bg-color-primary text-white px-5 py-5 rounded-lg text-3xl cursor-pointer"
-                                onClick={handleUpdateInfo}>Lưu lại</button>
+                                onClick={handleUpdateInfo}>Cập nhật</button>
                         </div>
 
                     </div>

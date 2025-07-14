@@ -8,6 +8,7 @@ import Auth from "./Auth";
 import { Customer } from "@/libs/types";
 import axiosCustomerConfig from "@/libs/configs/ApiConfig/axiosCustomerConfig";
 import { useSearchParams, usePathname } from "next/navigation";
+import fetchData from "@/libs/configs/ApiConfig/fetchDataServer";
 
 // Định nghĩa kiểu dữ liệu cho item trong menu
 interface MenuItem {
@@ -23,10 +24,8 @@ const HeaderBottom = () => {
 
   const pathname = useSearchParams();
   const path = usePathname();
-  const isStudy = path.includes('/study');
 
-  const [menuItems, setMenuItems] = React.useState<MenuItem[]>([
-    { href: "/faq", icon: "/assets/images/question-1.svg", text: "Hỏi tôi" },
+  const [menuItems] = React.useState<MenuItem[]>([
     { href: "/study", icon: "/assets/images/ic-chanel-2.svg", text: "Khoá học" },
     { href: "", icon: "/assets/images/icon_fb.svg", text: "Fanpage" },
     { href: "", icon: "/assets/images/add-friend.svg", text: "Liên hệ" },
@@ -34,11 +33,8 @@ const HeaderBottom = () => {
 
 
   useEffect(() => {
-    axiosCustomerConfig.get("/customer/get-info", {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem("AccessToken") || ""}`,
-      },
-    })
+    const accessToken = localStorage.getItem("AccessToken");
+    fetchData("/customer/get-info", accessToken || "")
       .then((res: any) => {
         const code = res.code;
         if (code === 200) {
@@ -49,7 +45,7 @@ const HeaderBottom = () => {
           sessionStorage.clear();
         }
       });
-  }, [pathname])
+  }, [path, pathname]);
 
 
   useEffect(() => {

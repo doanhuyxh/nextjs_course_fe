@@ -35,16 +35,16 @@ export default function Notification() {
 
     const GetNotification = useCallback(async () => {
         const res_data = await axiosCustomerConfig.get(`/notification/get-mail?page=${page}&status=${status}`);
-        setData(res_data.data.data);
-        setTotalPage(res_data.data.totalPage);
-        setTotalResult(res_data.data.totalResult);
+        setData(res_data.data?.data);
+        setTotalPage(res_data.data?.totalPage);
+        setTotalResult(res_data.data?.totalResult);
     }, [page, status]);
 
     const GetTotalNotification = useCallback(async () => {
         const res_data = await axiosCustomerConfig.get(`/notification/get-total-mail`);
         setTotalNotification({
-            read: res_data.data.total_read,
-            unread: res_data.data.total_un_read
+            read: res_data.data?.total_read,
+            unread: res_data.data?.total_un_read
         });
     }, []);
 
@@ -86,7 +86,7 @@ export default function Notification() {
                                 className={`cursor-pointer text-gray-600 px-5 py-3 rounded-md lg:text-3xl border border-gray-600 border-opacity-40 hover:bg-color-primary hover:text-white transition-all duration-300 ${status === "" ? "bg-color-primary text-white" : ""} relative`} onClick={() => handleStatusChange("")}>
                                 Tất cả
                                 <span className="absolute top-[-6px] right-[-4px] h-auto w-7 text-lg text-center text-white rounded-full bg-red-500">
-                                    {totalNotification.read + totalNotification.unread}
+                                    {Number(totalNotification.read + totalNotification.unread)}
                                 </span>
                             </button>
                             <button
@@ -148,7 +148,7 @@ export default function Notification() {
                                     </tr>
                                 ))}
 
-                                {data.length === 0 && (
+                                {data?.length === 0 && (
                                     <tr>
                                         <td colSpan={6} className="text-center py-4">Không có thông báo nào</td>
                                     </tr>
@@ -161,7 +161,7 @@ export default function Notification() {
                     </div>
                     <div className="lg:hidden w-full max-h-[50vh] overflow-y-auto">
                         {
-                            data.map((item: NotificationItem, index: number) => (
+                            data?.map((item: NotificationItem, index: number) => (
                                 <div className="bg-white p-4 mb-2 border border-gray-300 rounded-md" key={index}>
                                     <div className="flex justify-between">
                                         <span className="font-semibold text-gray-400">STT :</span>
@@ -201,7 +201,7 @@ export default function Notification() {
                             ))
                         }
                     </div>
-                    <Pagination length={data.length} pageSize={30} totalResult={totalResult} page={page} totalPage={totalPage} onPageChange={handlePageChange} />
+                    <Pagination length={data?.length} pageSize={30} totalResult={totalResult} page={page} totalPage={totalPage} onPageChange={handlePageChange} />
                 </div>
 
             </div>

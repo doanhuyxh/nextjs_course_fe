@@ -1,11 +1,11 @@
 'use client';
-
+import '@/styles/admin_web.css';
 import { useRouter, usePathname  } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { AdminSideBar } from '@/components/Sidebar';
 import AdminHeader from '@/components/Header/AdminWeb';
-import '@/styles/admin_web.css';
 import Loading from '@/components/Loading';
+
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   

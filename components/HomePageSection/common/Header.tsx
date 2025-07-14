@@ -1,9 +1,14 @@
 'use client';
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Button from '@/components/ui/Button';
 
 const Header: React.FC = () => {
+  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
+  const handleStudy = () => {
+    router.push('/study');
+  }
 
   return (
     <header className="w-full bg-white shadow-[0px_1px_2px_#0000000c] p-4 h-[72px]">
@@ -13,9 +18,9 @@ const Header: React.FC = () => {
           <div className="flex items-center gap-2">
             <div className="flex items-end gap-2">
               <div className="relative w-9 h-9">
-                <img 
-                  src="/images_v2/img_svg.svg" 
-                  alt="FlashBot Logo" 
+                <img
+                  src="/images_v2/img_svg.svg"
+                  alt="FlashBot Logo"
                   className="w-full h-full"
                 />
                 <div className="absolute bottom-0 right-0 w-3 h-3 bg-[#22c55e] rounded-full"></div>
@@ -33,8 +38,8 @@ const Header: React.FC = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <button 
-            className="block lg:hidden p-2" 
+          <button
+            className="block lg:hidden p-2"
             aria-label="Open menu"
             onClick={() => setMenuOpen(!menuOpen)}
           >
@@ -46,6 +51,7 @@ const Header: React.FC = () => {
           {/* Desktop Navigation */}
           <div className="hidden lg:block">
             <Button
+              onClick={handleStudy}
               variant="primary"
               className="bg-[linear-gradient(90deg,#22c55e_0%,#059669_100%)] rounded-xl !h-[40px] p-[11.8px 10px 12px 24px]"
               leftImage={{
@@ -62,6 +68,7 @@ const Header: React.FC = () => {
         {/* Mobile Menu */}
         <nav className={`${menuOpen ? 'block' : 'hidden'} lg:hidden mt-4 pt-4 border-t border-gray-200`}>
           <Button
+            onClick={handleStudy}
             variant="primary"
             className="w-full bg-[linear-gradient(90deg,#22c55e_0%,#059669_100%)] rounded-xl !h-[40px] !p-[11.8px 10px 12px 24px]"
             leftImage={{

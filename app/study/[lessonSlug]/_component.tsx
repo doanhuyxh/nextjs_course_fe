@@ -51,7 +51,7 @@ export default function StudyPageComponent({lesson_sv, isLogin}: { lesson_sv: Le
         }, 3000)
 
         return () => clearInterval(interval)
-    }, [isLogin, lesson?.video])
+    }, [isLogin, lesson?.video, lessonUserId])
 
 
     useEffect(() => {

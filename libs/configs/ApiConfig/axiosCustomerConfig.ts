@@ -26,10 +26,12 @@ axiosCustomerConfig.interceptors.response.use(
         localStorage.setItem("RefreshToken", res_refresh.data.refreshToken);
         localStorage.setItem("AccessToken", res_refresh.data.accessToken);
         axiosCustomerConfig.defaults.headers.common['Authorization'] = `Bearer ${res_refresh.data.accessToken}`;
+        document.cookie = `AccessToken=${res_refresh.data.accessToken}; path=/; max-age=3600; secure; SameSite=None`;
         return axiosCustomerConfig
       } else {
-        //localStorage.clear()
+        localStorage.clear()
         sessionStorage.clear()
+        document.cookie = ""
       }
     }
     const data = response.data;

@@ -6,7 +6,6 @@ const Header = dynamic(() => import("@/components/Header/CustomerKhanhHung"));
 import Sidebar from "@/components/Sidebar/Customer";
 import "@/styles/study.css";
 
-
 const response = await fetchData('/public/seo', '');
 const data = JSON.parse(response.data);
 export const metadata: Metadata = {

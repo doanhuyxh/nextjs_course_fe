@@ -8,7 +8,7 @@ import { Customer } from "@/libs/types";
 import axiosCustomerConfig from "@/libs/configs/ApiConfig/axiosCustomerConfig";
 import Link from "next/link";
 import { getLastStudyLesion } from "@/libs/services/ApiCustomerServices";
-import { useRouter } from "next/navigation";  
+import { useRouter } from "next/navigation";
 
 function Sidebar() {
 
@@ -60,21 +60,21 @@ function Sidebar() {
 
       ]
     },
-    {
-      title: "Kinh doanh cùng tôi",
-      menuItems: [
-        // {
-        //   name: "Dashboard Affiliate",
-        //   imageSrc: "/assets/images/ic-chanel-calendar.svg",
-        //   link: ""
-        // },
-        {
-          name: "Chính sách Affiliate",
-          imageSrc: "/assets/images/mb-ic-11.svg",
-          link: "/learn/affiliate/policy"
-        },
-      ]
-    },
+    // {
+    //   title: "Kinh doanh cùng tôi",
+    //   menuItems: [
+    //     // {
+    //     //   name: "Dashboard Affiliate",
+    //     //   imageSrc: "/assets/images/ic-chanel-calendar.svg",
+    //     //   link: ""
+    //     // },
+    //     {
+    //       name: "Chính sách Affiliate",
+    //       imageSrc: "/assets/images/mb-ic-11.svg",
+    //       link: "/learn/affiliate/policy"
+    //     },
+    //   ]
+    // },
     {
       title: "Về khoá học",
       menuItems: [
@@ -99,18 +99,17 @@ function Sidebar() {
   ])
 
   const [user, setUser] = useState<Customer>()
+  
   const router = useRouter()
+
   const handleLogout = () => {
     localStorage.clear()
     sessionStorage.clear()
-
-    axiosCustomerConfig.get(`Auth/LogOut?id=${user?.id}`).then(() => {
-      window.location.href = "/"
-    })
+    document.cookie = ""
   }
 
   const handleChangeStudyPage = async () => {
-    const response:any = await axiosCustomerConfig.get("/course/get-last-lesson")
+    const response: any = await axiosCustomerConfig.get("/course/get-last-lesson")
     if (response.code == 200) {
       router.push(`/study/${response.data}`)
     }

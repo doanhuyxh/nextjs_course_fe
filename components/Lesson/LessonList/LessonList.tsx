@@ -2,10 +2,11 @@
 import React, { useState, useEffect } from "react";
 import ActiveSpin from "@/components/ActiveSpin";
 import { CollapseCourse } from "@/components/Collapse";
-import TabButtons from "./TabButtons";
+// import TabButtons from "./TabButtons";
 import Description from "./Description";
 import {CourseData, LessonData} from "@/libs/types";
 import axiosCustomerConfig from "@/libs/configs/ApiConfig/axiosCustomerConfig";
+import { Spin } from "antd";
 
 
 const LessonList = () => {
@@ -15,9 +16,11 @@ const LessonList = () => {
     const [isShowAllLesson, setIsShowAllLesson] = useState(false);
     const [data, setData] = useState<CourseData[]>([]);
     const [totalLesson, setTotalLesson] = useState<number>(0)
+    const [isLoading, setIsLoading] = useState(true);
 
     const getAllCourse = async () => {
         const response = await axiosCustomerConfig.get("/course/GetAllCourse");
+        setIsLoading(false);
         const data = response.data;
         const temp_arr: CourseData[] = [];
         data.forEach((item: CourseData) => {
@@ -53,7 +56,6 @@ const LessonList = () => {
 
     }
 
-
     useEffect(() => {
         setIsClient(true);
     }, []);
@@ -67,7 +69,22 @@ const LessonList = () => {
             })
     }, [isClient])
 
-    if (!isClient) return null;
+    if (!isClient) {
+        // hiển thị một loading spinner hoặc thông báo khi đang tải dữ liệu bằng tailwind
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <Spin size="large" className="text-color-primary" />
+            </div>
+        )
+    };
+
+    if (isLoading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <Spin size="large" className="text-color-primary" />
+            </div>
+        )
+    }
 
     return (
         <>
@@ -94,7 +111,7 @@ const LessonList = () => {
 
             {activeTab === "description" && <Description />}
 
-            <TabButtons activeTab={activeTab} setActiveTab={setActiveTab} />
+            {/* <TabButtons activeTab={activeTab} setActiveTab={setActiveTab} /> */}
         </>
     );
 };

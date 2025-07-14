@@ -47,9 +47,8 @@ export default async function LearningCenter() {
                                         </div>
                                     </div>
                                     <h3 className="text-lg font-bold text-[#111827] mb-4">Cách tạo tài khoản FlashBot của bạn</h3>
-                                    <p className="text-sm text-[#4b5563] mb-6 leading-relaxed">
-                                        {course?.description || "Nội dung đang cập nhật."}
-                                    </p>
+                                    <div className="text-sm text-[#4b5563] mb-6 leading-relaxed line-clamp-2 overflow-hidden"
+                                        dangerouslySetInnerHTML={{ __html: course?.description || "" }} />
                                     <Button
                                         variant="gradient"
                                         size="md"

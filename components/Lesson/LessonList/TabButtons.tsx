@@ -35,7 +35,7 @@ const TabButtons: React.FC<TabButtonsProps> = ({ activeTab, setActiveTab }) => {
                     <span
                         className={`${activeTab === "description" ? "text-color-primary" : "text-black-200"} cursor-pointer`}
                     >
-                        Mô tả
+                        Hướng dẫn
                     </span>
                 </button>
             </div>

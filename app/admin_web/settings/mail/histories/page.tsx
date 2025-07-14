@@ -180,7 +180,7 @@ export default function Histories() {
 
     useEffect(() => {
         getHistorySendEmail();
-    }, [pageSize, startDate, endDate, page]);
+    }, [pageSize, startDate, endDate, page, getHistorySendEmail]);
 
 
     return (
