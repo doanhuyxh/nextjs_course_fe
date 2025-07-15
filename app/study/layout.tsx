@@ -1,16 +1,19 @@
+import { Metadata } from "next";
 
-import dynamic from "next/dynamic";
-import TrackingSeo from "@/components/TrackingSeo";
-const Header = dynamic(() => import("@/components/Header/CustomerKhanhHung"));
-import "@/styles/study.css";
+export const metadata: Metadata = {
+  title: "Learn with Study Flash Bot",
+  description: "Hướng dẫn đến việc học tập hiệu quả với Study Flash Bot - Trợ lý học tập AI giúp bạn chốt đơn nhanh chóng.",
+  icons: {
+    icon: "/favicon.png",
+    apple: "/favicon.png",
+    shortcut: "/favicon.png",
+  },
+};
 
-export default async function LearnLayout({ children }: { children: React.ReactNode }) {
-
+export default function LearnLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-    <TrackingSeo/>
-      <Header/>
-      <div className="w-full min-h-[70vh] h-screen overflow-x-auto">
+      <div className="w-full h-full overflow-x-auto">
         {children}
       </div>
     </>

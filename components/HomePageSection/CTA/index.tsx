@@ -1,4 +1,5 @@
 import Button from "@/components/ui/Button";
+import Link from "next/link";
 
 export default function CTA() {
     return (
@@ -13,21 +14,23 @@ export default function CTA() {
                         Xem ngay video đầu tiên và tạo FlashBot của bạn chỉ trong chưa đầy 10 phút.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-3.5 items-center">
-                        <Button
-                            size="lg"
-                            className="bg-white !text-[#16a34a] rounded-xl hover:!bg-[#f0fdf4] hover:!text-[#15803d] transition-colors duration-200"
-                            leftImage={{
-                                src: "/images_v2/img_svg_amber_a200_v2.svg",
-                                width: 24,
-                                height: 24
-                            }}
-                        >
-                            Bắt đầu học ngay
-                        </Button>
-                        <div className="flex items-center gap-2 bg-[linear-gradient(90deg,#3b82f6_0%,#7c3aed_100%)] rounded-xl px-4 py-4">
+                        <Link href="/study">
+                            <Button
+                                size="lg"
+                                className="bg-white !text-[#16a34a] rounded-xl hover:!bg-[#f0fdf4] hover:!text-[#15803d] transition-colors duration-200"
+                                leftImage={{
+                                    src: "/images_v2/img_svg_amber_a200_v2.svg",
+                                    width: 24,
+                                    height: 24
+                                }}
+                            >
+                                Bắt đầu học ngay
+                            </Button>
+                        </Link>
+                        <a href="https://flashbot.vn/" className="flex items-center gap-2 bg-[linear-gradient(90deg,#3b82f6_0%,#7c3aed_100%)] rounded-xl px-4 py-4">
                             <img src="/images_v2/img_svg_white_a700_20x20.svg" alt="" className="w-5 h-5" />
                             <span className="text-lg font-bold text-white">Đã xem xong? Đăng ký chatbot của bạn ngay!</span>
-                        </div>
+                        </a>
                     </div>
                     <div className="bg-[#ffffff19] rounded-xl p-5 shadow-[0px_4px_4px_#888888ff] max-w-2xl">
                         <div className="flex flex-col gap-4">

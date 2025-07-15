@@ -3,13 +3,13 @@
 import React from 'react';
 import Image from 'next/image';
 import { Customer } from '@/libs/types';
-import axiosCustomerConfig from '@/libs/configs/ApiConfig/axiosCustomerConfig';
 
 export default function UserDropdown({ isDropdown, user, setIsDropdown }: { isDropdown: boolean, user: Customer, setIsDropdown: React.Dispatch<React.SetStateAction<boolean>> }) {
 
     const handleLogout = () => {
         sessionStorage.clear()
         localStorage.clear()
+        document.cookie = ""
         window.location.href = "/"
     }
 

@@ -1,7 +1,6 @@
 
 import Header from '@/components/HomePageSection/common/Header';
 import Footer from '@/components/HomePageSection/common/Footer';
-import Button from '@/components/ui/Button';
 
 import Hero from '@/components/HomePageSection/Hero';
 import ProblemsAndSolutions from '@/components/HomePageSection/ProblemsAndSolutions';

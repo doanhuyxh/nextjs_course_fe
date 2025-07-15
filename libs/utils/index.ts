@@ -38,14 +38,14 @@ function formatTime(time: string) {
 }
 function generateSlug(title: string) {
   return title
+    .trim()                                  // Loại bỏ khoảng trắng đầu và cuối
+    .replace(/[^a-zA-Z0-9\s]/g, "")          //
     .normalize("NFD")                          // Tách dấu tiếng Việt
     .replace(/[\u0300-\u036f]/g, "")           // Xóa dấu
     .toLowerCase()
-    .trim()
     .replace(/[^a-z0-9\s-]/g, "")              // Loại bỏ ký tự đặc biệt
     .replace(/\s+/g, "-")                      // Thay khoảng trắng bằng dấu -
     .replace(/-+/g, "-")                       // Gộp các dấu - liên tiếp
-    .replace(/^-+|-+$/g, "")                   // Xóa - ở đầu/cuối
     .substring(0, 100);                        // Giới hạn độ dài
 }
 

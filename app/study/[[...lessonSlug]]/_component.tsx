@@ -63,7 +63,6 @@ export default function StudyPageComponent({lesson_sv, isLogin}: { lesson_sv: Le
                         setShowBannerUpgrade(true)
                         return
                     }
-                    console.log(res.data)
                     setLesson({ ...lesson_sv, video: res.data.video })
                     sessionStorage.setItem("noi_dung_bai_hoc", lesson_sv.description)
                     setLessonUserId(res.data.lessonUserId)

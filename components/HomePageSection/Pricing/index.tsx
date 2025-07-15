@@ -44,13 +44,15 @@ export default function Pricing() {
                                     <span className="text-base text-black ">Mẫu ngành</span>
                                 </div>
                             </div>
-                            <Button
-                                variant="primary"
-                                size="lg"
-                                className="w-full bg-[linear-gradient(90deg,#22c55e_0%,#059669_100%)] rounded-[30px] text-nowrap tranform translate-y-[-50%]"
-                            >
-                                Bắt đầu dùng thử miễn phí
-                            </Button>
+                            <a href="https://flashbot.vn/" rel="noopener noreferrer">
+                                <Button
+                                    variant="primary"
+                                    size="lg"
+                                    className="w-full bg-[linear-gradient(90deg,#22c55e_0%,#059669_100%)] rounded-[30px] text-nowrap tranform translate-y-[-50%]"
+                                >
+                                    Bắt đầu dùng thử miễn phí
+                                </Button>
+                            </a>
                         </div>
                         {/* Basic Plan */}
                         <div className="border-2 border-[#e5e7eb] rounded-3xl p-8 bg-white mt-3.5  w-[380px] h-[564px]">
@@ -81,13 +83,15 @@ export default function Pricing() {
                                     <span className="text-sm text-black">Trò chuyện hỗ trợ ngay lập tức</span>
                                 </div>
                             </div>
-                            <Button
-                                variant="gradient"
-                                size="lg"
-                                className="w-full bg-[linear-gradient(90deg,#3b82f6_0%,#4f46e5_100%)] rounded-[30px]"
-                            >
-                                Chọn gói Basic
-                            </Button>
+                            <a href="https://flashbot.vn/" rel="noopener noreferrer">
+                                <Button
+                                    variant="gradient"
+                                    size="lg"
+                                    className="w-full bg-[linear-gradient(90deg,#3b82f6_0%,#4f46e5_100%)] rounded-[30px]"
+                                >
+                                    Chọn gói Basic
+                                </Button>
+                            </a>
                         </div>
                         {/* Pro Plan */}
                         <div className="border-2 border-[#e5e7eb] rounded-3xl p-8 bg-white  mt-3.5 w-[380px] h-[564px]">
@@ -122,13 +126,15 @@ export default function Pricing() {
                                     <span className="text-sm text-black">Trò chuyện hỗ trợ ngay lập tức</span>
                                 </div>
                             </div>
-                            <Button
-                                variant="gradient"
-                                size="lg"
-                                className="w-full bg-[linear-gradient(90deg,#eab308_0%,#f97316_100%)] rounded-[30px]"
-                            >
-                                Chọn gói Pro
-                            </Button>
+                            <a href="https://flashbot.vn/" rel="noopener noreferrer">
+                                <Button
+                                    variant="gradient"
+                                    size="lg"
+                                    className="w-full bg-[linear-gradient(90deg,#eab308_0%,#f97316_100%)] rounded-[30px]"
+                                >
+                                    Chọn gói Pro
+                                </Button>
+                            </a>
                         </div>
                         {/* Premium Plan */}
                         <div className="relative  w-[380px] h-[564px]">
@@ -173,13 +179,15 @@ export default function Pricing() {
                                         <span className="text-sm text-black">Trò chuyện hỗ trợ ngay lập tức</span>
                                     </div>
                                 </div>
-                                <Button
-                                    variant="gradient"
-                                    size="lg"
-                                    className="w-full bg-[linear-gradient(90deg,#a855f7_0%,#2563eb_100%)] rounded-[30px]"
-                                >
-                                    Chọn gói Pro
-                                </Button>
+                                <a href="https://flashbot.vn/" rel="noopener noreferrer">
+                                    <Button
+                                        variant="gradient"
+                                        size="lg"
+                                        className="w-full bg-[linear-gradient(90deg,#a855f7_0%,#2563eb_100%)] rounded-[30px]"
+                                    >
+                                        Chọn gói Pro
+                                    </Button>
+                                </a>
                             </div>
                         </div>
                     </div>
