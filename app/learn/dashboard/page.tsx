@@ -123,7 +123,7 @@ export default function Dashboard() {
     if (progress === 100) return { text: "Hoàn thành", color: "success" as const }
     if (progress >= 80) return { text: "Sắp hoàn thành", color: "warning" as const }
     if (progress >= 50) return { text: "Đang học", color: "processing" as const }
-    return { text: "Mới bắt đầu", color: "default" as const }
+    return { text: "Vừa bắt đầu", color: "default" as const }
   }
 
   const getProgressColor = (progress: number) => {
@@ -216,7 +216,7 @@ export default function Dashboard() {
       <Row gutter={[24, 24]} style={{ marginBottom: "32px" }}>
         {statsData.map((stat, index) => (
           <Col xs={24} sm={8} key={index}>
-            <Card hoverable>
+            <Card hoverable className="shadow-lg">
               <Statistic
                 title={stat.title}
                 value={stat.value}
@@ -230,6 +230,7 @@ export default function Dashboard() {
 
       {/* Course Progress Section */}
       <Card
+        className="border-none min-h-[100vh]"
         title={
           <Space>
             <BookOutlined />
@@ -255,12 +256,13 @@ export default function Dashboard() {
             {data.map((item, index) => {
               const status = getProgressStatus(item.courseUser.progress)
               return (
-                <Col xs={24} sm={12} lg={8} key={index}>
+                <Col xs={24} sm={12} lg={6} key={index}>
                   <Card
+                    className="p-2 shadow-lg"
                     hoverable
                     cover={
-                      item.image && (
-                        <div style={{ position: "relative", height: "200px", overflow: "hidden" }}>
+                      item?.image && (
+                        <div className="relative w-full h-[200px] overflow-hidden">
                           <Image
                             src={item.image || "/placeholder.svg"}
                             alt={item.courseName || "Course"}
@@ -268,8 +270,9 @@ export default function Dashboard() {
                             style={{ objectFit: "cover" }}
                             loading="lazy"
                           />
-                          <div style={{ position: "absolute", top: "8px", right: "8px" }}>
-                            <Badge status={status.color} text={status.text} />
+                          {/* Optional: hiển thị Badge đè lên ảnh */}
+                          <div className="absolute top-2 left-2 z-10">
+                            <Badge status={status.color} text={status.text} className="font-bold bg-green-500 opacity-90 px-2 py-1 rounded" />
                           </div>
                         </div>
                       )
@@ -279,7 +282,7 @@ export default function Dashboard() {
                         key="lessons"
                         ghost
                         className="cursor-pointer"
-                        expandIcon={({ isActive }) => (isActive ? <UpOutlined size={2} width={2} className="font-weight-bold cursor-pointer"/> : <DownOutlined size={2} width={2} className="font-weight-bold cursor-pointer"/> )}
+                        expandIcon={({ isActive }) => (isActive ? <UpOutlined size={2} width={2} className="font-weight-bold cursor-pointer" /> : <DownOutlined size={2} width={2} className="font-weight-bold cursor-pointer" />)}
                       >
                         <Panel
                           header={
@@ -309,10 +312,10 @@ export default function Dashboard() {
                                           <Col flex="none">
                                             <div
                                               style={{
-                                                width: "60px",
-                                                height: "45px",
+                                                width: "100px",
+                                                height: "60px",
                                                 position: "relative",
-                                                borderRadius: "6px",
+                                                borderRadius: "2px",
                                                 overflow: "hidden",
                                               }}
                                             >

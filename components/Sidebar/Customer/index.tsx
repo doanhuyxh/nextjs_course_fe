@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
 import { Copy, LogOut, Zap } from "lucide-react"
+import { Drawer } from "antd"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
@@ -23,7 +24,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
-import { useToast } from "@/libs/hooks/use-toast" 
+import { useToast } from "@/libs/hooks/use-toast"
 
 const axiosCustomerConfig = {
   get: async (url: string) => {
@@ -46,7 +47,7 @@ const AppSidebar = () => {
   const [isMounted, setIsMounted] = useState(false)
   const { toast } = useToast()
   const [user, setUser] = useState<Customer | null>(null)
-  const { isMobile, state } = useSidebar()
+  const { isMobile, openMobile, closeMobileSidebar } = useSidebar()
 
   const [menu] = useState([
     {
@@ -157,7 +158,7 @@ const AppSidebar = () => {
     )
   }
 
-  return (
+  const desktopSidebar = (
     <Sidebar collapsible="icon" className="px-4 shadow-lg">
       <SidebarHeader>
         {user && (
@@ -240,6 +241,18 @@ const AppSidebar = () => {
       </SidebarFooter>
     </Sidebar>
   )
+
+  const mobileSidebar = (
+    <Drawer
+      open={openMobile}
+      onClose={closeMobileSidebar}
+      placement="left"
+      width={300}
+    >
+      {desktopSidebar} 
+    </Drawer>
+  )
+  return isMobile ? mobileSidebar : desktopSidebar
 }
 
 export default AppSidebar

@@ -18,7 +18,7 @@ axiosCustomerConfig.interceptors.response.use(
     const code = response.data.code
     if (code == 401) {
       const headers = {
-        "RefreshToken": localStorage.getItem("RefreshToken") || ""
+        "refreshToken": localStorage.getItem("RefreshToken") || ""
       };
       const res_refresh: ResponseData = await axiosCustomerConfig.post("/Auth/RefreshToken", {}, { headers });
       const code_res = res_refresh.code

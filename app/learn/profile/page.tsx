@@ -54,12 +54,12 @@ function ProfilePage() {
         Email: data.email || "",
         Avatar: data.avatar || "",
       });
-      form.setFieldsValue(data);
+
     } catch (error) {
       console.log(error);
       toast.error("Không thể tải thông tin");
     }
-  }, [form]);
+  }, []);
 
   const setAvatar = (avatar: string) => {
     setInfo({ ...info, Avatar: avatar });
@@ -67,7 +67,7 @@ function ProfilePage() {
 
   const handleUpdateInfo = async (values: any) => {
     const payload = { ...info, ...values, Avatar: info.Avatar };
-    const response:any = await axiosCustomerConfig.post("/customer/update-info", payload);
+    const response: any = await axiosCustomerConfig.post("/customer/update-info", payload);
     if (response.code === 200) {
       toast.success("Cập nhật thông tin thành công");
     } else {
@@ -76,19 +76,23 @@ function ProfilePage() {
   };
 
   useEffect(() => {
+    form.setFieldsValue(info)
+  }, [info, form]);
+
+  useEffect(() => {
     if (typeof window === 'undefined') return;
     getUserInfo();
-    
+
   }, [getUserInfo]);
 
-    useEffect(() => {
-        setIsClient(true);
-    }, []);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   if (!isClient) return null;
 
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto mt-6">
       <div className="w-full flex flex-col justify-center items-center mb-10">
         <Title level={2} className="!text-center text-color-secondary">Thông tin cá nhân</Title>
       </div>
@@ -98,35 +102,35 @@ function ProfilePage() {
 
         <div className="flex-1">
           <Form layout="vertical" form={form} onFinish={handleUpdateInfo}>
-            <Row gutter={16}>
-              <Col span={12}>
+            <Row gutter={[16, 16]}>
+              <Col xs={24} md={12}>
                 <Form.Item label="Họ" name="FirstName">
                   <Input className='rounded-md border border-gray-300' />
                 </Form.Item>
               </Col>
-              <Col span={12}>
+              <Col xs={24} md={12}>
                 <Form.Item label="Tên" name="LastName">
                   <Input className='rounded-md border border-gray-300' />
                 </Form.Item>
               </Col>
             </Row>
 
-            <Row gutter={16}>
-              <Col span={8}>
+            <Row gutter={[16, 16]}>
+              <Col xs={24} md={8}>
                 <Form.Item label="Giới tính" name="Gender">
                   <Select placeholder="Chọn giới tính">
                     <Option value="Male">Nam</Option>
                     <Option value="Female">Nữ</Option>
                     <Option value="Other">Khác</Option>
-                  </Select> 
+                  </Select>
                 </Form.Item>
               </Col>
-              <Col span={8}>
+              <Col xs={24} md={8}>
                 <Form.Item label="Năm sinh" name="YearOfBirth">
                   <Input type="number" className='rounded-md border border-gray-300' />
                 </Form.Item>
               </Col>
-              <Col span={8}>
+              <Col xs={24} md={8}>
                 <Form.Item label="Thành phố" name="City">
                   <Select placeholder="Chọn thành phố" className='rounded-md border border-gray-300'>
                     <Option value="Hà nội">Hà nội</Option>
@@ -137,26 +141,26 @@ function ProfilePage() {
               </Col>
             </Row>
 
-            <Row gutter={16}>
-              <Col span={12}>
+            <Row gutter={[16, 16]}>
+              <Col xs={24} md={12}>
                 <Form.Item label="Email" name="Email">
                   <Input disabled className='rounded-md border border-gray-300' />
                 </Form.Item>
               </Col>
-              <Col span={12}>
+              <Col xs={24} md={12}>
                 <Form.Item label="Số điện thoại" name="PhoneNumber">
                   <Input className='rounded-md border border-gray-300' />
                 </Form.Item>
               </Col>
             </Row>
 
-            <Row gutter={16}>
-              <Col span={12}>
+            <Row gutter={[16, 16]}>
+              <Col xs={24} md={12}>
                 <Form.Item label="Lĩnh vực chuyên môn" name="FieldOfExpertise">
                   <Input className='rounded-md border border-gray-300' />
                 </Form.Item>
               </Col>
-              <Col span={12}>
+              <Col xs={24} md={12}>
                 <Form.Item label="Số năm kinh nghiệm" name="YearOfExperience">
                   <Input type="number" className='rounded-md border border-gray-300' />
                 </Form.Item>
@@ -169,18 +173,18 @@ function ProfilePage() {
 
             <Title level={4}>Thông tin ngân hàng</Title>
 
-            <Row gutter={16}>
-              <Col span={8}>
+            <Row gutter={[16, 16]}>
+              <Col xs={24} md={8}>
                 <Form.Item label="Tên ngân hàng" name="AccountBankName">
                   <Input className='rounded-md border border-gray-300' />
                 </Form.Item>
               </Col>
-              <Col span={8}>
+              <Col xs={24} md={8}>
                 <Form.Item label="Số tài khoản" name="BankAccountNumber">
                   <Input className='rounded-md border border-gray-300' />
                 </Form.Item>
               </Col>
-              <Col span={8}>
+              <Col xs={24} md={8}>
                 <Form.Item label="Chủ tài khoản" name="AccountBankOwner">
                   <Input className='rounded-md border border-gray-300' />
                 </Form.Item>

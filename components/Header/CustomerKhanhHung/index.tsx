@@ -1,6 +1,5 @@
 'use client'
 
-import { useState, useEffect } from 'react';
 import HeaderBottom from "./HeaderBottom"
 
 export default function HeaderKhanHung() {

@@ -2,14 +2,15 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { BurgerIcon } from "../../Icon";
+import { Menu } from "lucide-react"
+import { useSidebar } from "@/components/ui/sidebar"
 import Link from "next/link";
 
 const HeaderLogo = () => {
 
   const [isClient, setIsClient] = useState(false)
-  const [isOpenSidebar, setIsOpenSidebar] = useState(false)
   const [logo, setLogo] = useState('')
+  const { toggleSidebar, isMobile } = useSidebar()
 
   useEffect(() => {
     setIsClient(true);
@@ -34,16 +35,18 @@ const HeaderLogo = () => {
   if (!isClient) return <></>
 
   return (
-    <>
-      <div className="header_bottom_wrapper_left">
-        <BurgerIcon isOpenSidebar={isOpenSidebar} setIsOpenSidebar={setIsOpenSidebar} />
-        {logo && <Link href="/">
-          <span>
-            {logo && <Image src={logo} alt="logo" width={100} height={100} />}
-          </span>
-        </Link>}
-      </div>
-    </>
+    <div className="px-1">
+      {isMobile && (
+        <button onClick={toggleSidebar} className="text-black">
+          <Menu className="w-6 h-6" />
+        </button>
+      )}
+      {logo && !isMobile && <Link href="/">
+        <span>
+          {logo && <Image src={logo} alt="logo" width={100} height={100} />}
+        </span>
+      </Link>}
+    </div>
   );
 }
 export default HeaderLogo;

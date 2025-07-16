@@ -39,7 +39,7 @@ export default function StudyPage() {
     try {
       const response: any = await axiosCustomerConfig.get(`/course/get-last-lesson`);
       if (response.code !== 200) {
-        console.error('Failed to fetch last lesson:', response.message);
+        console.log('Failed to fetch last lesson:', response.message);
         return null;
       }
       const data = response.data;
