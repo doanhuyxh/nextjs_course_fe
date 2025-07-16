@@ -139,18 +139,19 @@ export default function AuthTabs() {
     return (
       <div className="flex items-center justify-center h-full">
         <Spin size="large" className="text-purple-600" />
-        <div className="text-gray-500 mt-4">Đang tải...</div>
+        <div className="mt-4 text-white">Đang tải...</div>
       </div>
     )
   }
 
   if (userInfo) {
     return (
-      <Card className="w-full max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg">
-        <Title level={3} className="text-center mb-4">Chào mừng trở lại, {userInfo?.email || ""}!</Title>
-        <Paragraph className="text-center text-gray-600">Bạn đã đăng nhập thành công.</Paragraph>
-        <Button type="primary" className="w-full mt-4" onClick={() => router.push("/")}>
-          Quay về trang chủ
+      <Card className="w-full max-w-md mx-auto border-0 bg-transparent">
+        <Title level={3} className="text-center mb-4">
+          <ThunderboltFilled className="text-yellow-500" /> Chào mừng {(userInfo.firstName+ " " + userInfo.lastName) || userInfo.email}!
+        </Title>
+        <Button type="primary" className="w-full mt-4 bg-[#4ADE80]" onClick={() => router.push("/study")}>
+          Tiếp tục học ngay
         </Button>
       </Card>
     )
@@ -179,7 +180,7 @@ export default function AuthTabs() {
                   <MailOutlined className="text-purple-500 text-xl hover:scale-110 transition-transform duration-300" />
                 }
                 placeholder="Email của bạn"
-                className="h-14 rounded-2xl border-2 border-purple-200 hover:border-purple-400 focus:border-purple-600 bg-purple-50/50 text-lg font-medium shadow-sm hover:shadow-md transition-all duration-300"
+                className="h-14 rounded-2xl border-2 border-purple-200 hover:border-purple-400 focus:border-purple-600 text-lg font-medium shadow-sm hover:shadow-md transition-all duration-300"
               />
             </Form.Item>
 
@@ -189,7 +190,7 @@ export default function AuthTabs() {
                   <LockOutlined className="text-purple-500 text-xl hover:scale-110 transition-transform duration-300" />
                 }
                 placeholder="Mật khẩu"
-                className="h-14 rounded-2xl border-2 border-purple-200 hover:border-purple-400 focus:border-purple-600 bg-purple-50/50 text-lg font-medium shadow-sm hover:shadow-md transition-all duration-300"
+                className="h-14 rounded-2xl border-2 border-purple-200 hover:border-purple-400 focus:border-purple-600 text-lg font-medium shadow-sm hover:shadow-md transition-all duration-300"
               />
             </Form.Item>
             <Form.Item>
