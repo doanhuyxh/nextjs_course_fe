@@ -1,5 +1,5 @@
 
-import Button from "@/components/ui/Button"
+import Button from '@/components/Button';
 import AuthTabs from "../AuthTabs"
 
 export default function Hero() {

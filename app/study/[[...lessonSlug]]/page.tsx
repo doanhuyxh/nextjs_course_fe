@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback, use } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import axiosCustomerConfig from '@/libs/configs/ApiConfig/axiosCustomerConfig';
 import { CourseData, LessonItem } from '@/libs/types';
@@ -10,17 +10,20 @@ import { Spin } from 'antd';
 
 export default function StudyPage() {
   const router = useRouter();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const listLessonsRef = useRef<HTMLDivElement>(null);
+
   const [isMounted, setIsMounted] = useState(false);
   const { lessonSlug } = useParams() as { lessonSlug: string };
   const [course, setCourse] = useState<CourseData[] | []>([]);
   const [lesson, setLesson] = useState<LessonItem | null>(null);
+  const [loading, setLoading] = useState(true);
 
 
   const getLesson = useCallback(async (slug: string) => {
     try {
       const response: any = await axiosCustomerConfig.get(`/public/get-lesson-share?slug=${slug}`);
       if (response.code !== 200) {
-        console.error('Failed to fetch lesson:', response.message);
         return null;
       }
       const data = response.data;
@@ -62,6 +65,26 @@ export default function StudyPage() {
   }, []);
 
   useEffect(() => {
+
+    if (!isMounted || loading) {
+      return;
+    }
+
+    if (!containerRef.current || !listLessonsRef.current) {
+      return;
+    }
+
+    console.log('Adjusting layout for container and list lessons');
+
+    if (containerRef.current) {
+      const containerHeight = containerRef.current.clientHeight;
+      const listLessonsHeight = listLessonsRef.current?.clientHeight || 0;
+      const contentHeight = containerHeight - listLessonsHeight - 100; // Adjust as needed
+      listLessonsRef.current?.style.setProperty('height', `${contentHeight}px`);
+    }
+  }, [containerRef, listLessonsRef, isMounted, loading]);
+
+  useEffect(() => {
     if (!isMounted) {
       return;
     }
@@ -69,9 +92,6 @@ export default function StudyPage() {
     if (!token) {
       localStorage.clear();
       sessionStorage.clear();
-      document.cookie.split(';').forEach((cookie) => {
-        document.cookie = cookie.replace(/^ +/, '').replace(/=.*/, '=;expires=' + new Date().toUTCString() + ';path=/');
-      });
       router.push('/');
       return;
     }
@@ -81,6 +101,7 @@ export default function StudyPage() {
       getLesson(lessonSlug)
     }
 
+    setLoading(false);
 
   }, [lessonSlug, isMounted, getLastLesson, router, getLesson]);
 
@@ -94,23 +115,36 @@ export default function StudyPage() {
   }
 
   return (
-    <div className="w-full h-full">
-      <div className="flex flex-col lg:flex-row ">
-        {/* Cột bài học - chiếm 2 phần */}
-        <div className="w-full p-4">
-          {lesson ? (
-            <LessonView lesson={lesson} />
-          ) : (
-            <div className="text-center text-gray-500">Loading lesson...</div>
-          )}
-        </div>
+    <div className="flex flex-col lg:flex-row items-stretch mt-3" ref={containerRef}>
+      {/* Cột bài học - chiếm 2 phần */}
+      <div className="w-full px-4 pb-3">
 
-        {/* Cột bên phải - chiếm 1 phần */}
-        <div className="lg:w-[600px] w-full max-h-[100%]">
-          <ListCourse coursesData={course || []} />
-        </div>
+        {loading && (
+          <div className="flex items-center justify-center h-full">
+            <Spin size="large" />
+          </div>
+        )}
 
+        {
+          !lesson && (
+            <div className="flex items-center justify-center h-full">
+              <p className="text-gray-500">
+                Bài học đang được cập nhật 
+              </p>
+            </div>
+          )
+        }
+
+        {lesson && (
+          <LessonView lesson={lesson} />
+        )}
       </div>
+
+      {/* Cột bên phải - chiếm 1 phần */}
+      <div className="lg:w-[600px] w-full" ref={listLessonsRef}>
+        <ListCourse coursesData={course || []} containerRef={containerRef} />
+      </div>
+
     </div>
   );
 

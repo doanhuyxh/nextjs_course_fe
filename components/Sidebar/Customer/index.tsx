@@ -1,224 +1,245 @@
-"use client";
+"use client"
 
-import "./index.css";
-import Image from "next/image";
-import BlockItem from "./BlockItem";
-import { useEffect, useState } from "react";
-import { Customer } from "@/libs/types";
-import axiosCustomerConfig from "@/libs/configs/ApiConfig/axiosCustomerConfig";
-import Link from "next/link";
-import { getLastStudyLesion } from "@/libs/services/ApiCustomerServices";
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
+import Image from "next/image"
+import Link from "next/link"
+import { Copy, LogOut, Zap } from "lucide-react"
 
-function Sidebar() {
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
+import { Skeleton } from "@/components/ui/skeleton"
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  useSidebar,
+} from "@/components/ui/sidebar"
+import { useToast } from "@/libs/hooks/use-toast" 
 
-  const [menu, setMenu] = useState([
-    // {
-    //   title: "Quyền lợi riêng cho bạn",
-    //   menuItems: [
-    //     {
-    //       name: "Đặt lich hẹn Free mentor",
-    //       imageSrc:"/assets/images/ic-chanel-calendar.svg",
-    //       link: ""
-    //     },
-    //     {
-    //       name: "Đăng ký Free Setup",
-    //       imageSrc:"/assets/images/ic-chanel-setup.svg",
-    //       link: ""
-    //     },
+const axiosCustomerConfig = {
+  get: async (url: string) => {
+    if (url === "/course/get-last-lesson") {
+      return { code: 200, data: "lesson-id-123" }
+    }
+    return { code: 404, message: "Not found" }
+  },
+}
 
-    //   ]
-    // },
+type Customer = {
+  firstName: string
+  lastName: string
+  email: string
+  code: string
+}
+
+const AppSidebar = () => {
+  const router = useRouter()
+  const [isMounted, setIsMounted] = useState(false)
+  const { toast } = useToast()
+  const [user, setUser] = useState<Customer | null>(null)
+  const { isMobile, state } = useSidebar()
+
+  const [menu] = useState([
     {
       title: "Profile",
-      menuItems: [
-        {
-          name: "Dashboard",
-          imageSrc: "/assets/images/mb-ic-1.svg",
-          link: "/learn/dashboard"
-        },
-        {
-          name: "Đổi mật khẩu",
-          imageSrc: "/assets/images/mb-ic-2.svg",
-          link: "/learn/change-password"
-        },
-        {
-          name: "Profile C1",
-          imageSrc: "/assets/images/mb-ic-3.svg",
-          link: "/learn/profile"
-        },
-        // {
-        //   name: "Ticket của bạn",
-        //   imageSrc: "/assets/images/mb-ic-4.svg",
-        //   link: "/learn/ticket"
-        // },
-        {
-          name: "Thông báo của bạn",
-          imageSrc: "/assets/images/ic-histories-email.svg",
-          link: "/learn/notification"
-        },
-
-      ]
+      items: [
+        { label: "Dashboard", link: "/learn/dashboard", icon: "/assets/images/mb-ic-1.svg" },
+        { label: "Đổi mật khẩu", link: "/learn/change-password", icon: "/assets/images/mb-ic-2.svg" },
+        { label: "Profile C1", link: "/learn/profile", icon: "/assets/images/mb-ic-3.svg" },
+        { label: "Thông báo của bạn", link: "/learn/notification", icon: "/assets/images/ic-histories-email.svg" },
+      ],
     },
-    // {
-    //   title: "Kinh doanh cùng tôi",
-    //   menuItems: [
-    //     // {
-    //     //   name: "Dashboard Affiliate",
-    //     //   imageSrc: "/assets/images/ic-chanel-calendar.svg",
-    //     //   link: ""
-    //     // },
-    //     {
-    //       name: "Chính sách Affiliate",
-    //       imageSrc: "/assets/images/mb-ic-11.svg",
-    //       link: "/learn/affiliate/policy"
-    //     },
-    //   ]
-    // },
     {
       title: "Về khoá học",
-      menuItems: [
+      items: [
+        { label: "Chương trình học", link: "/#chuong-trinh-hoc", icon: "/assets/images/ic-chanel-4-side-menu.svg" },
+        { label: "Quyền lợi", link: "/#quyen-loi", icon: "/assets/images/ic-chanel-5.svg" },
         {
-          name: "Chương trình học",
-          imageSrc: "/assets/images/ic-chanel-4-side-menu.svg",
-          link: "/#chuong-trinh-hoc"
+          label: "Thông tin về chúng tôi",
+          link: "/#thong-tin-ve-chung-toi",
+          icon: "/assets/images/ic-chanel-3-side-menu.svg",
         },
-        {
-          name: "Quyền lợi",
-          imageSrc: "/assets/images/ic-chanel-5.svg",
-          link: "/#quyen-loi"
-        },
-        {
-          name: "Thông tin về chúng tôi",
-          imageSrc: "/assets/images/ic-chanel-3-side-menu.svg",
-          link: "/#thong-tin-ve-chung-toi"
-        },
-
-      ]
-    }
+      ],
+    },
   ])
-
-  const [user, setUser] = useState<Customer>()
-  
-  const router = useRouter()
 
   const handleLogout = () => {
     localStorage.clear()
     sessionStorage.clear()
     document.cookie = ""
+    router.push("/")
+  }
+
+  const handleCopy = (text: string, label: string) => {
+    navigator.clipboard.writeText(text)
+    toast({
+      title: "Copied!",
+      description: `${label} đã được sao chép`,
+    })
   }
 
   const handleChangeStudyPage = async () => {
-    const response: any = await axiosCustomerConfig.get("/course/get-last-lesson")
-    if (response.code == 200) {
-      router.push(`/study/${response.data}`)
+    try {
+      const response: any = await axiosCustomerConfig.get("/course/get-last-lesson")
+      if (response.code === 200) {
+        router.push(`/study/${response.data}`)
+      } else {
+        toast({
+          title: "Error",
+          description: "Không thể lấy bài học cuối cùng.",
+          variant: "destructive",
+        })
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Có lỗi xảy ra khi lấy bài học.",
+        variant: "destructive",
+      })
     }
   }
 
   useEffect(() => {
-    const width = window.innerWidth
-    if (width < 800) {
-      const userData = sessionStorage.getItem("user") ?? "{}"
-      setUser(JSON.parse(userData))
-
+    const userData = sessionStorage.getItem("user")
+    if (userData) {
+      try {
+        setUser(JSON.parse(userData))
+      } catch {
+        setUser(null)
+      }
     }
+    setIsMounted(true)
   }, [])
 
+  if (!isMounted) {
+    return (
+      <Sidebar collapsible="icon">
+        <SidebarHeader>
+          <div className="flex items-center gap-4 mb-6">
+            <Skeleton className="size-16 rounded-full" />
+            <div className="flex flex-col gap-2">
+              <Skeleton className="h-5 w-32" />
+              <Skeleton className="h-4 w-40" />
+            </div>
+          </div>
+        </SidebarHeader>
+        <SidebarContent>
+          <div className="space-y-4 mb-6">
+            <Skeleton className="h-16 w-full" />
+            <Skeleton className="h-10 w-full" />
+          </div>
+          <div className="flex-1 overflow-auto space-y-4">
+            {Array.from({ length: 2 }).map((_, groupIndex) => (
+              <div key={groupIndex} className="mb-4">
+                <Skeleton className="h-5 w-24 mb-2" />
+                <div className="space-y-1">
+                  {Array.from({ length: 4 }).map((_, itemIndex) => (
+                    <Skeleton key={itemIndex} className="h-8 w-full" />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </SidebarContent>
+        <SidebarFooter>
+          <Skeleton className="h-10 w-full" />
+        </SidebarFooter>
+      </Sidebar>
+    )
+  }
+
   return (
-    <>
-      <div className="sidebar_container animate-fade-right animate-once animate-duration-300 animate-ease-linear">
-        <div className="sidebar_content">
-
-          {user && <div className="w-full mx-8 mb-10 overflow-hidden">
-
-            <div className="my-2 mx-2 flex gap-4 mb-4">
-              <a href="/learn/profile" className="w-[40px rounded-full overflow-hidden">
-                <Image src="/assets/images/avatar_defaut.jpg" alt="profile" width={40} height={40} style={{ height: "auto" }} />
-              </a>
-              <div className="flex flex-col gap-1">
-                <p className="text-nowrap text-black font-bold text-2xl">{user?.firstName + " " + user?.lastName}</p>
-                <div className="text-nowrap flex items-center gap-1">
-                  <Image src="/assets/images/price-icon.svg" alt="star" width={15} height={15} />
-                  <span className="text-nowrap text-color-primary font-bold text-xl m-y-auto">{user?.totalMoney}đ</span>
-                </div>
-              </div>
-
-            </div>
-
-            <hr className="h-4 w-full" />
-
-            <div className="flex flex-col gap-8">
-              <div className="flex gap-3">
-                <Image src={"/assets/images/hd-logged-1.svg"} width={20} height={20} alt="" />
-                <div className="flex flex-col gap-2">
-                  <p className="text-3xl text-gray-600">Mã khách hàng</p>
-                  <p className="text-3xl text-[#2686ec] flex items-center gap-2">
-                    {user.code}
-                    <span>
-                      <Image src={"/assets/images/ic-cp-blue.svg"} width={10} height={10} alt="" />
-                    </span>
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-3">
-                <Image src={"/assets/images/hd-logged-4.svg"} width={20} height={20} alt="" />
-                <div className="flex flex-col gap-2">
-                  <p className="text-3xl text-gray-600">Affiliate Level: {user.level_affiliate}</p>
-                  <p className="text-3xl text-[#2686ec] flex items-center gap-2">Link Affiliate
-                    <span>
-                      <Image src={"/assets/images/ic-cp-blue.svg"} width={10} height={10} alt="" />
-                    </span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>}
-
-          <div className="sidebar_top">
-            <button onClick={handleChangeStudyPage} className="sidebar_top_wrap">
-              <span className="icon_thunder">
-                <Image
-                  width={20}
-                  height={31}
-                  alt=""
-                  src={"/assets/images/ic-thunder.svg"}
-                />
-              </span>
-              <span>Học ngay</span>
-            </button>
-          </div>
-          <div className="sidebar_body">
-            <div className="sidebar_body_wrap">
-              <div
-                style={{
-                  height: "16px",
-                  width: "228.008px",
-                  opacity: 0,
-                  transform: "translateY(80.1855px)",
-                }}
-              />
-              {menu.map((item, index) => {
-                return <BlockItem title={item.title} menuItems={item.menuItems} key={index} />
-              })}
-              {
-                user && <div className="block_item cursor-pointer">
-                  <div onClick={handleLogout} className="flex items-center gap-2 px-5 py-3 cursor-pointer">
-                    <div className="flex justify-center text-gray-500">
-                      <Image src="/assets/images/header/window.svg" alt="profile" width={15} height={15} />
-                    </div>
-                    <div className="text-nowra text-xl flex flex-col gap-2">
-                      <p className="text-gray-500 font-semibold">Đăng xuất</p>
-                    </div>
-                  </div>
-                </div>
-              }
+    <Sidebar collapsible="icon" className="px-4 shadow-lg">
+      <SidebarHeader>
+        {user && (
+          <div className="flex items-center gap-4 mb-6">
+            <Link href="/learn/profile" className="flex-shrink-0">
+              <Avatar className="size-16">
+                <AvatarImage src="/assets/images/avatar_defaut.jpg" alt="User Avatar" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+            </Link>
+            <div className="flex flex-col overflow-hidden">
+              <span className="text-lg font-semibold truncate">{user.firstName + " " + user.lastName}</span>
+              <span className="text-gray-500 text-sm truncate">{user.email}</span>
             </div>
           </div>
+        )}
+        {user && (
+          <div className="space-y-4 mb-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-500">Mã khách hàng</p>
+                <p className="font-semibold text-primary">{user.code}</p>
+              </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => handleCopy(user.code, "Mã khách hàng")}
+                aria-label="Copy customer code"
+              >
+                <Copy className="size-4" />
+              </Button>
+            </div>
+          </div>
+        )}
+      </SidebarHeader>
+      <SidebarContent>
+        <Button
+          onClick={handleChangeStudyPage}
+          className="mb-6 w-full text-lg py-5 bg-pink-500 !text-white hover:!bg-pink-600 transition-colors"
+        >
+          <Zap className="mr-2 size-5" />
+          Học ngay
+        </Button>
+        <div className="flex-1 overflow-auto">
+          {menu.map((group) => (
+            <SidebarGroup key={group.title}>
+              <SidebarGroupLabel>{group.title}</SidebarGroupLabel>
+              <SidebarGroupContent>
+                <SidebarMenu>
+                  {group.items.map((item) => (
+                    <SidebarMenuItem key={item.label} className="font-bold">
+                      <SidebarMenuButton asChild tooltip={item.label}>
+                        <Link href={item.link} className="flex items-center gap-2">
+                          <Image src={item.icon || "/placeholder.svg"} alt="" width={20} height={20} />
+                          <span className="truncate font-semibold">{item.label}</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  ))}
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+          ))}
         </div>
-      </div>
-    </>
-  );
+      </SidebarContent>
+      <SidebarFooter className="!border-red-500">
+        {user && (
+          <>
+            <Separator className="my-2" />
+            <Button
+              variant="ghost"
+              className="w-full justify-start text-left text-red-500 hover:text-red-600"
+              onClick={handleLogout}
+            >
+              <LogOut className="mr-2 size-4" />
+              Đăng xuất
+            </Button>
+          </>
+        )}
+      </SidebarFooter>
+    </Sidebar>
+  )
 }
 
-export default Sidebar;
+export default AppSidebar

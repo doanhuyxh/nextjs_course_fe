@@ -16,9 +16,9 @@ export default function UserDropdown({ isDropdown, user, setIsDropdown }: { isDr
     return (
         <div
             onMouseLeave={() => setIsDropdown(false)}
-            className={`transition-all duration-300 absolute top-20 right-[-20px] z-99999 ${isDropdown ? 'dropdown_menu' : 'hidden'}`}
+            className={`transition-all duration-300 absolute top-24 z-99999 ${isDropdown ? 'dropdown_menu' : 'hidden'}`}
         >
-            <ul className="dropdown_menu_item bg-white shadow-lg rounded-lg py-2">
+            <ul className="bg-white shadow-lg rounded-lg py-2">
                 <li>
                     <a href="/learn/profile" className="flex items-center gap-2 px-5 py-3">
                         <div className="flex justify-center align-middle items-center transform translate-y-[-8px] w[20px]">
@@ -33,19 +33,6 @@ export default function UserDropdown({ isDropdown, user, setIsDropdown }: { isDr
                                 </span>
                             </p>
                         </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="/learn/profile" className="flex gap-2 px-5 py-3">
-                        <div className="flex overflow-hidden w-[20px]">
-                            <Image src="/assets/images/header/cup-icon.svg" alt="profile" width={15} height={15} />
-                        </div>
-                        <p className="text-gray-500 font-semibold cursor-pointer">
-                            Affiliate Level:
-                            <span className="mx-2 text-orange-500 font-semibold">
-                                {user?.level_affiliate || ""}
-                            </span>
-                        </p>
                     </a>
                 </li>
                 <li>

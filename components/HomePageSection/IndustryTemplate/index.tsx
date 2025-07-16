@@ -1,5 +1,5 @@
-import Button from "@/components/ui/Button";
-import EditText from "@/components/ui/EditText";
+import Button from '@/components/Button';
+
 
 export default function IndustryTemplate() {
     return (

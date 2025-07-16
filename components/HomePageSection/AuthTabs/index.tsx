@@ -59,6 +59,12 @@ export default function AuthTabs() {
         localStorage.setItem("AccessToken", response.data.accessToken)
         localStorage.setItem("RefreshToken", response.data.refreshToken)
         axiosCustomerConfig.defaults.headers.common["Authorization"] = `Bearer ${response.data.accessToken}`
+        Swal.fire({
+          icon: "success",
+          title: "Đăng nhập thành công",
+          text: "Chào mừng bạn trở lại!",
+        })
+        await handleGetInfoUser()
       } else {
         Swal.fire({
           icon: "error",

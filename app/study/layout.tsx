@@ -1,4 +1,7 @@
+
+import HeaderKhanHung from "@/components/Header/CustomerKhanhHung";
 import { Metadata } from "next";
+
 
 export const metadata: Metadata = {
   title: "Learn with Study Flash Bot",
@@ -13,6 +16,7 @@ export const metadata: Metadata = {
 export default function LearnLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
+     <HeaderKhanHung />
       <div className="w-full h-full overflow-x-auto">
         {children}
       </div>

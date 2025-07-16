@@ -1,25 +1,22 @@
 'use client'
 
-import Pagination from "@/components/Pagination";
 import axiosCustomerConfig from "@/libs/configs/ApiConfig/axiosCustomerConfig";
-import ModalViewHtml from "@/components/Modal/ModalViewHtml";
-import { formatTime } from "@/libs/utils";
+import { formatTime } from "@/libs/utils/index";
 import { NotificationItem } from "@/libs/types";
 import { useState, useEffect, useCallback } from "react";
+import { Button, Modal, Table, Tag, Typography, Pagination, Space, Segmented, Skeleton } from "antd";
 
+const { Text } = Typography;
 
 export default function Notification() {
-
-
-    const [status, setStatus] = useState("");
-    const [page, setPage] = useState(1);
+    const [status, setStatus] = useState<string>("");
+    const [page, setPage] = useState<number>(1);
     const [data, setData] = useState<NotificationItem[]>([]);
-    const [totalPage, setTotalPage] = useState(0);
-    const [totalResult, setTotalResult] = useState(0);
-    const [totalNotification, setTotalNotification] = useState({
-        read: 0,
-        unread: 0
-    });
+    const [totalPage, setTotalPage] = useState<number>(0);
+    const [totalResult, setTotalResult] = useState<number>(0);
+    const [totalNotification, setTotalNotification] = useState({ read: 0, unread: 0 });
+
+    const [isClient, setIsClient] = useState(false);
 
     const [isOpen, setIsOpen] = useState(false);
     const [title, setTitle] = useState("");
@@ -29,22 +26,18 @@ export default function Notification() {
         setPage(page);
     }
 
-    const handleStatusChange = (status: string) => {
-        setStatus(status);
-    }
-
     const GetNotification = useCallback(async () => {
-        const res_data = await axiosCustomerConfig.get(`/notification/get-mail?page=${page}&status=${status}`);
-        setData(res_data.data?.data);
-        setTotalPage(res_data.data?.totalPage);
-        setTotalResult(res_data.data?.totalResult);
+        const res = await axiosCustomerConfig.get(`/notification/get-mail?page=${page}&status=${status}`);
+        setData(res.data?.data);
+        setTotalPage(res.data?.totalPage);
+        setTotalResult(res.data?.totalResult);
     }, [page, status]);
 
     const GetTotalNotification = useCallback(async () => {
-        const res_data = await axiosCustomerConfig.get(`/notification/get-total-mail`);
+        const res = await axiosCustomerConfig.get(`/notification/get-total-mail`);
         setTotalNotification({
-            read: res_data.data?.total_read,
-            unread: res_data.data?.total_un_read
+            read: res.data?.total_read,
+            unread: res.data?.total_un_read
         });
     }, []);
 
@@ -61,7 +54,6 @@ export default function Notification() {
         if (item.status === "un_read") {
             axiosCustomerConfig.get(`/notification/update-mail?mailId=${item.messUserId}`);
         }
-
     }
 
     useEffect(() => {
@@ -69,145 +61,137 @@ export default function Notification() {
         GetTotalNotification();
     }, [page, status, GetNotification, GetTotalNotification]);
 
-    return (
-        <>
-            <div className="w-11/12 m-auto ml-0 mt-10 lg:mt-30">
-                <div className="w-full flex justify-center items-center mb-10">
-                    <h1 className="text-3xl lg:text-6xl font-bold transform scale-150 text-color-secondary animate-jump-in animate-once animate-ease-out" >Thông báo của bạn</h1>
-                </div>
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
 
-                <div className="w-11/12 lg:w-full shadow-[0_0_20px_rgba(0,0,0,0.2)] shadow-gray-500/50 m-auto p-6 lg:p-12 lg:m-12 rounded-lg">
-                    <div className="flex flex-col lg:flex-row justify-center lg:justify-between gap-10 lg:gap-0 py-8 mb-10">
-                        <div>
-                            <h2 className="text-3xl lg:text-4xl font-bold opacity-80">Lịch sử các thông báo của bạn</h2>
-                        </div>
-                        <div className="flex gap-4">
-                            <button
-                                className={`cursor-pointer text-gray-600 px-5 py-3 rounded-md lg:text-3xl border border-gray-600 border-opacity-40 hover:bg-color-primary hover:text-white transition-all duration-300 ${status === "" ? "bg-color-primary text-white" : ""} relative`} onClick={() => handleStatusChange("")}>
-                                Tất cả
-                                <span className="absolute top-[-6px] right-[-4px] h-auto w-7 text-lg text-center text-white rounded-full bg-red-500">
-                                    {Number(totalNotification.read + totalNotification.unread)}
-                                </span>
-                            </button>
-                            <button
-                                className={`cursor-pointer text-gray-600 px-5 py-3 rounded-md lg:text-3xl border border-gray-600 border-opacity-40 hover:bg-color-primary hover:text-white transition-all duration-300 ${status === "read" ? "bg-color-primary text-white" : ""} relative`} onClick={() => handleStatusChange("read")}>
-                                Đã xem
-                                <span className="absolute top-[-6px] right-[-4px] h-auto w-7 text-lg text-center text-white rounded-full bg-red-500">
-                                    {totalNotification.read}
-                                </span>
-                            </button>
-                            <button
-                                className={`cursor-pointer text-gray-600 px-5 py-3 rounded-md lg:text-3xl border border-gray-600 border-opacity-40 hover:bg-color-primary hover:text-white transition-all duration-300 ${status === "unread" ? "bg-color-primary text-white" : ""} relative`}
-                                onClick={() => handleStatusChange("un_read")}>
-                                Chưa xem
-                                <span className="absolute top-[-6px] right-[-4px] h-auto w-7 text-lg text-center text-white rounded-full bg-red-500">
-                                    {totalNotification.unread}
-                                </span>
-                            </button>
-                        </div>
-                    </div>
-                    <div className="lg:block hidden w-full overflow-x-auto">
-                        <table className="min-w-full bg-white border border-gray-300 rounded-xl">
-                            <thead>
-                                <tr className="bg-gray-100 text-black text-xl leading-normal text-nowrap">
-                                    <th className="py-3 px-6 text-left">STT</th>
-                                    <th className="py-3 px-6 text-left min-w-[40%]">Tiêu đề</th>
-                                    <th className="py-3 px-6 text-left">Nội dung</th>
-                                    <th className="py-3 px-6 text-left">Thời gian gửi</th>
-                                    <th className="py-3 px-6 text-left">Thời gian xem</th>
-                                    <th className="py-3 px-6 text-left">Trạng thái</th>
-                                </tr>
-                            </thead>
-                            <tbody className="text-gray-600 text-xl">
-                                {data && data.map((item: NotificationItem, index: number) => (
-                                    <tr className="border-b border-gray-200 hover:bg-gray-50" key={index}>
-                                        <td className="py-4 px-6">{index + 1}</td>
+    const columns = [
+        {
+            title: 'STT',
+            dataIndex: 'index',
+            key: 'index',
+            render: (_: any, __: NotificationItem, index: number) => index + 1,
+        },
+        {
+            title: 'Tiêu đề',
+            dataIndex: 'title',
+            key: 'title',
+            render: (title: string) => <Text strong>{title}</Text>,
+        },
+        {
+            title: 'Nội dung',
+            key: 'content',
+            render: (_: any, item: NotificationItem) => (
+                <Button type="link" onClick={() => handleViewDetail(item)}>
+                    Xem chi tiết
+                </Button>
+            )
+        },
+        {
+            title: 'Thời gian gửi',
+            dataIndex: 'sendAt',
+            key: 'sendAt',
+            render: (sendAt: string) => formatTime(sendAt),
+        },
+        {
+            title: 'Thời gian xem',
+            dataIndex: 'readAt',
+            key: 'readAt',
+            render: (_: string, item: NotificationItem) => item.status === "read" ? formatTime(item.readAt) : "-",
+        },
+        {
+            title: 'Trạng thái',
+            key: 'status',
+            render: (_: any, item: NotificationItem) =>
+                item.status === "read" ? (
+                    <Tag color="green">Đã xem</Tag>
+                ) : (
+                    <Tag color="red">Chưa xem</Tag>
+                )
+        }
+    ];
 
-                                        <td className="py-4 px-6 font-semibold text-2xl min-w-[40%]">{item.title}</td>
-
-                                        <td className="py-4 px-6">
-                                            <span
-                                                onClick={() => handleViewDetail(item)}
-                                                className={`cursor-pointer text-decoration-line: underline ${item.status === "read" ? "text-gray-600" : "text-blue-600"}`}
-                                            >
-                                                Xem chi tiết
-                                            </span>
-                                        </td>
-
-                                        <td className="py-4 px-6">{formatTime(item.sendAt)}</td>
-
-                                        <td className="py-4 px-6">{item.status == "read" ? formatTime(item.readAt) : "-"}</td>
-
-                                        <td className="py-4 px-6">
-                                            {item.status === "read" ? (
-                                                <span className="bg-green-600 text-white py-2 px-4 rounded-md">Đã xem</span>
-                                            ) : (
-                                                <span className="bg-red-600 text-white py-2 px-4 rounded-md">Chưa xem</span>
-                                            )}
-                                        </td>
-                                    </tr>
-                                ))}
-
-                                {data?.length === 0 && (
-                                    <tr>
-                                        <td colSpan={6} className="text-center py-4">Không có thông báo nào</td>
-                                    </tr>
-                                )}
-
-
-                            </tbody>
-
-                        </table>
-                    </div>
-                    <div className="lg:hidden w-full max-h-[50vh] overflow-y-auto">
-                        {
-                            data?.map((item: NotificationItem, index: number) => (
-                                <div className="bg-white p-4 mb-2 border border-gray-300 rounded-md" key={index}>
-                                    <div className="flex justify-between">
-                                        <span className="font-semibold text-gray-400">STT :</span>
-                                        <span className="text-gray-400">{index + 1}</span>
-                                    </div>
-                                    <div className="flex justify-between mt-2">
-                                        <span className="font-semibold text-gray-400 text-nowrap">Tiêu đề: </span>
-                                        <span className="text-gray-700 font-semibold text-right">{item.title}</span>
-                                    </div>
-                                    <div className="flex justify-between mt-2">
-                                        <span className="font-semibold text-gray-400">Nội dung:</span>
-                                        <span
-                                            onClick={() => handleViewDetail(item)}
-                                            className="text-gray-600 text-decoration-line: underline">
-                                            Nhấn để xem
-                                        </span>
-                                    </div>
-                                    <div className="flex justify-between mt-2">
-                                        <span className="font-semibold text-gray-400">Thời gian gửi:</span>
-                                        <span className="text-gray-600">
-                                            {formatTime(item.sendAt)}
-                                        </span>
-                                    </div>
-                                    <div className="flex justify-between mt-2">
-                                        <span className="font-semibold text-gray-400">Thời gian xem:</span>
-                                        <span className="text-gray-600">
-                                            {item.status == "read" ? formatTime(item.readAt) : "-"}
-                                        </span>
-                                    </div>
-                                    <div className="flex justify-between mt-2">
-                                        <span className="font-semibold text-gray-400">Trạng thái:</span>
-                                        <span className={`text-white ${item.status == "read" ? "bg-green-500" : "bg-orange-400"} py-1 px-3 rounded-md`}>
-                                            {item.status == "read" ? "Đã xem" : "Chưa xem"}
-                                        </span>
-                                    </div>
-                                </div>
-                            ))
-                        }
-                    </div>
-                    <Pagination length={data?.length} pageSize={30} totalResult={totalResult} page={page} totalPage={totalPage} onPageChange={handlePageChange} />
-                </div>
-
+    if (!isClient) {
+        return (
+            <div className="w-full max-w-xl mx-auto px-4 py-8">
+                <Typography.Title level={2} className="text-center text-color-secondary">
+                    Thông báo
+                </Typography.Title>
+                <Skeleton active paragraph={{ rows: 4 }} />
             </div>
-            <ModalViewHtml isOpen={isOpen} onClose={() => setIsOpen(false)} title={title} >
-                <div className="p-4" dangerouslySetInnerHTML={{ __html: content }} />
-            </ModalViewHtml>
-        </>
+        );
+    };
+
+    return (
+        <div className="lg:mt-5 w-full px-4 py-8 max-w-7xl mx-auto bg-white shadow-md rounded-lg">
+            <div className="text-center mb-10">
+                <h1 className="text-3xl font-bold text-blue-600">Thông báo của bạn</h1>
+            </div>
+
+            <div className="mb-6 flex flex-wrap gap-4 justify-center">
+                <Segmented
+                    options={[
+                        {
+                            label: (
+                                <Space>
+                                    <span>Tất cả</span>
+                                    <Tag color="red">{totalNotification.read + totalNotification.unread}</Tag>
+                                </Space>
+                            ),
+                            value: "",
+                        },
+                        {
+                            label: (
+                                <Space>
+                                    <span>Đã xem</span>
+                                    <Tag color="green">{totalNotification.read}</Tag>
+                                </Space>
+                            ),
+                            value: "read",
+                        },
+                        {
+                            label: (
+                                <Space>
+                                    <span>Chưa xem</span>
+                                    <Tag color="red">{totalNotification.unread}</Tag>
+                                </Space>
+                            ),
+                            value: "un_read",
+                        },
+                    ]}
+                    value={status}
+                    onChange={(val) => setStatus(val as string)}
+                />
+            </div>
+
+            <Table
+                dataSource={data}
+                columns={columns}
+                rowKey="messId"
+                pagination={false}
+                scroll={{ x: true }}
+                locale={{ emptyText: 'Không có thông báo nào' }}
+            />
+
+            <div className="flex justify-center mt-6">
+                <Pagination
+                    current={page}
+                    total={totalResult}
+                    pageSize={30}
+                    onChange={handlePageChange}
+                    showSizeChanger={false}
+                />
+            </div>
+
+            <Modal
+                title={title}
+                open={isOpen}
+                onCancel={() => setIsOpen(false)}
+                footer={null}
+                width={800}
+            >
+                <div dangerouslySetInnerHTML={{ __html: content }} />
+            </Modal>
+        </div>
     )
 }
