@@ -1,11 +1,11 @@
-import ImageUpload from "@/components/FileHandle/Image";
 import FileUploadPDF from "@/components/FileHandle/FileUploadPDF";
 import VideoUploadFull from "@/components/FileHandle/video";
 import EditorReactQuill from "../../Editor/ReactQuill";
-import { LessonItem } from "@/libs/types";
+import { LessonItem, MemberType } from "@/libs/types";
 import { generateSlug } from "@/libs/utils/index";
 import { useState } from "react";
 import FileUploadImage from "../../FileHandle/FileUploadImage";
+
 
 export default function FormLesson({ lesson, setLesson, saveLesson }: { lesson: LessonItem, setLesson: any, saveLesson: any }) {
 
@@ -96,13 +96,14 @@ export default function FormLesson({ lesson, setLesson, saveLesson }: { lesson: 
 
                 <div className="flex flex-row justify-between gap-4 items-center">
                     <div className="flex gap-2 items-center  cursor-pointer">
-                        <input
-                            id="isFree"
-                            type="checkbox"
-                            checked={lessonTemp.isFree}
-                            onChange={(e) => handleCheckboxChange('isFree', e.target.checked)}
-                        />
-                        <label htmlFor="isFree" className="cursor-pointer">Miễn phí</label>
+                        <label className="font-semibold">Loại thành viên </label>
+                        <select className="border border-gray-300 rounded-md p-2" value={lessonTemp.memberType} onChange={(e) => setLessonTemp({ ...lessonTemp, memberType: e.target.value })}>
+                            {MemberType.map((item) => (
+                                <option key={item.value} value={item.value.trim()}>
+                                    {item.label}
+                                </option>
+                            ))}
+                        </select>
                     </div>
 
                     <div className="flex gap-2 items-center  cursor-pointer">

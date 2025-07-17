@@ -188,7 +188,7 @@ export default function AuthTabs() {
     return (
       <Card className="w-full max-w-md mx-auto border-0 bg-transparent">
         <Title level={3} className="text-center mb-4">
-          <ThunderboltFilled className="text-yellow-500" /> Chào mừng {(userInfo.firstName + " " + userInfo.lastName) || userInfo.email}!
+          <ThunderboltFilled className="text-yellow-500" /> Chào mừng {(userInfo.firstName || "") + " " + (userInfo.lastName || "") || userInfo.email}!
         </Title>
         <Button type="primary" className="w-full mt-4 bg-[#4ADE80]" onClick={() => router.push("/study")}>
           Tiếp tục học ngay

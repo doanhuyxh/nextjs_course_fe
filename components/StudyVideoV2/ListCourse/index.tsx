@@ -142,11 +142,30 @@ export default function ListCourse({ coursesData, containerRef }: { coursesData:
                                                             {lesson.name}
                                                         </h4>
                                                         <div className="flex items-center gap-2">
-                                                            {lesson.isFree && (
+                                                            {lesson.memberType == "free" && (
                                                                 <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white text-xs px-3 py-1 shadow-sm">
                                                                     <span className="font-medium">FREE</span>
                                                                 </Badge>
                                                             )}
+                                                            {lesson.memberType == "basic" && (
+                                                                <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white text-xs px-3 py-1 shadow-sm">
+                                                                    <span className="font-medium">BASIC</span>
+                                                                </Badge>
+                                                            )}
+
+                                                            {lesson.memberType == "pro" && (
+                                                                <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white text-xs px-3 py-1 shadow-sm">
+                                                                    <span className="font-medium">PRO</span>
+                                                                </Badge>
+                                                            )}
+
+                                                            {lesson.memberType == "enterprise" && (
+                                                                <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white text-xs px-3 py-1 shadow-sm">
+                                                                    <span className="font-medium">ENTERPRISE</span>
+                                                                </Badge>
+                                                            )}
+
+
                                                             {lesson.isImportant && (
                                                                 <Badge className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs px-3 py-1">
                                                                     Quan trọng

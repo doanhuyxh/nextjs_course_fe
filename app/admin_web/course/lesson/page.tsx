@@ -10,7 +10,7 @@ import ModalScroll from '@/components/Modal/ModalScroll';
 import { FormLesson } from '@/components/Form';
 import { LessonItemAdmin } from '@/components/Lesson';
 import ModalViewHtml from '@/components/Modal/ModalViewHtml';
-import { LessonItem } from '@/libs/types';
+import { LessonItem, MemberType } from '@/libs/types';
 import VideoPlayerType from '@/components/LessonViewControl/VideoPlayerType';
 import toast from "react-hot-toast";
 import ModalViewVideo from "@/components/Modal/ModelVideo";
@@ -45,7 +45,7 @@ export default function CourseLesson() {
         imageThumbnail: '',
         video: '',
         duration: '12:01',
-        isFree: false,
+        memberType: 'free',
         isImportant: false,
         isOutstanding: false,
         courseId: courseId,
@@ -65,11 +65,11 @@ export default function CourseLesson() {
                 video: '',
                 type : 'video',
                 duration: '12:01',
-                isFree: false,
-                isImportant: false,
+                memberType: 'free',
                 isOutstanding: false,
                 courseId: courseId,
                 totalView: 0,
+                isImportant: false,
             })
         } else {
             const lesson = courseLesson.find((item: LessonItem) => item.id == id)
@@ -84,7 +84,7 @@ export default function CourseLesson() {
                     video: '',
                     type : 'video',
                     duration: '12:01',
-                    isFree: false,
+                    memberType: 'free',
                     isImportant: false,
                     isOutstanding: false,
                     courseId: courseId,
@@ -135,8 +135,6 @@ export default function CourseLesson() {
 
     const HandleSearchLesson = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value
-        console.log(value)
-        console.log(courseLesson)
         const newLesson = courseLesson.filter((item: LessonItem) => item.name.toLowerCase().includes(value.toLowerCase()))
         setCourseLessonBackUp(newLesson)
     }

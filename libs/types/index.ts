@@ -22,7 +22,7 @@ export interface LessonData {
     imageThumbnail: string;
     video: boolean;
     duration: string;
-    isFree: boolean;
+    memberType: string;
     isImportant: boolean;
     isOutstanding: boolean;
 }
@@ -38,7 +38,7 @@ export interface LessonItem {
     description: string;
     duration: string;
     totalView: number;
-    isFree: boolean;
+    memberType: string;
     isImportant: boolean;
     isOutstanding: boolean
     courseId: string | null;
@@ -244,3 +244,10 @@ export interface ConditionSelected {
     condition: string,
     value: string
 }
+
+export const MemberType =[
+    { value: "free", label: "Miễn phí" },
+    { value: "basic", label: "Cơ bản" },
+    { value: "pro", label: "Gói Pro" },
+    { value: "enterprise", label: "Gói Doanh nghiệp" }
+]

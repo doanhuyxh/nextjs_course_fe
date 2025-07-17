@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import { MemberType } from '@/libs/types';
 
 interface LessonItemProps {
     item: any; // Có thể thay đổi thành kiểu dữ liệu phù hợp với bạn
@@ -10,12 +11,12 @@ interface LessonItemProps {
 }
 
 const LessonItemAdmin: React.FC<LessonItemProps> = ({
-                                                        item,
-                                                        toggleLessonContent,
-                                                        toggleLessonVideo,
-                                                        HandleCreateOrUpdateLesson,
-                                                        HandleDeleteLesson,
-                                                    }) => {
+    item,
+    toggleLessonContent,
+    toggleLessonVideo,
+    HandleCreateOrUpdateLesson,
+    HandleDeleteLesson,
+}) => {
     return (
         <div
             className='w-full flex justify-between items-center gap-4 shadow-lg bg-white px-4 py-5 mb-6 rounded-lg cursor-pointer relative group'>
@@ -28,7 +29,7 @@ const LessonItemAdmin: React.FC<LessonItemProps> = ({
                             width={200}
                             height={200}
                             loading='lazy'
-                            style={{width: '100%', height: 'auto'}}
+                            style={{ width: '100%', height: 'auto' }}
                         />
                     )}
                 </div>
@@ -46,12 +47,13 @@ const LessonItemAdmin: React.FC<LessonItemProps> = ({
                         </span>
                     )}
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col  gap-2">
                     <p className='text-xl font-bold'>Bài học: {item.name || ""}</p>
-                    <div className="flex justify-start my-2 gap-4">
+                    <div className="flex justify-start flex-col gap-2">
                         <p className='text-sm'>Thời lượng: {item.duration || ""}</p>
-                        {item.isFree && (<p className='text-sm bg-green-200 px-2 py-1 rounded text-green-500'>Miễn phí</p>)}
+                        <p className='text-sm'>Loại thành viên: {MemberType.find(i=>i.value === item.memberType)?.label || ""}</p>
                     </div>
+                    <p className='text-sm'>Loại bài học: {item.type || ""}</p>
                     <div className='flex gap-2'>
                         <span className="font-semibold text-lg">Nội dung:</span>
                         <button
@@ -65,11 +67,11 @@ const LessonItemAdmin: React.FC<LessonItemProps> = ({
             </div>
             <div className='flex flex-col gap-2'>
                 <button className='bg-blue-500 text-white px-4 py-2 rounded-md'
-                        onClick={() => HandleCreateOrUpdateLesson(item.id)}>
+                    onClick={() => HandleCreateOrUpdateLesson(item.id)}>
                     <i className="fa-solid fa-pen-to-square"></i>
                 </button>
                 <button className='bg-red-500 text-white px-4 py-2 rounded-md'
-                        onClick={() => HandleDeleteLesson(item.id)}>
+                    onClick={() => HandleDeleteLesson(item.id)}>
                     <i className="fa-solid fa-trash"></i>
                 </button>
             </div>
