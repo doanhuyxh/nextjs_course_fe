@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState, useCallback } from "react";
 import { Tabs, Spin, Modal, Select, DatePicker } from "antd";
 import Image from "next/image";
-import { formatTime } from "@/libs/utils";
+import { formatTime } from "@/libs/utils/index";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";

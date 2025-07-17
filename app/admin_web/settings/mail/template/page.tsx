@@ -8,7 +8,7 @@ import { TemplateMail } from "@/libs/types";
 import AddTemplate from "./_components/add_template";
 
 import ModalViewHtml from "@/components/Modal/ModalViewHtml";
-import { formatTime } from "@/libs/utils";
+import { formatTime } from "@/libs/utils/index";
 
 export default function Template() {
     const [data, setData] = useState<TemplateMail[]>([]);

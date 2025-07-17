@@ -5,8 +5,8 @@ import axiosInstance from '@/libs/configs/ApiConfig/axiosAdminConfig';
 import toast from 'react-hot-toast';
 import {Page} from '@/libs/types';
 import EditorReactQuill from '@/components/Editor/ReactQuill';
-import {unixToDatetime} from '@/libs/utils';
-import {generateSlug} from '@/libs/utils';
+import {unixToDatetime} from '@/libs/utils/index';
+import {generateSlug} from '@/libs/utils/index';
 
 export default function News() {
     const [news, setNews] = useState<Page[]>([]);
