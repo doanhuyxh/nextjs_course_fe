@@ -39,7 +39,7 @@ export default function ListCourse({ coursesData, containerRef }: { coursesData:
         handleResize()
         window.addEventListener("resize", handleResize)
         return () => window.removeEventListener("resize", handleResize)
-    }, [])
+    }, [containerRef])
 
     return (
         <div className="w-full mx-auto px-2 py-1 space-y-6" ref={containerRef}>

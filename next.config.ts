@@ -8,7 +8,8 @@ const nextConfig: NextConfig = {
     env: {
         API_URL: process.env.API_URL,
         MEDIA_UPLOAD_URL: process.env.MEDIA_UPLOAD_URL,
-        API_URL_SERVER: process.env.API_URL_SERVER
+        API_URL_SERVER: process.env.API_URL_SERVER,
+        API_URL_BACKEND_NESTJS: process.env.API_URL_BACKEND_NESTJS,
     },
     experimental: {},
     compiler: {

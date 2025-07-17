@@ -36,7 +36,7 @@ export default function LessonView({ lesson }: { lesson: LessonItem }) {
         } finally {
             setIsLoading(false);
         }
-    }, [lesson.id, setToggleCourse]);
+    }, [lesson.id, setActiveLesson, setToggleCourse]);
 
     useEffect(() => {
         if (lesson) {

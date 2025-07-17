@@ -1,12 +1,12 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {Select, Input, Row, Col, Card} from 'antd';
-import {Condition, ConditionSelected} from "@/libs/types";
+import React, { useEffect, useRef, useState } from 'react';
+import { Select, Input, Row, Col, Card } from 'antd';
+import { Condition, ConditionSelected } from "@/libs/types";
 
-const {Option} = Select;
-import {switch_display_label, switch_display_subLabel, switch_display_value} from "@/libs/utils";
+const { Option } = Select;
+import { switch_display_label, switch_display_subLabel, switch_display_value } from "@/libs/utils/index";
 
 
-const ConditionSelector = ({data, onChange, intData}) =>{
+const ConditionSelector = ({ data, onChange, intData }) => {
     const [selectedCondition, setSelectedCondition] = useState<ConditionSelected>({
         label: '',
         subLabel: '',
@@ -49,10 +49,10 @@ const ConditionSelector = ({data, onChange, intData}) =>{
     }, [selectedCondition, condition, data, onChange]);
 
     useEffect(() => {
-        if(intData){
-            setSelectedCondition({...intData});
+        if (intData) {
+            setSelectedCondition({ ...intData });
         }
-    }, []);
+    }, [intData]);
 
 
     return (
@@ -60,11 +60,11 @@ const ConditionSelector = ({data, onChange, intData}) =>{
             <Card bordered={false} className="w-full">
                 <Row gutter={[16, 16]} align="middle">
                     <Col xs={24} sm={8}>
-                        <div className="min-w-[100px]" style={{height: '100%'}}>
+                        <div className="min-w-[100px]" style={{ height: '100%' }}>
                             <Select
                                 onChange={handleSelectLabel}
                                 placeholder="Select condition"
-                                style={{width: '100%', height: '100%'}}
+                                style={{ width: '100%', height: '100%' }}
                             >
                                 {data.map((item: Condition, index: number) => (
                                     <Option key={index} value={item.label + " " + item.conditionListLabel}>
@@ -78,9 +78,9 @@ const ConditionSelector = ({data, onChange, intData}) =>{
                     <Col xs={24} sm={8}>
                         <Select
                             placeholder="Select sub-condition"
-                            style={{width: '100%', height: '100%'}}
+                            style={{ width: '100%', height: '100%' }}
                             disabled={condition.length === 0}
-                            onChange={(value) => setSelectedCondition({...selectedCondition, condition: value})}
+                            onChange={(value) => setSelectedCondition({ ...selectedCondition, condition: value })}
                         >
                             {condition.map((item, index) => (
                                 <Option key={index} value={item}>
@@ -96,8 +96,8 @@ const ConditionSelector = ({data, onChange, intData}) =>{
                         <Input
                             className="rounded"
                             placeholder="Nhập số"
-                            style={{width: '100%', height: '100%'}}
-                            onChange={(e) => setSelectedCondition({...selectedCondition, value: e.target.value})}
+                            style={{ width: '100%', height: '100%' }}
+                            onChange={(e) => setSelectedCondition({ ...selectedCondition, value: e.target.value })}
                         />
                     </Col>
                     }

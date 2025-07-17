@@ -12,6 +12,7 @@ import {
   ThunderboltFilled,
 } from "@ant-design/icons"
 import axiosCustomerConfig from "@/libs/configs/ApiConfig/axiosCustomerConfig"
+import axiosCustomerNestJsConfig from "@/libs/configs/ApiConfig/axiosBackEndNesjs"
 import Swal from "sweetalert2"
 
 const { Title, Text, Paragraph } = Typography
@@ -56,6 +57,7 @@ export default function AuthTabs() {
     try {
       const response: any = await axiosCustomerConfig.post("/Auth/Login", values)
       if (response.code == 200) {
+        localStorage.clear()
         localStorage.setItem("AccessToken", response.data.accessToken)
         localStorage.setItem("RefreshToken", response.data.refreshToken)
         axiosCustomerConfig.defaults.headers.common["Authorization"] = `Bearer ${response.data.accessToken}`
@@ -69,7 +71,7 @@ export default function AuthTabs() {
         Swal.fire({
           icon: "error",
           title: "Đăng nhập thất bại",
-          text: "Tài khoản hoặc mật khẩu không đúng",
+          text: response.response.data.message || "Tài khoản hoặc mật khẩu không đúng",
         })
       }
     } catch (error) {
@@ -85,27 +87,59 @@ export default function AuthTabs() {
 
   const handleRegister = async (values: RegisterForm) => {
     setLoading(true)
+    // try {
+    //   const response: any = await axiosCustomerConfig.post("/Auth/Register", values)
+    //   if (response.code === 201) {
+    //     toast.success("Đăng ký thành công, vui lòng đăng nhập", {
+    //       duration: 3000,
+    //       position: "top-right",
+    //     })
+    //     registerForm.resetFields()
+    //   } else {
+    //     toast.error("Đăng ký thất bại", {
+    //       duration: 3000,
+    //       position: "top-right",
+    //     })
+    //   }
+    // } catch (error) {
+    //   console.error("Error registering:", error)
+    //   toast.error("Đăng ký thất bại", {
+    //     duration: 3000,
+    //     position: "top-right",
+    //   })
+    // } finally {
+    //   setLoading(false)
+    // }
     try {
-      const response: any = await axiosCustomerConfig.post("/Auth/Register", values)
-      if (response.code === 201) {
-        toast.success("Đăng ký thành công, vui lòng đăng nhập", {
-          duration: 3000,
-          position: "top-right",
+      const response: any = await axiosCustomerNestJsConfig.post("/auth/register", {
+        email: values.email,
+        password: values.password,
+      })
+
+      if (response.status === 201) {
+        Swal.fire({
+          icon: "success",
+          title: "Đăng ký thành công",
+          text: "Vui lòng đăng nhập để tiếp tục",
         })
         registerForm.resetFields()
       } else {
-        toast.error("Đăng ký thất bại", {
-          duration: 3000,
-          position: "top-right",
+        Swal.fire({
+          icon: "error",
+          title: "Đăng ký thất bại",
+          text: response.data.message || "Vui lòng kiểm tra lại thông tin đăng ký",
         })
       }
+
     } catch (error) {
       console.error("Error registering:", error)
-      toast.error("Đăng ký thất bại", {
-        duration: 3000,
-        position: "top-right",
+      Swal.fire({
+        icon: "error",
+        title: "Đăng ký thất bại",
+        text: "Vui lòng kiểm tra lại thông tin đăng ký",
       })
-    } finally {
+    }
+    finally {
       setLoading(false)
     }
   }
@@ -154,7 +188,7 @@ export default function AuthTabs() {
     return (
       <Card className="w-full max-w-md mx-auto border-0 bg-transparent">
         <Title level={3} className="text-center mb-4">
-          <ThunderboltFilled className="text-yellow-500" /> Chào mừng {(userInfo.firstName+ " " + userInfo.lastName) || userInfo.email}!
+          <ThunderboltFilled className="text-yellow-500" /> Chào mừng {(userInfo.firstName + " " + userInfo.lastName) || userInfo.email}!
         </Title>
         <Button type="primary" className="w-full mt-4 bg-[#4ADE80]" onClick={() => router.push("/study")}>
           Tiếp tục học ngay

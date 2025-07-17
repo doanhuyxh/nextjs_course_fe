@@ -3,12 +3,13 @@
 import { useCallback, useEffect, useState } from "react";
 import { Customer } from "@/libs/types";
 import axiosInstance from "@/libs/configs/ApiConfig/axiosAdminConfig";
-import { formatTime } from "@/libs/utils";
+import { formatTime } from "@/libs/utils/index";
 import { useRouter } from "next/navigation";
 import { Table, Input, Button, Pagination, Avatar, Space, Popconfirm, Breadcrumb, DatePicker, Modal, Select } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import toast from "react-hot-toast";
 import moment from "moment";
+import Swal from "sweetalert2";
 const { Option } = Select;
 
 export default function CustomerPage() {
@@ -48,10 +49,18 @@ export default function CustomerPage() {
     };
 
     const handleDeleteCustomer = (id: string) => {
-        axiosInstance.get(`/customer/delete?id=${id}`)
-            .then(() => {
-                fetchCustomerData();
-            });
+        // axiosInstance.get(`/customer/delete?id=${id}`)
+        //     .then(() => {
+        //         fetchCustomerData();
+        //     });
+        Swal.fire({
+            icon: "warning",
+            title: "Tính năng đang được phát triển",
+            text:"chúng tôi dang phát triển tính năng này, vui lòng quay lại sau.",
+            showCancelButton: false,
+            confirmButtonText: "Oke",
+            cancelButtonText: "Hủy",
+        })
     }
 
     const fetchCustomerData = useCallback(async () => {
@@ -194,6 +203,10 @@ export default function CustomerPage() {
         {
             title: "Số điện thoại",
             dataIndex: "phoneNumber",
+        },
+        {
+            title: "utmSource",
+            dataIndex: "utmSource",
         },
         {
             title: "Ngày tham gia",
