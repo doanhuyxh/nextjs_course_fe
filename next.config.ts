@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
     experimental: {},
     compiler: {
         styledComponents: true,
-        removeConsole: false
+        removeConsole: true
     },
     sassOptions: {
         includePaths: ["./styles", "./components"],
@@ -34,11 +34,11 @@ const nextConfig: NextConfig = {
         if (!isServer) {
             config.resolve.alias['yjs'] = path.resolve(__dirname, 'node_modules/yjs')
         }
-        config.optimization.minimize = false;
+        config.optimization.minimize = true;
         return config;
     },
     typescript: {
-        ignoreBuildErrors: true,
+        ignoreBuildErrors: false,
     },
 };
 

@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import PdfView from "./PdfView";
-import ShowNotifyNotFree from "../ShowNotifyNotFree/ShowNotifyNotFree";
-import ShowNotifyNotLogin from "../ShowNotifyNotFree/ShowNotifyNotLogin";
+
 
 interface VideoPlayerProps {
     title: string;
@@ -30,8 +29,6 @@ const PdfLessonView: React.FC<VideoPlayerProps> = ({
     return (
         <div className="flex flex-col">
             <div className="h-auto w-full flex justify-center text-white">
-                {!isLogin && <div className={`w-full min-h-[25vh] lg:min-h-[60vh] overflow-hidden`}><ShowNotifyNotLogin imageThumbnail={imageThumbnail} /></div>}
-                {isLogin && isUpgrade && <div className="w-full min-h-[25vh] lg:min-h-[60vh] flex flex-1 bg-[#380b42]"><ShowNotifyNotFree /></div>}
                 {isLogin && !isUpgrade && <PdfView pdfSrc={videoUrl} />}
             </div>
             <div className="mt-10">

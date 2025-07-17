@@ -20,7 +20,7 @@ async function fetchData(url: string, accessToken: string): Promise<any> {
         return {
             code: 500,
             message: 'Internal Server Error - Fetch Data Catch',
-            data: null
+            data: ""
         }
     }
 }
