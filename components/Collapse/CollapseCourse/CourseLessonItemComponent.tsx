@@ -70,7 +70,7 @@ const CourseLessonItemComponent = ({ item }: CourseItemComponentProps) => {
                                 Quan trọng
                             </span>
                         )}
-                        {item.isFree &&
+                        {item.memberType == "free" &&
                             <span className="font-bold text-white bg-green-800 px-2 py-1 lg:p-3 rounded-lg flex flex-row justify-center items-center lg:gap-2 text_mobile cursor-pointer max-h-[28px]">
                                 <span className="m-auto hidden lg:block d-none">
                                     <Image
@@ -84,7 +84,7 @@ const CourseLessonItemComponent = ({ item }: CourseItemComponentProps) => {
                                 Free
                             </span>
                         }
-                        {!item.isFree &&
+                        {item.memberType == "pro" &&
                             <span className="font-bold text-white bg-green-800 px-2 py-1 lg:p-3 rounded-lg flex flex-row justify-center items-center lg:gap-2 text_mobile tag-pro cursor-pointer max-h-[28px]">
                                 <span className="m-auto hidden lg:block d-none">
                                     <Image
@@ -98,6 +98,7 @@ const CourseLessonItemComponent = ({ item }: CourseItemComponentProps) => {
                                 Pro
                             </span>
                         }
+                        
                     </p>
                     <p className="flex justify-center flex-row items-center align-middle gap-1 text_mobile max-h-[28px]">
                         <span className="w-auto h-full hidden lg:block d-none">

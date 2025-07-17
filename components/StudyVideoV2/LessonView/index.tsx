@@ -83,7 +83,7 @@ export default function LessonView({ lesson }: { lesson: LessonItem }) {
                             Danh mục: {lesson.isOutstanding ? "Nổi bật" : "Thường"}
                         </span>
                         <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">
-                            {lesson.isFree ? "Miễn phí" : "Có phí"}
+                            Loại bài học: {lesson.memberType.charAt(0).toUpperCase() + lesson.memberType.slice(1)}
                         </span>
                         <span className="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-semibold">
                             {lesson.isImportant ? "Quan trọng" : "Không quan trọng"}
