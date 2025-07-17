@@ -114,7 +114,7 @@ const HeaderStudy = () => {
     }
 
     return (
-        <div className="w-full bg-white shadow-lg flex items-center justify-between">
+        <div className="w-full bg-white shadow-lg flex items-center justify-between position-sticky top-0 z-50">
             <div className="px-3 py-2">
                 {logo && <Link href="/learn/profile">
                     <span>

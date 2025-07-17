@@ -17,7 +17,7 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
   return (
     <>
       <HeaderStudy />
-      <div className="w-full h-full overflow-x-auto">
+      <div className="w-full h-full overflow-y-auto">
         {children}
       </div>
     </>

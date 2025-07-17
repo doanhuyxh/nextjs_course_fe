@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, useRef } from 'react';
-import Hls from 'hls.js';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import LoadingVideo from '../../Loading/LoadingVideo';
 import { generateSlug } from '@/libs/utils/index';
@@ -12,7 +11,7 @@ interface VideoUploadProps {
   setDuration: (value: string) => void;
 }
 
-const VideoUploadFull: React.FC<VideoUploadProps> = ({ initialLink, onChange, setDuration }) => {
+const VideoMp4UploadFull: React.FC<VideoUploadProps> = ({ initialLink, onChange, setDuration }) => {
   const [videoUrl, setVideoUrl] = useState<string>("");
   const [isUploading, setIsUploading] = useState(false);
 
@@ -121,19 +120,6 @@ const VideoUploadFull: React.FC<VideoUploadProps> = ({ initialLink, onChange, se
     }
   };
 
-
-  // useEffect(() => {
-  //   if (videoUrl && isM3U8(videoUrl) && videoRef.current) {
-  //     if (Hls.isSupported()) {
-  //       const hls = new Hls();
-  //       hls.loadSource(videoUrl);
-  //       hls.attachMedia(videoRef.current);
-  //     } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
-  //       videoRef.current.src = videoUrl;
-  //     }
-  //   }
-  // }, [videoUrl]);
-
   useEffect(() => {
     return () => {
       const fileInputs = document.querySelectorAll('input[type="file"]');
@@ -197,7 +183,7 @@ const VideoUploadFull: React.FC<VideoUploadProps> = ({ initialLink, onChange, se
             value={videoUrl || ''}
             onChange={handleLinkChange}
             className="w-full p-2 border border-gray-300 rounded-md"
-            placeholder="Hoặc dán đường dẫn video tại đây"
+            placeholder="Hoặc dán đường dẫn video mp4 tại đây"
           />
         </div>
       </div>
@@ -205,4 +191,4 @@ const VideoUploadFull: React.FC<VideoUploadProps> = ({ initialLink, onChange, se
   );
 };
 
-export default VideoUploadFull;
+export default VideoMp4UploadFull;

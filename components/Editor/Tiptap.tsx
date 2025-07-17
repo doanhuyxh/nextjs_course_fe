@@ -10,7 +10,7 @@ import TableRow from '@tiptap/extension-table-row'
 import TableCell from '@tiptap/extension-table-cell'
 import TableHeader from '@tiptap/extension-table-header'
 import ImageUpload from '../FileHandle/Image'
-import VideoUpload from '@/components/FileHandle/video'
+import VideoUpload from '@/components/FileHandle/VideoMp4'
 import { useState } from 'react'
 
 const Tiptap = ({ value = '' }) => {

@@ -4,10 +4,14 @@ import { LessonItem } from "@/libs/types";
 import { useEffect, useState, useCallback } from "react";
 import useLocalStorage from "@/libs/hooks/useLocalStorage";
 import Swal from "sweetalert2";
+import PDFViewer from "./View/pdf";
+import VideoBunny from "./View/videobunny";
+import VideoMp4 from "./View/videomp4";
 
 
 export default function LessonView({ lesson }: { lesson: LessonItem }) {
     const [videoUrl, setVideoUrl] = useState<string | null>(null);
+    const [videoType, setVideoType] = useState<string | null>(null);
     const [lessonConetent, setLessonContent] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [, setToggleCourse] = useLocalStorage<string>("toggleCourse", "");
@@ -27,6 +31,7 @@ export default function LessonView({ lesson }: { lesson: LessonItem }) {
             }
             setVideoUrl(response.data.video);
             setLessonContent(response.data.lessonContent);
+            setVideoType(response.data.type);
             setToggleCourse(response.data.courseId || "");
             setIsLoading(false);
 
@@ -55,13 +60,14 @@ export default function LessonView({ lesson }: { lesson: LessonItem }) {
                             <Spin size="large" />
                         </div>
                     )}
-                    {videoUrl && (
-                        <video
-                            className="w-full h-full"
-                            controls
-                            src={videoUrl}
-                            poster={lesson.imageThumbnail || "/default-thumbnail.jpg"}
-                        />
+                    {lesson.type === "video_mp4" && videoUrl && (
+                        <VideoMp4 url={videoUrl} poster={lesson.imageThumbnail} />
+                    )}
+                    {lesson.type === "video_bunny" && videoUrl && (
+                        <VideoBunny url={videoUrl} />
+                    )}
+                    {lesson.type === "pdf" && videoUrl && (
+                        <PDFViewer url={videoUrl} name={lesson.name} />
                     )}
                 </div>
 

@@ -202,10 +202,13 @@ export default function CourseLesson() {
                                 toggleLessonVideo={() => {
                                     setLessonVideo(item.video)
                                     setLessonTitle(item.name)
-                                    if (item.type == 'video') {
+                                    if (item.type == 'video_mp4') {
                                         setIsOpenVideo(true)
-                                    } else {
+                                    } else if (item.type == 'pdf') {
                                         setIsOpenPDF(true)
+                                    }else if (item.type == 'video_bunny') {
+                                        setLessonVideo(item.video);
+                                        setIsOpenVideo(true);
                                     }
                                 }}
                                 HandleCreateOrUpdateLesson={HandleCreateOrUpdateLesson}
@@ -227,7 +230,7 @@ export default function CourseLesson() {
             <ModalViewVideo isOpen={isOpenVideo} onClose={() => setIsOpenVideo(false)} title={lessonTitle}>
                 <VideoPlayerType videoSrc={lessonVideo} />
             </ModalViewVideo>
-
+            
             <ModalViewPDF isOpen={isOpenPDF} onClose={() => setIsOpenPDF(false)} title={lessonTitle} pdfLink={lessonVideo} />
             
         </>

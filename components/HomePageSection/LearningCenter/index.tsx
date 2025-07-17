@@ -1,12 +1,29 @@
+"use client";
+
 import Button from '@/components/Button';
 import fetchData from "@/libs/configs/ApiConfig/fetchDataServer"
 import Link from "next/link";
+import { useEffect, useState } from 'react';
 
 
-export default async function LearningCenter() {
-    
-    const getCourse = await fetchData('/course/GetAllCourse', '');
-    const json_data = getCourse?.data || [];
+export default function LearningCenter() {
+
+    const [courses, setCourses] = useState<any[]>([]);
+
+    useEffect(() => {
+        const fetchCourses = async () => {
+            try {
+                const response = await fetchData("/course/GetAllCourse", "");
+                if (response && response.data) {
+                    setCourses(response.data);
+                }
+            } catch (error) {
+                console.error("Error fetching courses:", error);
+            }
+        };
+
+        fetchCourses();
+    }, []);
 
     return (
         <section className="w-full bg-[linear-gradient(159deg,#f9fafb_0%,#eff6ff_100%)] py-16 sm:py-20 md:py-24">
@@ -21,7 +38,7 @@ export default async function LearningCenter() {
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
 
-                        {json_data.map((course: any, index: number) => (
+                        {courses.map((course: any, index: number) => (
                             <div key={index} className="bg-white rounded-xl shadow-[0px_4px_6px_#00000019] overflow-hidden">
                                 <div className="relative">
                                     <div className={`h-50 flex items-center justify-center relative`}
@@ -47,7 +64,9 @@ export default async function LearningCenter() {
                                             <span className="text-xs text-[#6b7280]">{course?.totalTimeDuration || ""}</span>
                                         </div>
                                     </div>
-                                    <h3 className="text-lg font-bold text-[#111827] mb-4">Cách tạo tài khoản FlashBot của bạn</h3>
+                                    <h3 className="text-lg font-bold text-[#111827] mb-4">
+                                        {course?.name || "Đang cập nhật"}
+                                    </h3>
                                     <div className="text-sm text-[#4b5563] mb-6 leading-relaxed line-clamp-2 overflow-hidden"
                                         dangerouslySetInnerHTML={{ __html: course?.description || "" }} />
                                     <Link href={`/study/${course?.lesson[0]?.slug || ""}`}>
