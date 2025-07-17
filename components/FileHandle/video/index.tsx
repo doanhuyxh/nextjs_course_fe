@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import Hls from 'hls.js';
 import { toast } from 'react-hot-toast';
 import LoadingVideo from '../../Loading/LoadingVideo';
-import { generateSlug } from '@/libs/utils';
+import { generateSlug } from '@/libs/utils/index';
 
 interface VideoUploadProps {
   initialLink: string;
@@ -13,10 +13,9 @@ interface VideoUploadProps {
 }
 
 const VideoUploadFull: React.FC<VideoUploadProps> = ({ initialLink, onChange, setDuration }) => {
-  const [videoUrl, setVideoUrl] = useState<string | null>(initialLink);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoUrl, setVideoUrl] = useState<string>("");
   const [isUploading, setIsUploading] = useState(false);
-  const isM3U8 = (url: string) => url.endsWith('.m3u8');
+
 
   const handleLinkChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -56,7 +55,7 @@ const VideoUploadFull: React.FC<VideoUploadProps> = ({ initialLink, onChange, se
       style: { background: '#4CAF50', color: '#fff' },
     });
 
-    const fileName = generateSlug(file.name.replace(/\.[^/.]+$/, '').toLowerCase())+ `-${Date.now().toString(36)}`;
+    const fileName = generateSlug(file.name.replace(/\.[^/.]+$/, '').toLowerCase()) + `-${Date.now().toString(36)}`;
     const CHUNK_SIZE = 5 * 1024 * 1024; // 5MB
     const totalChunks = Math.ceil(file.size / CHUNK_SIZE);
     const chunks: Blob[] = [];
@@ -123,17 +122,17 @@ const VideoUploadFull: React.FC<VideoUploadProps> = ({ initialLink, onChange, se
   };
 
 
-  useEffect(() => {
-    if (videoUrl && isM3U8(videoUrl) && videoRef.current) {
-      if (Hls.isSupported()) {
-        const hls = new Hls();
-        hls.loadSource(videoUrl);
-        hls.attachMedia(videoRef.current);
-      } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
-        videoRef.current.src = videoUrl;
-      }
-    }
-  }, [videoUrl]);
+  // useEffect(() => {
+  //   if (videoUrl && isM3U8(videoUrl) && videoRef.current) {
+  //     if (Hls.isSupported()) {
+  //       const hls = new Hls();
+  //       hls.loadSource(videoUrl);
+  //       hls.attachMedia(videoRef.current);
+  //     } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
+  //       videoRef.current.src = videoUrl;
+  //     }
+  //   }
+  // }, [videoUrl]);
 
   useEffect(() => {
     return () => {
@@ -142,6 +141,13 @@ const VideoUploadFull: React.FC<VideoUploadProps> = ({ initialLink, onChange, se
     };
   }, []);
 
+  useEffect(() => {
+    if (initialLink) {
+      setVideoUrl(initialLink);
+    }
+  }, [initialLink]);
+
+
   return (
     <div className="mb-4">
       <label className="block text-sm font-medium text-gray-700 mb-2">Video</label>
@@ -149,14 +155,10 @@ const VideoUploadFull: React.FC<VideoUploadProps> = ({ initialLink, onChange, se
         <div className="mb-2">
           {videoUrl ? (
             <div>
-              {isM3U8(videoUrl) ? (
-                <video ref={videoRef} className="mx-auto w-auto max-h-[300px]" controls />
-              ) : (
-                <video className="mx-auto w-auto max-h-[300px]" controls>
-                  <source src={videoUrl} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              )}
+              <video className="mx-auto w-auto max-h-[300px]" controls>
+                <source src={videoUrl} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
             </div>
           ) : (
             <div className="w-full h-40">

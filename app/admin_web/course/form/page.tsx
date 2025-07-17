@@ -7,7 +7,7 @@ import VideoUploadFull from "@/components/FileHandle/video";
 import { EditorReactQuill } from "@/components/Editor";
 import axiosInstance, { postFormData } from "@/libs/configs/ApiConfig/axiosAdminConfig";
 import toast from "react-hot-toast";
-import { generateSlug } from "@/libs/utils";
+import { generateSlug } from "@/libs/utils/index";
 
 export default function CourseForm() {
 
