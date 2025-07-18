@@ -9,16 +9,18 @@ export default function Profile({ userInfo }: { userInfo: any }) {
 
     return (
         <div>
-            <div className="w-full max-w-md rounded-xl p-6">
+            <div className="w-full m-auto flex justify-center flex-col items-center">
                 <div className="flex flex-col items-center text-center">
                     <div className="mb-4 flex size-20 items-center justify-center rounded-full bg-[#22c55e]">
                         <Book className="size-10 text-white" />
                     </div>
-                    <h1 className="mb-2 text-2xl font-bold text-white">Tên tài khoản khách</h1>
+                    <h1 className="mb-2 text-2xl font-bold text-white">
+                        Chào mừng {userInfo?.firstName || userInfo.email} đến với FlashBot
+                    </h1>
                     <p className="mb-8 text-sm text-[#86efac]">Vừa học vừa tạo chatbot cho chính doanh nghiệp của mình</p>
                 </div>
 
-                <div className="rounded-lg bg-white p-6 shadow-md">
+                <div className="rounded-lg bg-white p-6 shadow-md w-[534px] m-auto">
                     <div className="mb-4 flex items-center justify-between">
                         <div className="flex items-center gap-2">
                             <div className="flex size-8 items-center justify-center rounded-full bg-[#6366f1]">
@@ -54,7 +56,7 @@ export default function Profile({ userInfo }: { userInfo: any }) {
                     </p>
                 </div>
             </div>
-            <p className="absolute bottom-4 text-lg font-bold text-[#fde047]">Học một lần, lợi nhuận mãi mãi!</p>
+            
         </div>
     );
 }

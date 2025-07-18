@@ -7,6 +7,7 @@ import {
     Lock,
     Play,
     Sparkles,
+    Check,
 } from "lucide-react"
 import {
     Collapsible,
@@ -18,11 +19,14 @@ import useLocalStorage from "@/libs/hooks/useLocalStorage"
 import axiosCustomerConfig from "@/libs/configs/ApiConfig/axiosCustomerConfig"
 import Link from "next/link"
 
+import useSearchParamsClient from "@/libs/hooks/useSearchParamsClient"
+
 export default function CoursePlaylist() {
     const [user, setUser] = useState<any>(null)
     const [openSections, setOpenSections] = useState<Set<string>>(new Set())
     const [courseData, setCourseData] = useState<any[]>([])
     const [toggleCourse] = useLocalStorage<string>("toggleCourse", "")
+    const [activeLesson, setActiveLesson] = useSearchParamsClient<string>("atl", "")
 
     const getAllCourse = useCallback(async () => {
         try {
@@ -106,31 +110,39 @@ export default function CoursePlaylist() {
         }
     }, [toggleCourse])
 
+
+    useEffect(() => {
+        if (activeLesson) {
+            setActiveLesson(activeLesson)
+        }
+    }, [activeLesson, setActiveLesson])
+
+
     return (
-        <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-lg">
-            <div className="mb-6 flex items-center gap-2">
+        <div className="w-full !min-w-[410px] rounded-2xl bg-white py-2 px-1 shadow-lg">
+            <div className="px-5 mb-6 flex items-center gap-2">
                 <Sparkles className="h-6 w-6 text-[#a855f7]" />
                 <h1 className="text-2xl font-bold text-[#0f172a]">Course Playlist</h1>
             </div>
 
-            <div className="space-y-4 max-h-[calc(100vh-200px)] overflow-y-auto">
+            <div className="space-y-4 max-h-[100%] overflow-y-auto">
                 {courseData.map((section) => (
                     <Collapsible
                         key={section.id}
                         open={isSectionOpen(section.id)}
                         onOpenChange={() => toggleSection(section.id)}
-                        className={`rounded-xl transition-all duration-300 ${isSectionOpen(section.id)
+                        className={`rounded-xl transition-all py-2 duration-300 ${isSectionOpen(section.id)
                             ? "bg-[#ecfdf5] border-l-4 border-[#a7f3d0]"
                             : "bg-white border border-[#e5e7eb]"
                             }`}
                     >
-                        <CollapsibleTrigger className="flex w-full items-center justify-between p-4">
+                        <CollapsibleTrigger className="flex w-full items-center justify-between">
                             <div className="flex items-start gap-2">
                                 <div className="flex items-center justify-center h-10 w-10">
                                     {isSectionOpen(section.id) ? (
                                         <ChevronDown className="h-5 w-5 text-[#6b7280]" />
                                     ) : (
-                                        <ChevronRight className="h-5 w-5 text-[#6b7280]" />
+                                        <ChevronRight className="h-5 w-6 text-[#6b7280]" />
                                     )}
                                 </div>
                                 <div>
@@ -166,7 +178,7 @@ export default function CoursePlaylist() {
                                         return (
                                             <Link href={`/study/${item.slug}`}
                                                 key={item.id}
-                                                className="flex items-center gap-3 rounded-lg bg-white p-3 shadow-sm border border-[#e5e7eb] cursor-pointer"
+                                                className={`flex items-center gap-3 rounded-lg p-3 shadow-sm border border-[#e5e7eb] cursor-pointer`}
                                             >
                                                 <div className="relative h-16 w-24 shrink-0 overflow-hidden rounded-md bg-[#94a3b8]">
                                                     <img
@@ -177,18 +189,31 @@ export default function CoursePlaylist() {
                                                         alt="Thumbnail"
                                                         className="h-full w-full object-cover"
                                                     />
-                                                    <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                                                        <Play className="h-6 w-6 text-white" />
-                                                    </div>
+                                                    {
+                                                        activeLesson != item.id && (
+                                                            <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                                                                <Play className="h-6 w-6 text-white" />
+                                                            </div>
+                                                        )
+                                                    }
+                                                    {
+                                                        activeLesson === item.id && (
+                                                            <div className="absolute top-[0] left-0 bg-black w-full h-full flex items-center justify-center bg-opacity-40">
+                                                                <span className="text-white text-xs">
+                                                                    Đang xem
+                                                                </span>
+                                                            </div>
+                                                        )
+                                                    }
                                                 </div>
-                                                <div className="flex flex-col justify-between flex-grow mb-2">
-                                                    <h3 className="text-base font-medium text-[#0f172a]">
+                                                <div className="flex flex-col justify-between flex-grow gap-2 mb-2">
+                                                    <h3 className="text-base font-medium text-[#0f172a] line-clamp-2">
                                                         {item.name || "Không có tiêu đề"}
                                                     </h3>
                                                     <div className="flex items-center justify-between text-sm text-[#6b7280]">
-                                                        <div className="flex items-center gap-2">
+                                                        <div className="flex items-center gap-2 flex-wrap">
                                                             <span>{item.duration || "0:00"}</span>
-                                                            <span className="rounded-full px-2 py-0.5 text-xs font-medium bg-[#DCFCE7] text-[#16A34A]">
+                                                            <span className="rounded-full px-2 py-0.5 text-[11px] font-medium bg-[#DCFCE7] text-[#16A34A]">
                                                                 Người mới bắt đầu
                                                             </span>
                                                         </div>
@@ -196,7 +221,7 @@ export default function CoursePlaylist() {
                                                             <span
                                                                 className={`rounded-full px-2 py-0.5 text-xs font-medium ${getTagColors(item.memberType)}`}
                                                             >
-                                                                {getTagValue(item.memberType)}  
+                                                                {getTagValue(item.memberType)}
                                                             </span>
                                                             {locked && (
                                                                 <Lock className="h-4 w-4 text-[#6b7280]" />

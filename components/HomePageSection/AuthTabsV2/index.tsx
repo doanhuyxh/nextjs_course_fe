@@ -17,6 +17,12 @@ export default function AuthTabsV2() {
     try {
       const response: any = await axiosCustomerConfig.get("/customer/get-info")
       if (response.code === 200) {
+        const authTabsV2Container = document.getElementById('auth-tabs-v2-container_v2');
+        if (authTabsV2Container) {
+            // authTabsV2Container.style.width = "600px";
+            authTabsV2Container.style.height = "406px";
+            authTabsV2Container.classList.add("bg-transparent");
+        }
         setUserInfo(response.data)
       } else {
         console.error("Failed to fetch user info:", response.message)
@@ -45,7 +51,7 @@ export default function AuthTabsV2() {
     }, []);
 
     return (
-        <div className="flex items-center justify-center bg-[#ffffff] w-[500px] m-auto rounded-[12px]">
+        <div className="flex items-center justify-center bg-[#ffffff] w-[500px] m-auto rounded-[12px]" id="auth-tabs-v2-container_v2">
             {
                 userInfo && <Profile userInfo={userInfo} />
             }

@@ -91,7 +91,7 @@ export default function Login() {
                         type="email"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="Enter your email"
+                        placeholder="Nhập địa chỉ email của bạn"
                         className="h-12 rounded-xl border border-[#d1d5db] pl-10 pr-4 bg-gray-100 text-[#111827] placeholder:text-[#9ca3af] focus:border-[#4ade80] focus:ring-[#4ade80]"
                     />
                 </div>
@@ -108,7 +108,7 @@ export default function Login() {
                         type={showPassword ? "text" : "password"}
                         value={formData.password}
                         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                        placeholder="Enter your password"
+                        placeholder="Nhâp mật khẩu của bạn"
                         className="h-12 rounded-xl border border-[#d1d5db] pl-10 pr-10 bg-gray-100 text-[#111827] placeholder:text-[#9ca3af] focus:border-[#4ade80] focus:ring-[#4ade80]"
                     />
                     <Button

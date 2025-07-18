@@ -52,7 +52,7 @@ export default function Hero() {
           </div>
           {/* Right Content - Tutorial Progress Card */}
           <div className="w-full" id='auth-tabs-v2'>
-            <div className="bg-[#ffffff19] border border-[#ffffff33] rounded-2xl w-[600px] p-6 sm:p-8 shadow-[0px_4px_4px_#888888ff]">
+            <div className="bg-[#ffffff19] border border-[#ffffff33] rounded-2xl w-[600px] p-6 sm:p-8 shadow-[0px_4px_4px_#888888ff]" id='auth-tabs-v2-container'>
               <AuthTabsV2 />
             </div>
           </div>

@@ -11,13 +11,14 @@ import VideoBunny from "./View/videobunny"
 import VideoMp4 from "./View/videomp4"
 import PDFViewer from "./View/pdf"
 import { LessonItem } from "@/libs/types"
+import useSearchParamsClient from "@/libs/hooks/useSearchParamsClient"
 
 export default function VideoSectionV3({ lessonId }: { lessonId: string }) {
 
     const [lesson, setLesson] = useState<LessonItem | null>(null)
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [, setToggleCourse] = useLocalStorage<string>("toggleCourse", "");
-    const [, setActiveLesson] = useLocalStorage<string>("ActiveLesson", "");
+    const [, setActiveLesson] = useSearchParamsClient<string>("atl", "");
     const fetchVideoUrl = useCallback(async () => {
         try {
             setActiveLesson(lessonId);
@@ -41,7 +42,7 @@ export default function VideoSectionV3({ lessonId }: { lessonId: string }) {
         } finally {
             setIsLoading(false);
         }
-    }, [lessonId]);
+    }, [lessonId, setActiveLesson, setToggleCourse]);
 
     useEffect(() => {
         if (lessonId) {

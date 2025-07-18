@@ -34,7 +34,7 @@ const Footer: React.FC = () => {
             {/* Learning Resources */}
             <div className="flex flex-col gap-4 w-full lg:w-1/4">
               <h3 className="text-base font-bold text-white">Tài nguyên học tập</h3>
-              <ul className="flex flex-col gap-3.5">
+              <ul className="flex flex-col gap-2">
                 <li>
                   <a href="#" className="flex items-center gap-2 text-sm text-[#9ca3af] hover:text-white transition-colors">
                     <img
@@ -45,9 +45,9 @@ const Footer: React.FC = () => {
                     Video hướng dẫn
                   </a>
                 </li>
-                <li className="relative">
+                <li className="">
                   <div className="flex flex-col gap-2">
-                    <div className="flex items-center gap-2 text-sm text-[#9ca3af] hover:text-white transition-colors mt-4">
+                    <div className="flex items-center gap-2 text-sm text-[#9ca3af] hover:text-white transition-colors">
                       <img
                         src="/images_v2/img_vector_blue_gray_300_v2.svg"
                         alt=""
@@ -55,7 +55,7 @@ const Footer: React.FC = () => {
                       />
                       Mẫu ngành
                     </div>
-                    <a href="#" className="flex items-center gap-2 text-sm text-[#9ca3af] hover:text-white transition-colors mt-4">
+                    <a href="#" className="flex items-center gap-2 text-sm text-[#9ca3af] hover:text-white transition-colors">
                       <img
                         src="/images_v2/img_svg_blue_gray_300_16x16.svg"
                         alt=""
@@ -72,7 +72,7 @@ const Footer: React.FC = () => {
             {/* Support Section */}
             <div className="flex flex-col gap-4 w-full lg:w-1/4">
               <h3 className="text-base font-bold text-white">Hỗ trợ</h3>
-              <ul className="flex flex-col gap-3.5">
+              <ul className="flex flex-col gap-2">
                 <li>
                   <a href="mailto:support@flashbot.vn" className="flex items-center gap-2 text-sm text-[#9ca3af] hover:text-white transition-colors">
                     <img

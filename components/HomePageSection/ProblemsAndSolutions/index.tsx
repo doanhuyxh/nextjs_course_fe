@@ -42,7 +42,7 @@ export default function ProblemsAndSolutions() {
               </div>
               {/* Solutions */}
               <div className="flex flex-col gap-6">
-                <h3 className="text-xl sm:text-2xl font-bold text-[#111827]">Với FlashBot - Giải pháp toàn diện cho mọi rắc rối dưới đây:</h3>
+                <h3 className="text-xl sm:text-2xl font-bold text-[#111827] lg:text-nowrap">Với FlashBot - Giải pháp toàn diện cho mọi rắc rối dưới đây:</h3>
                 <div className="flex flex-col gap-4">
                   <div className="flex gap-4">
                     <img src="/images_v2/img_background_green_50.svg" alt="" className="w-9 h-9 rounded-lg flex-shrink-0" />
