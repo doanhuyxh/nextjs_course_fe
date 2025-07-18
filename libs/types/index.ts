@@ -248,6 +248,7 @@ export interface ConditionSelected {
 export const MemberType =[
     { value: "free", label: "Miễn phí" },
     { value: "basic", label: "Cơ bản" },
-    { value: "pro", label: "Gói Pro" },
-    { value: "enterprise", label: "Gói Doanh nghiệp" }
+    { value: "pro", label: "Pro" },
+    { value: "premium", label: "Premium" },
+    { value: "enterprise", label: "Doanh nghiệp" }
 ]

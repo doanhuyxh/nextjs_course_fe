@@ -25,22 +25,18 @@ export default function IndustryTemplate() {
                             <p className="text-xs text-[#4b5563] leading-relaxed mb-3 ml-1">
                                 Mẫu chatbot được xây dựng sẵn với các phản hồi và quy trình làm việc cụ thể theo ngành.
                             </p>
-                            <div className="flex gap-2 ml-1">
-                                <div className="flex items-center justify-center gap-4 !w-[170px] bg-[linear-gradient(90deg,#3b82f6_0%,#7c3aed_100%)] rounded-lg p-[11px 30.27px 11px 30.45px]">
-                                    <img src="/images_v2/img_svg_white_a700_12x12.svg" alt="" className="w-3 h-3" />
-                                    <span className="text-sm font-bold text-white">Xem ví dụ</span>
-                                </div>
+                            <div className="flex justify-center gap-2 ml-1">
                                 <Button
                                     variant="secondary"
                                     size="sm"
-                                    className="bg-[#f3f4f6] text-[#374151] rounded-lg"
+                                    className="bg-[linear-gradient(90deg,#3b82f6_0%,#7c3aed_100%)] text-white"
                                     leftImage={{
-                                        src: "/images_v2/img_svg_blue_gray_800.svg",
+                                        src: "/images_v2/img_svg_white_a700_12x12.svg",
                                         width: 12,
                                         height: 12
                                     }}
                                 >
-                                    Tải xuống
+                                    Xem ví dụ
                                 </Button>
                             </div>
                         </div>

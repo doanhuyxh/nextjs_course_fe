@@ -7,7 +7,6 @@ import ProblemsAndSolutions from '@/components/HomePageSection/ProblemsAndSoluti
 import LearningCenter from '@/components/HomePageSection/LearningCenter';
 import IndustryTemplate from '@/components/HomePageSection/IndustryTemplate';
 import Testimonials from '@/components/HomePageSection/Testimonials';
-import Pricing from '@/components/HomePageSection/Pricing';
 import CTA from '@/components/HomePageSection/CTA';
 
 
@@ -17,7 +16,7 @@ const Home: React.FC = () => {
       {/* Header */}
       <Header />
       {/* Hero Section */}
-        <Hero />
+      <Hero />
       {/* Problems vs Solutions Section */}
       <ProblemsAndSolutions />
       {/* Learning Center Section */}
@@ -26,8 +25,6 @@ const Home: React.FC = () => {
       <IndustryTemplate />
       {/* Testimonials Section */}
       <Testimonials />
-      {/* Pricing Section */}
-      <Pricing />
       {/* CTA Section */}
       <CTA />
       {/* Footer */}

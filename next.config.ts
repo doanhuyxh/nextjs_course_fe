@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
     experimental: {},
     compiler: {
         styledComponents: true,
-        removeConsole: true
+        removeConsole: false
     },
     sassOptions: {
         includePaths: ["./styles", "./components"],
