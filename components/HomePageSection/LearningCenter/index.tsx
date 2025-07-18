@@ -64,7 +64,7 @@ export default function LearningCenter() {
                                             <span className="text-xs text-[#6b7280]">{course?.totalTimeDuration || ""}</span>
                                         </div>
                                     </div>
-                                    <h3 className="text-lg font-bold text-[#111827] mb-4">
+                                    <h3 className="text-lg font-bold text-[#111827] mb-4 leading-relaxed line-clamp-2">
                                         {course?.name || "Đang cập nhật"}
                                     </h3>
                                     <div className="text-sm text-[#4b5563] mb-6 leading-relaxed line-clamp-2 overflow-hidden"

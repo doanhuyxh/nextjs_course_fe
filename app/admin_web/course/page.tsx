@@ -4,7 +4,7 @@ import { Button, Input, Table, Dropdown, Space, message, Spin, Menu, Popconfirm 
 import type { MenuProps } from 'antd';
 import { useRouter } from 'next/navigation';
 import axiosInstance from '@/libs/configs/ApiConfig/axiosAdminConfig';
-import { ResponseData } from "@/libs/types";
+import { MemberType, ResponseData } from "@/libs/types";
 
 export default function Course() {
     const router = useRouter();
@@ -120,6 +120,13 @@ export default function Course() {
         {
             title: 'Tổng thời lượng',
             dataIndex: 'totalTimeDuration',
+        },
+        {
+            title: 'Phân loại khách hàng',
+            dataIndex: 'memberType',
+            render: (memberType: string) => {
+                return MemberType.find(item => item.value === memberType)?.label || 'Không xác định';
+            },
         },
         {
             title: 'Hành động',
