@@ -164,7 +164,7 @@ export default function CoursePlaylist() {
                                     section.lesson.map((item: any) => {
                                         const locked = isLocked(item.memberType)
                                         return (
-                                            <Link href={`/study_v3/${item.slug}`}
+                                            <Link href={`/study/${item.slug}`}
                                                 key={item.id}
                                                 className="flex items-center gap-3 rounded-lg bg-white p-3 shadow-sm border border-[#e5e7eb] cursor-pointer"
                                             >
