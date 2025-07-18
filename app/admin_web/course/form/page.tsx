@@ -8,7 +8,7 @@ import { EditorReactQuill } from "@/components/Editor";
 import axiosInstance, { postFormData } from "@/libs/configs/ApiConfig/axiosAdminConfig";
 import toast from "react-hot-toast";
 import { generateSlug } from "@/libs/utils/index";
-import VideoBunny from "@/components/FileHandle/VideoBunny";
+import VideoBunny from "@/components/FileHandle/VideoM3U8";
 import VideoYoutubeUpload from "@/components/FileHandle/VideoYoutube";
 import FileUploadPDF from "@/components/FileHandle/FileUploadPDF";
 import { MemberType } from "@/libs/types";

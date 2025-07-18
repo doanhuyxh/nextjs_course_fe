@@ -34,7 +34,7 @@ export default function CTA() {
                     </div>
                     <div className="bg-[#ffffff19] rounded-xl p-5 shadow-[0px_4px_4px_#888888ff] max-w-2xl">
                         <div className="flex flex-col gap-4 justify-center items-center">
-                            <div className="flex items-center justify-center gap-2.5">
+                            <div className="flex lg:items-center items-start justify-center gap-2.5">
                                 <img src="/images_v2/img_svg_amber_a200.svg" alt="" className="w-6 h-6" />
                                 <h3 className="text-lg font-bold text-white">Phần thưởng: Lộ trình học tập hoàn chỉnh</h3>
                             </div>

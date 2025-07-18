@@ -23,31 +23,21 @@ const Header: React.FC = () => {
                   alt="FlashBot Logo"
                   className="w-full h-full"
                 />
-                <div className="absolute bottom-0 right-0 w-3 h-3 bg-[#22c55e] rounded-full"></div>
+                <div className="absolute top-0 right-0 w-3 h-3 bg-[#22c55e] rounded-full"></div>
               </div>
               <h1 className="text-lg md:text-xl font-bold text-[#111827]">
                 FlashBot
               </h1>
               <Button
                 variant="gradient"
-                className="rounded-[14px] text-xs !h-[28px]"
+                className=" text-xs !h-[28px] !text-nowrap !rounded-2xl"
               >
                 Trung tâm học tập
               </Button>
             </div>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="block lg:hidden p-2"
-            aria-label="Open menu"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-
+         
           {/* Desktop Navigation */}
           <div className="hidden lg:block">
             <Button

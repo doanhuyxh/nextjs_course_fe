@@ -15,17 +15,19 @@ import {
     CollapsibleTrigger,
 } from "@/components/ui/collapsible"
 import { Progress } from "@/components/ui/progress"
-import useLocalStorage from "@/libs/hooks/useLocalStorage"
 import axiosCustomerConfig from "@/libs/configs/ApiConfig/axiosCustomerConfig"
 import Link from "next/link"
 
 import useSearchParamsClient from "@/libs/hooks/useSearchParamsClient"
+import { useIsMobile } from "@/libs/hooks/use-mobile"
+import { Button } from "antd"
 
 export default function CoursePlaylist() {
     const [user, setUser] = useState<any>(null)
+    const isMobile = useIsMobile()
     const [openSections, setOpenSections] = useState<Set<string>>(new Set())
     const [courseData, setCourseData] = useState<any[]>([])
-    const [toggleCourse] = useLocalStorage<string>("toggleCourse", "")
+    const [toggleCourse] = useSearchParamsClient<string>("tc", "");
     const [activeLesson, setActiveLesson] = useSearchParamsClient<string>("atl", "")
 
     const getAllCourse = useCallback(async () => {
@@ -119,7 +121,7 @@ export default function CoursePlaylist() {
 
 
     return (
-        <div className="w-full !min-w-[410px] rounded-2xl bg-white py-2 px-1 shadow-lg">
+        <div className="w-full !lg:min-w-[410px] rounded-2xl bg-white py-2 px-1 shadow-lg">
             <div className="px-5 mb-6 flex items-center gap-2">
                 <Sparkles className="h-6 w-6 text-[#a855f7]" />
                 <h1 className="text-2xl font-bold text-[#0f172a]">Course Playlist</h1>
@@ -178,7 +180,7 @@ export default function CoursePlaylist() {
                                         return (
                                             <Link href={`/study/${item.slug}`}
                                                 key={item.id}
-                                                className={`flex items-center gap-3 rounded-lg p-3 shadow-sm border border-[#e5e7eb] cursor-pointer`}
+                                                className={`flex items-center gap-3 rounded-lg p-3 shadow-sm border border-[#FDE68A] cursor-pointer`}
                                             >
                                                 <div className="relative h-16 w-24 shrink-0 overflow-hidden rounded-md bg-[#94a3b8]">
                                                     <img
@@ -242,6 +244,17 @@ export default function CoursePlaylist() {
                     </Collapsible>
                 ))}
             </div>
+            {courseData.length === 0 && (
+                <div className="text-center text-sm text-gray-500 mt-4">
+                    Không có khóa học nào hiện có.
+                </div>
+            )}
+
+            {isMobile && (
+                <button className="mt-4 h-[56px] w-full bg-gradient-to-r from-[#2563EB] to-[#9333EA] text-white rounded-lg px-4 py-2 text-sm font-medium flex items-center justify-center gap-2">
+                    Nâng cấp ngay
+                </button>
+            )}
         </div>
     )
 }

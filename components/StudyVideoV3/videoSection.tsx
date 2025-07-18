@@ -4,20 +4,20 @@ import React, { useEffect, useState, useCallback } from "react"
 import { Button } from "@/components/ui/button"
 import { Check, FileText, HelpCircle, Users } from "lucide-react"
 import { Spin } from "antd"
-import useLocalStorage from "@/libs/hooks/useLocalStorage"
 import Swal from "sweetalert2"
 import axiosCustomerConfig from "@/libs/configs/ApiConfig/axiosCustomerConfig"
-import VideoBunny from "./View/videobunny"
+import VideoM3U8 from "./View/videom3u8"
 import VideoMp4 from "./View/videomp4"
 import PDFViewer from "./View/pdf"
 import { LessonItem } from "@/libs/types"
 import useSearchParamsClient from "@/libs/hooks/useSearchParamsClient"
+import IframeVideo from "./View/iframe"
 
 export default function VideoSectionV3({ lessonId }: { lessonId: string }) {
 
     const [lesson, setLesson] = useState<LessonItem | null>(null)
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [, setToggleCourse] = useLocalStorage<string>("toggleCourse", "");
+    const [, setToggleCourse] = useSearchParamsClient<string>("tc", "");
     const [, setActiveLesson] = useSearchParamsClient<string>("atl", "");
     const fetchVideoUrl = useCallback(async () => {
         try {
@@ -51,30 +51,33 @@ export default function VideoSectionV3({ lessonId }: { lessonId: string }) {
         }
     }, [lessonId, fetchVideoUrl, lesson?.name]);
 
-   
+
     return (
         <div className="bg-white rounded-lg shadow-md p-6 col-span-1 lg:col-span-2">
-            <div className="relative w-full m-auto aspect-video rounded-lg overflow-hidden bg-gray-200 flex items-center justify-center">
-                <div className="flex items-center justify-center ">
-                    {isLoading && (<div className="flex items-center justify-center w-full h-full">
-                        <Spin />
-                    </div>)}
-                    {lesson?.type === "video_mp4" && lesson?.video && (
-                        <VideoMp4 url={lesson.video} poster={lesson.imageThumbnail} />
-                    )}
-                    {lesson?.type === "video_bunny" && lesson?.video && (
-                        <VideoBunny url={lesson.video} />
-                    )}
-                    {lesson?.type === "pdf" && lesson?.video && (
-                        <PDFViewer url={lesson.video} name={lesson.name} />
-                    )}
-                </div>
+            <div className="relative w-full m-auto aspect-video rounded-lg overflow-hidden  flex items-center justify-center">
+
+                {isLoading && (<div className="flex items-center justify-center w-full h-full">
+                    <Spin />
+                </div>)}
+                {lesson?.type === "video_mp4" && lesson?.video && (
+                    <VideoMp4 url={lesson.video} poster={lesson.imageThumbnail} />
+                )}
+                {lesson?.type === "video_m3u8" && lesson?.video && (
+                    <VideoM3U8 url={lesson.video} />
+                )}
+                {lesson?.type === "video_iframe" && lesson?.video && (
+                    <IframeVideo iframe={lesson.video} />
+                )}
+                {lesson?.type === "pdf" && lesson?.video && (
+                    <PDFViewer url={lesson.video} name={lesson.name} />
+                )}
+
             </div>
             <div className="mt-4 flex items-center gap-2 text-sm text-[#6b7280]">
                 <span className="bg-[#dcfce7] text-[#15803d] px-2 py-1 rounded-full font-medium">Người mới bắt đầu</span>
                 <span>{lesson?.duration}</span>
             </div>
-            <h1 className="text-2xl font-bold text-[#111827] mt-2">{lesson?.name}</h1>
+            <h1 className="lg:text-2xl text-[24px] font-bold text-[#111827] mt-2">{lesson?.name}</h1>
             <p className="text-[#4b5563] mt-2 leading-relaxed">
                 Tìm hiểu những điều cơ bản và cách tạo tài khoản FlashBot và bắt đầu sử dụng nền tảng của chúng tôi.
             </p>
@@ -85,7 +88,7 @@ export default function VideoSectionV3({ lessonId }: { lessonId: string }) {
                 </Button>
                 <Button
                     variant="outline"
-                    className="rounded-full px-4 py-2 text-sm font-medium flex items-center gap-2 text-[#4b5563] border-[#e2e8f0] hover:bg-[#f3f4f6] bg-transparent"
+                    className="rounded-full px-4 py-2 text-sm font-medium flex items-center gap-2 text-[#1D4ED8] border-[#EFF6FF] bg-[#EFF6FF]"
                 >
                     <FileText className="w-4 h-4" />
                     Ghi chú (0)
@@ -99,7 +102,7 @@ export default function VideoSectionV3({ lessonId }: { lessonId: string }) {
                 </Button>
                 <Button
                     variant="outline"
-                    className="rounded-full px-4 py-2 text-sm font-medium flex items-center gap-2 text-[#4b5563] border-[#e2e8f0] hover:bg-[#f3f4f6] bg-transparent"
+                    className="rounded-full px-4 py-2 text-sm font-medium flex items-center gap-2 text-[#7E22CE] border-[#e2e8f0] bg-[#FAF5FF]"
                 >
                     <Users className="w-4 h-4" />
                     Cộng đồng
@@ -107,7 +110,7 @@ export default function VideoSectionV3({ lessonId }: { lessonId: string }) {
             </div>
 
             <div className="bg-gray-100 mt-6 p-4 rounded-lg">
-                <div className="" dangerouslySetInnerHTML={{ __html: lesson?.lessonContent||"" }} />
+                <div className="" dangerouslySetInnerHTML={{ __html: lesson?.lessonContent || "" }} />
             </div>
 
         </div>

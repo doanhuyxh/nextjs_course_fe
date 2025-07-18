@@ -8,13 +8,15 @@ import { Crown } from "lucide-react"
 import { Customer } from "@/libs/types"
 import fetchData from "@/libs/configs/ApiConfig/fetchDataServer"
 import { useSearchParams, usePathname } from "next/navigation"
-import { Avatar, Typography, Space, Dropdown, MenuProps } from 'antd';
+import { useIsMobile } from "@/libs/hooks/use-mobile"
 
 
 export default function HeaderStudyVideoV3() {
     const pathname = useSearchParams();
     const path = usePathname();
     const [user, setUser] = React.useState<Customer>({} as Customer);
+    const isMobile = useIsMobile();
+    const [isClient, setIsClient] = React.useState(false);
 
     React.useEffect(() => {
         const accessToken = localStorage.getItem("AccessToken");
@@ -29,18 +31,26 @@ export default function HeaderStudyVideoV3() {
             });
     }, [path, pathname]);
 
+    React.useEffect(() => {
+        setIsClient(true);
+    }, []);
+
+    if (!isClient) {
+        return null;
+    }
+
     return (
-        <header className="bg-white shadow-sm py-3 px-6 flex items-center justify-between sticky top-0 z-10">
+        <header className={`${isMobile ? "  border-b border-[rgba(30,41,59,0.5)] bg-[rgba(15,23,42,0.95)] shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)] backdrop-blur-lg" : "bg-white"} shadow-sm py-3 px-6 flex items-center justify-between sticky top-0 z-10`}>
             <div className="flex items-center gap-4">
                 <div className="flex items-center gap-2">
                     <Image src="/images_v2/img_svg.svg" width={32} height={32} alt="FlashBot Logo" />
-                    <span className="font-bold text-lg text-[#111827]">FlashBot</span>
+                    <span className={`font-bold text-lg ${isMobile ? "text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600" : "text-[#111827]"}`}>FlashBot</span>
                 </div>
-                <Button className="bg-[#3b82f6] hover:bg-[#2563eb] text-white rounded-full px-4 py-2 text-sm font-medium">
+                <Button className="lg:bg-[#3b82f6] lg:hover:bg-[#2563eb] bg-[linear-gradient(90deg,#3B82F6_0%,#8B5CF6_100%)] text-white rounded-full lg:px-4 !py-3 lg:text-sm lg:font-medium !text-[12px] font-normal h-[14px] flex items-center gap-2 leading-[20px]">
                     Trung tâm học tập
                 </Button>
             </div>
-            <nav className="flex items-center gap-6 text-sm font-medium text-[#6b7280]">
+            {!isMobile && <nav className="flex items-center gap-6 text-sm font-medium text-[#6b7280]">
                 <Link href="#" className="flex items-center gap-2 hover:text-[#111827]">
                     <Image src="/images_v2/ring_notify.svg" alt="notification" width={20} height={20} />
                 </Link>
@@ -69,6 +79,13 @@ export default function HeaderStudyVideoV3() {
                     {user?.firstName + " " + user?.lastName || user?.email}
                 </Link>
             </nav>
+            }
+            {isMobile && <Button
+                onClick={() => console.log("Open mobile menu")}
+                className="!bg-transparent text-white rounded-full px-4 py-2 text-sm font-medium"
+            >
+                <Image src="/images_v2/icon_menu.svg" alt="menu" width={24} height={24} />
+            </Button>}
         </header>
     )
 }

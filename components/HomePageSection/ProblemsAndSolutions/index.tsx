@@ -7,8 +7,8 @@ export default function ProblemsAndSolutions() {
           <div className="flex flex-col gap-10 sm:gap-12 md:gap-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center">
               <span className="text-[#111827]">Trả lời thủ công đang </span>
-              <span className="text-[#dc2626]">làm mất thời gian của bạn.</span>
-              <br />
+              <span className="block sm:inline text-[#dc2626]">làm mất thời gian của bạn.</span>
+              <br className='hidden sm:block'/>
               <span className="text-[#111827]">FlashBot </span>
               <span className="text-[#16a34a]">sẽ thay đổi điều đó.</span>
             </h2>

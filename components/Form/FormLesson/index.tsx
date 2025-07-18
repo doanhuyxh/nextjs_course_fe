@@ -5,8 +5,9 @@ import { LessonItem, MemberType } from "@/libs/types";
 import { generateSlug } from "@/libs/utils/index";
 import { useState } from "react";
 import FileUploadImage from "../../FileHandle/FileUploadImage";
-import VideoBunny from "@/components/FileHandle/VideoBunny";
+import VideoM3U8 from "@/components/FileHandle/VideoM3U8";
 import VideoYoutubeUpload from "@/components/FileHandle/VideoYoutube";
+import VideoIframeUpload from "@/components/FileHandle/VideoIframe";
 
 
 export default function FormLesson({ lesson, setLesson, saveLesson }: { lesson: LessonItem, setLesson: any, saveLesson: any }) {
@@ -28,6 +29,10 @@ export default function FormLesson({ lesson, setLesson, saveLesson }: { lesson: 
 
     const handleCheckboxChange = (field: string, value: boolean) => {
         setLessonTemp({ ...lessonTemp, [field]: value });
+    };
+
+    const hanleTypeVideoChange = (type: string) => {
+        setLessonTemp({ ...lessonTemp, type: type, video: '', duration: '00:00' });
     };
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,10 +85,11 @@ export default function FormLesson({ lesson, setLesson, saveLesson }: { lesson: 
                 <div className="flex flex-row items-center gap-3">
                     <label className="font-semibold">Loại bài học</label>
                     <div className="flex flex-row gap-2">
-                        <label className="cursor-pointer">Video YouTube <input type="radio" value={"video_youtube"} checked={lessonTemp.type === "video_youtube"} onChange={(e) => setLessonTemp({ ...lessonTemp, type: e.target.value })} /></label>
-                        <label className="cursor-pointer">Video MP4 <input type="radio" value={"video_mp4"} checked={lessonTemp.type === "video_mp4"} onChange={(e) => setLessonTemp({ ...lessonTemp, type: e.target.value })} /></label>
-                        <label className="cursor-pointer">Video Bunny <input type="radio" value={"video_bunny"} checked={lessonTemp.type === "video_bunny"} onChange={(e) => setLessonTemp({ ...lessonTemp, type: e.target.value })} /></label>
-                        <label className="cursor-pointer">PDF <input type="radio" value={"pdf"} checked={lessonTemp.type === "pdf"} onChange={(e) => setLessonTemp({ ...lessonTemp, type: e.target.value })} /></label>
+                        <label className="cursor-pointer">Video YouTube <input type="radio" value={"video_youtube"} checked={lessonTemp.type === "video_youtube"} onChange={(e) => hanleTypeVideoChange(e.target.value)} /></label>
+                        <label className="cursor-pointer">Video MP4 <input type="radio" value={"video_mp4"} checked={lessonTemp.type === "video_mp4"} onChange={(e) => hanleTypeVideoChange(e.target.value)} /></label>
+                        <label className="cursor-pointer">Video M3u8 <input type="radio" value={"video_m3u8"} checked={lessonTemp.type === "video_m3u8"} onChange={(e) => hanleTypeVideoChange(e.target.value)} /></label>
+                        <label className="cursor-pointer">Video Iframe <input type="radio" value={"video_iframe"} checked={lessonTemp.type === "video_iframe"} onChange={(e) => hanleTypeVideoChange(e.target.value)} /></label>
+                        <label className="cursor-pointer">PDF <input type="radio" value={"pdf"} checked={lessonTemp.type === "pdf"} onChange={(e) => hanleTypeVideoChange(e.target.value)} /></label>
                     </div>
                 </div>
 
@@ -133,16 +139,14 @@ export default function FormLesson({ lesson, setLesson, saveLesson }: { lesson: 
 
             </div>
 
-            {lessonTemp.type === "video_bunny" && (<div>
-                <VideoBunny initialLink={lessonTemp.video} onChange={(value) => setLessonTemp({ ...lessonTemp, video: value })} setDuration={(value) => setLessonTemp({ ...lessonTemp, duration: value })} />
+            {lessonTemp.type === "video_m3u8" && (<div>
+                <VideoM3U8 initialLink={lessonTemp.video} onChange={(value) => setLessonTemp({ ...lessonTemp, video: value })} setDuration={(value) => setLessonTemp({ ...lessonTemp, duration: value })} />
             </div>)}
 
 
             {lessonTemp.type === "video_youtube" && (<div>
                 <VideoYoutubeUpload initialLink={lessonTemp.video} onChange={(value) => setLessonTemp({ ...lessonTemp, video: value })} setDuration={(value) => setLessonTemp({ ...lessonTemp, duration: value })} />
             </div>)}
-
-
 
             {lessonTemp.type === "video_mp4" && (<div className="flex flex-col gap-2">
                 <VideoMp4UploadFull initialLink={lessonTemp.video} onChange={(value) => setLessonTemp({ ...lessonTemp, video: value })} setDuration={(value) => setLessonTemp({ ...lessonTemp, duration: value })} />
@@ -154,6 +158,10 @@ export default function FormLesson({ lesson, setLesson, saveLesson }: { lesson: 
                     <FileUploadPDF initialLink={lessonTemp.video} onChange={(value) => setLessonTemp({ ...lessonTemp, video: value })} />
                 </div>
             )}
+
+            {lessonTemp.type === "video_iframe" && (<div>
+                <VideoIframeUpload initialLink={lessonTemp.video} onChange={(value) => setLessonTemp({ ...lessonTemp, video: value })} setDuration={(value) => setLessonTemp({ ...lessonTemp, duration: value })} />
+            </div>)}
 
             <div className="flex flex-col gap-2">
                 <label className="font-semibold">Nội dung bài học</label>

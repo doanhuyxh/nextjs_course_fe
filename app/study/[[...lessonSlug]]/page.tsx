@@ -77,7 +77,7 @@ export default function StudyPageV3() {
       {/* Top Navigation Bar */}
       <HeaderStudyVideoV3 />
       {/* Main Content Area */}
-      <main className="max-w-[1920px] m-auto flex-1 p-6 grid grid-cols-1 lg:grid-cols-[2fr_1fr_1fr] gap-3">
+      <main className="max-w-[1920px] m-auto flex-1 lg:p-6 p-3 grid grid-cols-1 lg:grid-cols-[2fr_1fr_1fr] gap-3">
         {/* Video Player Section */}
         <VideoSectionV3 lessonId={lesson?.id||""} />
         {/* Course Playlist Section */}

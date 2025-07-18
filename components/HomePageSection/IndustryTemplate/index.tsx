@@ -168,7 +168,7 @@ export default function IndustryTemplate() {
                             </div>
                         </div>
                     </div>
-                    <div className="text-center bg-[linear-gradient(90deg,#eab308_0%,#f97316_100%)] rounded-xl px-8 py-4 w-[628px] m-auto">
+                    <div className="text-center bg-[linear-gradient(90deg,#eab308_0%,#f97316_100%)] rounded-xl px-8 py-4 w-full lg:w-[628px] m-auto">
                         <p
                             className="text-white text-lg font-bold mb-4"
                         >

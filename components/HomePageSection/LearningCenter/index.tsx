@@ -26,11 +26,11 @@ export default function LearningCenter() {
     }, []);
 
     return (
-        <section className="w-full bg-[linear-gradient(159deg,#f9fafb_0%,#eff6ff_100%)] py-16 sm:py-20 md:py-24">
+        <section className="w-full bg-[linear-gradient(159deg,#f9fafb_0%,#eff6ff_100%)] py-16 sm:py-10 md:py-14">
             <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col gap-12 sm:gap-16">
                     <div className="text-center">
-                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3">
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 leading-[36px] text-[27px]">
                             <span className="text-[#111827]">📚 Trung tâm Học Tập FlashBot – </span>
                             <span className="text-[#2563eb]">Video hướng dẫn từng bước</span>
                         </h2>

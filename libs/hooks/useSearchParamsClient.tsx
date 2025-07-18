@@ -2,7 +2,7 @@
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useCallback } from 'react'
 
-function useSearchParamsClient<T extends string>(key: string, defaultValue: T): [T, (value: string) => void] {
+function useSearchParamsClient<T>(key: string, defaultValue: T): [T, (value: any) => void] {
     const router = useRouter()
     const searchParams = useSearchParams()
 
@@ -13,7 +13,7 @@ function useSearchParamsClient<T extends string>(key: string, defaultValue: T): 
             const newValue = typeof value === 'function' ? (value as (currentValue: T) => string)(currentValue) : value
             const params = new URLSearchParams(searchParams.toString())
             params.set(key, newValue)
-            router.replace(`?${params.toString()}`, { scroll: false })
+            router.replace(`?${params.toString()}`, { scroll: true })
         },
         [key, router, searchParams, currentValue]
     )

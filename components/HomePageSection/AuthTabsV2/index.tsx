@@ -14,49 +14,54 @@ export default function AuthTabsV2() {
     const [userInfo, setUserInfo] = useState<any>(null);
 
     const handleGetInfoUser = async () => {
-    try {
-      const response: any = await axiosCustomerConfig.get("/customer/get-info")
-      if (response.code === 200) {
-        const authTabsV2Container = document.getElementById('auth-tabs-v2-container_v2');
-        if (authTabsV2Container) {
-            // authTabsV2Container.style.width = "600px";
-            authTabsV2Container.style.height = "406px";
-            authTabsV2Container.classList.add("bg-transparent");
-        }
-        setUserInfo(response.data)
-      } else {
-        console.error("Failed to fetch user info:", response.message)
-      }
-    } catch (error) {
-      console.error("Error fetching user info:", error)
+        try {
+            const response: any = await axiosCustomerConfig.get("/customer/get-info")
+            if (response.code === 200) {
+                const authTabsV2Container = document.getElementById('auth-tabs-v2-container_v2');
+                if (authTabsV2Container) {
+                    // authTabsV2Container.style.width = "600px";
+                    if (window.innerWidth < 768) {
+                        authTabsV2Container.style.height = "auto";
+                    }
+                    else {
+                        authTabsV2Container.style.height = "406px";
+                    }
+                    authTabsV2Container.classList.add("bg-transparent");
+                }
+                setUserInfo(response.data)
+            } else {
+                console.error("Failed to fetch user info:", response.message)
+            }
+        } catch (error) {
+            console.error("Error fetching user info:", error)
 
+        }
     }
-  }
 
 
     useEffect(() => {
         if (!isClient) {
-          return
+            return
         }
         const accessToken = localStorage.getItem("AccessToken")
         if (!accessToken) {
-          return
+            return
         }
         handleGetInfoUser()
-    
-      }, [isClient])
+
+    }, [isClient])
 
     useEffect(() => {
         setIsClient(true)
     }, []);
 
     return (
-        <div className="flex items-center justify-center bg-[#ffffff] w-[500px] m-auto rounded-[12px]" id="auth-tabs-v2-container_v2">
+        <div className="flex items-center justify-center bg-[#ffffff] w-full lg:w-[500px] m-auto rounded-[12px]" id="auth-tabs-v2-container_v2">
             {
                 userInfo && <Profile userInfo={userInfo} />
             }
 
-            {!userInfo && <div className="w-full max-w-md rounded-2xl p-8">
+            {!userInfo && <div className="w-full max-w-md rounded-2xl lg:p-8 p-4">
                 <div className="mb-6 flex justify-center rounded-xl bg-[#f9fafb] p-1">
                     <Button
                         onClick={() => setTab("login")}
@@ -74,10 +79,10 @@ export default function AuthTabsV2() {
                     </Button>
                 </div>
 
-                <h1 className="mb-2 text-center text-2xl font-bold text-[#111827]">
-                    {tab === "login" ? "Đăng nhập vào tài khoản của bạn" : "Tạo tài khoản mới"}
+                <h1 className="mb-2 text-center text-[20px] font-bold text-[#111827] text-nowrap leading-[32px]">
+                    {tab === "login" ? "Đăng nhập vào FlashBot" : "Tạo tài khoản mới"}
                 </h1>
-                <p className="mb-6 text-center text-sm text-[#10b981]">
+                <p className="mb-6 text-center font-normal text-[11px] text-[#10b981] leading-[20px]">
                     Chào mừng trở lại! Tiếp tục hành trình học tập của bạn.
                 </p>
 

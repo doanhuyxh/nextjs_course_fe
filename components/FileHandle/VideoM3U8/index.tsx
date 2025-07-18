@@ -9,7 +9,7 @@ interface VideoUploadProps {
   setDuration: (value: string) => void;
 }
 
-const VideoBunnyUpload: React.FC<VideoUploadProps> = ({ initialLink, onChange, setDuration }) => {
+const VideoM3U8Upload: React.FC<VideoUploadProps> = ({ initialLink, onChange, setDuration }) => {
   const [videoUrl, setVideoUrl] = useState('');
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -80,4 +80,4 @@ const VideoBunnyUpload: React.FC<VideoUploadProps> = ({ initialLink, onChange, s
   );
 };
 
-export default VideoBunnyUpload;
+export default VideoM3U8Upload;
