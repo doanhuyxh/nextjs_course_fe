@@ -47,9 +47,8 @@ export default function AuthTabsV2() {
 
     useEffect(() => {
         if (useCheckLogin === "study") {
-            // tôi muốn scroll id lên trên cùng của trang 
             const authTabsV2Container = document.getElementById('auth-tabs-v2');
-            if (authTabsV2Container) {
+            if (authTabsV2Container && window.innerWidth < 768) {
                 authTabsV2Container.scrollIntoView({ behavior: "smooth" });
             }
         }
