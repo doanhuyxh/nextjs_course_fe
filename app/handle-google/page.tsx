@@ -16,6 +16,7 @@ export default function LoadingSocial() {
           if (response.code === 200) {
             localStorage.setItem("AccessToken", response.data.accessToken);
             localStorage.setItem("RefreshToken", response.data.refreshToken);
+            axiosCustomerConfig.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`;
             router.push('/study');
           } else {
             router.push('/');

@@ -76,7 +76,7 @@ export default function VideoSectionV3({ lessonId }: { lessonId: string }) {
                 <span className="bg-[#dcfce7] text-[#15803d] px-2 py-1 rounded-full font-medium">Người mới bắt đầu</span>
                 <span>{lesson?.duration}</span>
             </div>
-            <h1 className="lg:text-2xl text-[24px] font-bold text-[#111827] mt-2">{lesson?.name}</h1>
+            <h1 className="lg:text-2xl text-[23px] font-bold text-[#111827] leading-[32px] mt-2">{lesson?.name}</h1>
             <p className="text-[#4b5563] mt-2 leading-relaxed">
                 Tìm hiểu những điều cơ bản và cách tạo tài khoản FlashBot và bắt đầu sử dụng nền tảng của chúng tôi.
             </p>

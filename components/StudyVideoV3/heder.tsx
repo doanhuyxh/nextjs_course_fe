@@ -19,7 +19,7 @@ const DesktopMenu = ({ user, userName, items }: { user: Customer, userName: stri
             <Link href="#" className="flex items-center gap-2 hover:text-[#111827]">
                 <Image src="/images_v2/ring_notify.svg" alt="notification" width={20} height={20} />
             </Link>
-            <Link href="#" className="flex items-center gap-2 hover:text-[#111827]">
+            <Link href="https://www.facebook.com/flashbot247" className="flex items-center gap-2 hover:text-[#111827]">
                 <Image src="/images_v2/icon_facebook.svg" alt="facebook" width={20} height={20} />
                 Fanpage
             </Link>
@@ -71,7 +71,7 @@ const MobileDrawer = ({ user, openDrawer, setOpenDrawer, handleLogout }: {
                         <Image src="/images_v2/ring_notify.svg" alt="noti" width={20} height={20} />
                         Notifications
                     </Link>
-                    <Link href="#" className="flex items-center gap-3 text-[16px] text-[#1e293b]">
+                    <Link href="https://www.facebook.com/flashbot247" className="flex items-center gap-3 text-[16px] text-[#1e293b]">
                         <Image src="/images_v2/icon_facebook.svg" alt="facebook" width={20} height={20} />
                         Fanpage
                     </Link>
@@ -82,7 +82,7 @@ const MobileDrawer = ({ user, openDrawer, setOpenDrawer, handleLogout }: {
 
                     {user.type !== "premium" && (
                         <Link
-                            href="/nang-cap"
+                            href="https://flashbot.vn/"
                             className="mt-4 h-[50px] w-full bg-gradient-to-r from-[#2563EB] to-[#9333EA] text-white rounded-lg px-4 py-2 text-sm font-medium flex items-center justify-start gap-2"
                         >
                             <Crown className="w-4 h-4" />

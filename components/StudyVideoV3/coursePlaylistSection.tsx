@@ -118,7 +118,7 @@ export default function CoursePlaylist() {
         <div className="w-full !lg:min-w-[410px] rounded-2xl bg-white py-2 px-1 shadow-lg">
             <div className="px-5 mb-6 flex items-center gap-2">
                 <Sparkles className="h-6 w-6 text-[#a855f7]" />
-                <h1 className="text-2xl font-bold text-[#0f172a]">Course Playlist</h1>
+                <h1 className="lg:text-2xl text-[19px] font-bold text-[#0f172a]">Course Playlist</h1>
             </div>
 
             <div className="space-y-4 max-h-[100%] overflow-y-auto">
@@ -203,12 +203,12 @@ export default function CoursePlaylist() {
                                                     }
                                                 </div>
                                                 <div className="flex flex-col justify-between flex-grow gap-2 mb-2">
-                                                    <h3 className="text-base font-medium text-[#0f172a] line-clamp-2">
+                                                    <h3 className="lg:text-base text-[14px] font-medium text-[#0f172a] lg:line-clamp-2 line-clamp-1">
                                                         {item.name || "Không có tiêu đề"}
                                                     </h3>
                                                     <div className="flex items-center justify-between text-sm text-[#6b7280]">
                                                         <div className="flex items-center gap-2 flex-wrap">
-                                                            <span>{item.duration || "0:00"}</span>
+                                                            <span className="text-[10px]">{item.duration || "0:00"}</span>
                                                             <span className="rounded-full px-2 py-0.5 text-[11px] font-medium bg-[#DCFCE7] text-[#16A34A]">
                                                                 Người mới bắt đầu
                                                             </span>
@@ -246,11 +246,11 @@ export default function CoursePlaylist() {
 
             {isMobile && (
                 <div className="fixed bottom-4 left-4 right-4 z-50">
-                    <button
+                    <a href="https://flashbot.vn" target="_blank"
                         className="h-[56px] w-full bg-gradient-to-r from-[#2563EB] to-[#9333EA] text-white rounded-lg px-4 py-2 text-sm font-medium flex items-center justify-center gap-2 shadow-lg hover:opacity-90 active:scale-95 transition-all duration-200"
                     >
                         Nâng cấp ngay
-                    </button>
+                    </a>
                 </div>
             )}
 

@@ -8,6 +8,7 @@ const axiosCustomerConfig = axios.create({
   timeout: 20000,
   headers: {
     'Content-Type': 'application/json',
+    'Accept': 'application/json',
   },
   withCredentials: true,
 });
