@@ -33,7 +33,7 @@ const DesktopMenu = ({ user, userName, items }: { user: Customer, userName: stri
                     Nâng cấp
                 </Button>
             )}
-            <Dropdown menu={{ items }} placement="bottomRight" trigger={['hover', 'click']}>
+            <Dropdown menu={{ items }} placement="bottomRight" trigger={['click']}>
                 <div className="flex items-center gap-2 cursor-pointer hover:text-[#111827]">
                     <div className="bg-green-500 rounded-lg p-1 flex items-center justify-center">
                         <Image src={user?.avatar || '/images_v2/icon_user.svg'} width={24} height={24} alt="" />

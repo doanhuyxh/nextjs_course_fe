@@ -50,6 +50,11 @@ export default function AuthTabsV2() {
             const authTabsV2Container = document.getElementById('auth-tabs-v2');
             if (authTabsV2Container && window.innerWidth < 768) {
                 authTabsV2Container.scrollIntoView({ behavior: "smooth" });
+            } else if (authTabsV2Container) {
+                const yOffset = -200;
+                const y = authTabsV2Container.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({ top: y, behavior: "smooth" });
+
             }
         }
     }, [useCheckLogin]);
