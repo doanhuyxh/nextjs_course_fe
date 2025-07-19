@@ -50,6 +50,7 @@ export default function AuthTabsV2() {
         }
         const accessToken = localStorage.getItem("AccessToken")
         if (!accessToken) {
+            setIsLoading(false);
             return
         }
         handleGetInfoUser()
