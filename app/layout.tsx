@@ -13,9 +13,9 @@ export const metadata: Metadata = {
   title: "Study Flash Bot",
   description: "Chốt đơn thần tốc với Study Flash Bot - Trợ lý học tập AI giúp bạn chốt đơn nhanh chóng.",
   icons: {
-    icon: "/logo_flashbot.jpg",
-    apple: "/logo_flashbot.jpg",
-    shortcut: "/logo_flashbot.jpg",
+    icon: "https://study-api.flashbot.vn/upload/image/638885115064360671.png",
+    apple: "https://study-api.flashbot.vn/upload/image/638885115064360671.png",
+    shortcut: "https://study-api.flashbot.vn/upload/image/638885115064360671.png",
   },
 };
 
