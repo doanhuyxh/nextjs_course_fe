@@ -12,11 +12,15 @@ export default function AuthTabsV2() {
     const [tab, setTab] = useState<"login" | "register">("login");
     const [isClient, setIsClient] = useState(false);
     const [userInfo, setUserInfo] = useState<any>(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     const handleGetInfoUser = async () => {
         try {
+            setIsLoading(true);
             const response: any = await axiosCustomerConfig.get("/customer/get-info")
             if (response.code === 200) {
+                setUserInfo(response.data)
+                
                 const authTabsV2Container = document.getElementById('auth-tabs-v2-container_v2');
                 if (authTabsV2Container) {
                     // authTabsV2Container.style.width = "600px";
@@ -28,13 +32,14 @@ export default function AuthTabsV2() {
                     }
                     authTabsV2Container.classList.add("bg-transparent");
                 }
-                setUserInfo(response.data)
+                
             } else {
                 console.error("Failed to fetch user info:", response.message)
             }
         } catch (error) {
             console.error("Error fetching user info:", error)
-
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -55,13 +60,18 @@ export default function AuthTabsV2() {
         setIsClient(true)
     }, []);
 
+    if (!isClient) {
+        return null;
+    }
+
+
     return (
         <div className="flex items-center justify-center bg-[#ffffff] w-full lg:w-[500px] m-auto rounded-[12px]" id="auth-tabs-v2-container_v2">
             {
-                userInfo && <Profile userInfo={userInfo} />
+                userInfo && !isLoading && <Profile userInfo={userInfo} />
             }
 
-            {!userInfo && <div className="w-full max-w-md rounded-2xl lg:p-8 p-4">
+            {!userInfo && !isLoading && <div className="w-full max-w-md rounded-2xl lg:p-8 p-4">
                 <div className="mb-6 flex justify-center rounded-xl bg-[#f9fafb] p-1">
                     <Button
                         onClick={() => setTab("login")}

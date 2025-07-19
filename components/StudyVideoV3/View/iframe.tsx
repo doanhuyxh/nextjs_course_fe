@@ -36,7 +36,7 @@ export default function IframeVideo({ iframe }: { iframe: string }) {
       <iframe
         id="bunny-player"
         className="w-full h-full"
-        src="https://iframe.mediadelivery.net/embed/344217/34b5b0ab-a88c-4416-a886-ad306c22b4ee?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+        src={`${iframe}?autoplay=true&loop=true&muted=true&preload=true&responsive=true`}
         loading="lazy"
         allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
         allowFullScreen
