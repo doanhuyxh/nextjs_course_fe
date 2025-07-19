@@ -136,7 +136,7 @@ export default function HeaderStudyVideoV3() {
         {
             key: "profile",
             icon: <UserOutlined />,
-            label: <Link href="/learn/profile">Hồ sơ của tôi</Link>,
+            label: <Link href="#">Hồ sơ của tôi</Link>,
         },
         {
             key: "settings",
