@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Check, FileText, HelpCircle, Users } from "lucide-react"
 import { Spin } from "antd"
 import Swal from "sweetalert2"
+import Image from "next/image"
 import axiosCustomerConfig from "@/libs/configs/ApiConfig/axiosCustomerConfig"
 import VideoM3U8 from "./View/videom3u8"
 import VideoMp4 from "./View/videomp4"
@@ -17,7 +18,6 @@ export default function VideoSectionV3({ lessonId }: { lessonId: string }) {
 
     const [lesson, setLesson] = useState<LessonItem | null>(null)
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [, setToggleCourse] = useSearchParamsClient<string>("tc", "");
     const [, setActiveLesson] = useSearchParamsClient<string>("atl", "");
     const fetchVideoUrl = useCallback(async () => {
         try {
@@ -33,7 +33,6 @@ export default function VideoSectionV3({ lessonId }: { lessonId: string }) {
                 return;
             }
             setLesson(response.data);
-            setToggleCourse(response.data.courseId || "");
             setIsLoading(false);
 
 
@@ -42,7 +41,7 @@ export default function VideoSectionV3({ lessonId }: { lessonId: string }) {
         } finally {
             setIsLoading(false);
         }
-    }, [lessonId, setActiveLesson, setToggleCourse]);
+    }, [lessonId, setActiveLesson]);
 
     useEffect(() => {
         if (lessonId) {
@@ -93,13 +92,15 @@ export default function VideoSectionV3({ lessonId }: { lessonId: string }) {
                     <FileText className="w-4 h-4" />
                     Ghi chú (0)
                 </Button>
-                <Button
-                    variant="outline"
-                    className="rounded-full px-4 py-2 text-sm font-medium flex items-center gap-2 text-[#4b5563] border-[#e2e8f0] hover:bg-[#f3f4f6] bg-transparent"
-                >
-                    <HelpCircle className="w-4 h-4" />
-                    Nhận giúp đỡ
-                </Button>
+                <a href="https://www.facebook.com/messages/t/541293975723906">
+                    <Button
+                        variant="outline"
+                        className="rounded-full px-4 py-2 text-sm font-medium flex items-center gap-2 text-[#4b5563] border-[#e2e8f0] hover:bg-[#f3f4f6] bg-transparent"
+                    >
+                        <HelpCircle className="w-4 h-4" />
+                        Nhận giúp đỡ
+                    </Button>
+                </a>
                 <Button
                     variant="outline"
                     className="rounded-full px-4 py-2 text-sm font-medium flex items-center gap-2 text-[#7E22CE] border-[#e2e8f0] bg-[#FAF5FF]"
@@ -107,6 +108,15 @@ export default function VideoSectionV3({ lessonId }: { lessonId: string }) {
                     <Users className="w-4 h-4" />
                     Cộng đồng
                 </Button>
+                <a href="https://flashbot.vn/">
+                    <Button
+                        variant="outline"
+                        className="rounded-full px-4 py-2 text-sm font-medium flex items-center gap-2 text-[#F59E0B] border-[#e2e8f0] bg-[#FFF2BD]"
+                    >
+                        <Image src="/images_v2/icon_bot.svg" alt="Amber Icon" width={16} height={16} className="w-4 h-4" />
+                        Tạo ChatBot ngay
+                    </Button>
+                </a>
             </div>
 
             <div className="bg-gray-100 mt-6 p-4 rounded-lg">

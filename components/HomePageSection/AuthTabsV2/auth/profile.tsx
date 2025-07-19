@@ -21,8 +21,8 @@ export default function Profile({ userInfo }: { userInfo: any }) {
                 </div>
 
                 <div className="rounded-lg bg-white p-6 shadow-md lg:w-[534px] m-auto">
-                    <div className="mb-4 flex items-center justify-between flex-col lg:flex-row">
-                        <div className="flex items-center gap-2">
+                    <div className="mb-4 flex items-center justify-between ">
+                        <div className="flex items-center justify-between gap-2">
                             <div className="flex lg:size-8 size-6 items-center justify-center rounded-full bg-[#6366f1]">
                                 <Video className="lg:size-4 size-3 text-white" />
                             </div>

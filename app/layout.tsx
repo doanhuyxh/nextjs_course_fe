@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Inder } from "next/font/google";
+import { Inter } from "next/font/google";
 import "@/styles/globals.css";
 
-const inder = Inder({
+const inter = Inter({
   weight: "400",
   subsets: ["latin"],
-  variable: "--font-inder",
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inder.variable} ${inder.variable} antialiased`}
+        className={`${inter.variable} ${inter.variable} antialiased`}
       >
         {children}
       </body>

@@ -55,7 +55,7 @@ export default function StudyPageV3() {
     if (!token) {
       localStorage.clear();
       sessionStorage.clear();
-      router.push('/');
+      router.push('/?redirect=study#auth-tabs-v2');
       return;
     }
     if (!lessonSlug) {

@@ -20,8 +20,7 @@ export default function Testimonials() {
                                 "Các video hướng dẫn thật sự quá dễ hiểu! Tôi bắt đầu từ con số 0 mà chỉ mất 25 phút để tạo xong chatbot hoạt động. Doanh số của tôi tăng 150% chỉ trong tháng đầu tiên!"
                             </p>
                             <div className="flex items-center gap-2.5">
-                                <div className="w-10 h-10 bg-[linear-gradient(90deg,#ec4899_0%,#a855f7_100%)] rounded-full flex items-center justify-center">
-                                    <span className="text-base font-bold text-white">A</span>
+                                <div className="w-10 h-10 bg-[url(/images_v2/user_anh_tran.png)] rounded-full flex items-center justify-center">
                                 </div>
                                 <div>
                                     <h4 className="text-base font-bold text-[#111827]">Ánh Trần</h4>
@@ -41,8 +40,7 @@ export default function Testimonials() {
                                 "Tôi hoàn toàn không rành công nghệ, nhưng các video hướng dẫn từng bước rất dễ hiểu. Giờ tôi có nhiều thời gian hơn cho gia đình, trong khi chatbot vẫn đang bán hàng giúp tôi!"
                             </p>
                             <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-[linear-gradient(90deg,#3b82f6_0%,#6366f1_100%)] rounded-full flex items-center justify-center">
-                                    <span className="text-base font-bold text-white">D</span>
+                                <div className="w-10 h-10 bg-[url(/images_v2/user_dang_dung.png)] rounded-full flex items-center justify-center">
                                 </div>
                                 <div>
                                     <h4 className="text-base font-bold text-[#111827]">Nguyễn Văn Dũng</h4>
@@ -62,8 +60,7 @@ export default function Testimonials() {
                                 "Các mẫu theo ngành giúp tôi tiết kiệm hàng giờ liền! Tôi dùng mẫu dành cho spa và tùy chỉnh theo video hướng dẫn. Kết quả hoàn hảo luôn!"
                             </p>
                             <div className="flex items-center gap-2.5">
-                                <div className="w-10 h-10 bg-[linear-gradient(90deg,#22c55e_0%,#10b981_100%)] rounded-full flex items-center justify-center">
-                                    <span className="text-base font-bold text-white">M</span>
+                                <div className="w-10 h-10 bg-[url(/images_v2/user_pham_hoa.png)] rounded-full flex items-center justify-center">
                                 </div>
                                 <div>
                                     <h4 className="text-base font-bold text-[#111827]">Phạm Hoa</h4>

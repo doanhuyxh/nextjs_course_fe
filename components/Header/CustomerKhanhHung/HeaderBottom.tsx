@@ -30,6 +30,8 @@ const HeaderBottom = () => {
         if (code === 200) {
           setUser(res.data);
           sessionStorage.setItem("user", JSON.stringify(res.data));
+        }else{
+          window.location.href = "/";
         }
       });
   }, [path, pathname]);

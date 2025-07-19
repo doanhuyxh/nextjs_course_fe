@@ -27,14 +27,21 @@ export default function CTA() {
                                 Bắt đầu học ngay
                             </Button>
                         </Link>
-                        <a href="https://flashbot.vn/" className="flex items-center gap-2 bg-[linear-gradient(90deg,#3b82f6_0%,#7c3aed_100%)] rounded-xl px-4 py-4">
-                            <img src="/images_v2/img_svg_white_a700_20x20.svg" alt="" className="w-5 h-5" />
-                            <span className="text-lg font-bold text-white">Đã xem xong? Đăng ký chatbot của bạn ngay!</span>
+                        <a href="https://flashbot.vn/" className="flex lg:items-center gap-2 bg-[linear-gradient(90deg,#3b82f6_0%,#7c3aed_100%)] rounded-xl px-4 py-4">
+                            <img src="/images_v2/img_svg_white_a700_20x20.svg" alt="" className="lg:w-5 lg:h-5 w-10 h-10" />
+                            <div className="flex gap-1 lg:flex-row flex-col">
+                                <span className="text-lg font-bold text-white text-left text-wrap text-[17px] leading-[28px]">
+                                    Đã xem xong? Đăng ký
+                                </span>
+                                <span className="text-lg font-bold text-white text-left text-wrap text-[17px] leading-[28px]">
+                                     chatbot của bạn ngay!
+                                </span>
+                            </div>
                         </a>
                     </div>
                     <div className="bg-[#ffffff19] rounded-xl p-5 shadow-[0px_4px_4px_#888888ff] max-w-2xl">
                         <div className="flex flex-col gap-4 justify-center items-center">
-                            <div className="flex lg:items-center items-start justify-center gap-2.5">
+                            <div className="flex items-center justify-center gap-2.5">
                                 <img src="/images_v2/img_svg_amber_a200.svg" alt="" className="w-6 h-6" />
                                 <h3 className="text-lg font-bold text-white">Phần thưởng: Lộ trình học tập hoàn chỉnh</h3>
                             </div>

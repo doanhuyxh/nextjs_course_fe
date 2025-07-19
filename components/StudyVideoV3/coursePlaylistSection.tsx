@@ -7,7 +7,6 @@ import {
     Lock,
     Play,
     Sparkles,
-    Check,
 } from "lucide-react"
 import {
     Collapsible,
@@ -20,14 +19,12 @@ import Link from "next/link"
 
 import useSearchParamsClient from "@/libs/hooks/useSearchParamsClient"
 import { useIsMobile } from "@/libs/hooks/use-mobile"
-import { Button } from "antd"
 
 export default function CoursePlaylist() {
     const [user, setUser] = useState<any>(null)
     const isMobile = useIsMobile()
     const [openSections, setOpenSections] = useState<Set<string>>(new Set())
     const [courseData, setCourseData] = useState<any[]>([])
-    const [toggleCourse] = useSearchParamsClient<string>("tc", "");
     const [activeLesson, setActiveLesson] = useSearchParamsClient<string>("atl", "")
 
     const getAllCourse = useCallback(async () => {
@@ -107,17 +104,14 @@ export default function CoursePlaylist() {
     }, [])
 
     useEffect(() => {
-        if (toggleCourse) {
-            setOpenSections(new Set([toggleCourse]))
-        }
-    }, [toggleCourse])
-
-
-    useEffect(() => {
         if (activeLesson) {
             setActiveLesson(activeLesson)
+            // mỏ hết tất cả các section
+            courseData.forEach((section) => {
+                toggleSection(section.id)
+            })
         }
-    }, [activeLesson, setActiveLesson])
+    }, [activeLesson, setActiveLesson, courseData])
 
 
     return (
@@ -178,7 +172,7 @@ export default function CoursePlaylist() {
                                     section.lesson.map((item: any) => {
                                         const locked = isLocked(item.memberType)
                                         return (
-                                            <Link href={`/study/${item.slug}`}
+                                            <Link href={`${activeLesson === item.id ? "#" : `/study/${item.slug}`}`}
                                                 key={item.id}
                                                 className={`flex items-center gap-3 rounded-lg p-3 shadow-sm border border-[#FDE68A] cursor-pointer`}
                                             >
@@ -251,10 +245,15 @@ export default function CoursePlaylist() {
             )}
 
             {isMobile && (
-                <button className="mt-4 h-[56px] w-full bg-gradient-to-r from-[#2563EB] to-[#9333EA] text-white rounded-lg px-4 py-2 text-sm font-medium flex items-center justify-center gap-2">
-                    Nâng cấp ngay
-                </button>
+                <div className="fixed bottom-4 left-4 right-4 z-50">
+                    <button
+                        className="h-[56px] w-full bg-gradient-to-r from-[#2563EB] to-[#9333EA] text-white rounded-lg px-4 py-2 text-sm font-medium flex items-center justify-center gap-2 shadow-lg hover:opacity-90 active:scale-95 transition-all duration-200"
+                    >
+                        Nâng cấp ngay
+                    </button>
+                </div>
             )}
+
         </div>
     )
 }

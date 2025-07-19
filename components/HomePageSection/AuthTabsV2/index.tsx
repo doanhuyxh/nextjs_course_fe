@@ -6,6 +6,7 @@ import axiosCustomerConfig from "@/libs/configs/ApiConfig/axiosCustomerConfig";
 import Login from "./auth/login";
 import Register from "./auth/register";
 import Profile from "./auth/profile";
+import useSearchParamsClient from "@/libs/hooks/useSearchParamsClient";
 
 
 export default function AuthTabsV2() {
@@ -13,6 +14,7 @@ export default function AuthTabsV2() {
     const [isClient, setIsClient] = useState(false);
     const [userInfo, setUserInfo] = useState<any>(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [useCheckLogin] = useSearchParamsClient<string>("redirect", "");
 
     const handleGetInfoUser = async () => {
         try {
@@ -20,7 +22,7 @@ export default function AuthTabsV2() {
             const response: any = await axiosCustomerConfig.get("/customer/get-info")
             if (response.code === 200) {
                 setUserInfo(response.data)
-                
+
                 const authTabsV2Container = document.getElementById('auth-tabs-v2-container_v2');
                 if (authTabsV2Container) {
                     // authTabsV2Container.style.width = "600px";
@@ -32,7 +34,7 @@ export default function AuthTabsV2() {
                     }
                     authTabsV2Container.classList.add("bg-transparent");
                 }
-                
+
             } else {
                 console.error("Failed to fetch user info:", response.message)
             }
@@ -73,7 +75,7 @@ export default function AuthTabsV2() {
             }
 
             {!userInfo && !isLoading && <div className="w-full max-w-md rounded-2xl lg:p-8 p-4">
-                <div className="mb-6 flex justify-center rounded-xl bg-[#f9fafb] p-1">
+                <div className="mb-6 flex justify-center rounded-xl bg-[#f9fafb] p-1" id="auth-tabs-v2-buttons">
                     <Button
                         onClick={() => setTab("login")}
                         variant="ghost"
@@ -90,6 +92,12 @@ export default function AuthTabsV2() {
                     </Button>
                 </div>
 
+                {useCheckLogin == "study" && tab === "login" &&
+                    <p className="mb-3 text-center font-normal text-[11px] text-red-500 leading-[12px] animate-bounce">
+                        Vui lòng đăng nhập để xem video
+                    </p>
+                }
+
                 <h1 className="mb-2 text-center text-[20px] font-bold text-[#111827] text-nowrap leading-[32px]">
                     {tab === "login" ? "Đăng nhập vào FlashBot" : "Tạo tài khoản mới"}
                 </h1>
@@ -105,9 +113,9 @@ export default function AuthTabsV2() {
 
                 <p className="mt-6 text-center text-sm text-[#6b7280]">
                     {tab === "login" ? "Bạn chưa có tài khoản?" : "Bạn đã có tài khoản?"}{" "}
-                    <a href="#" onClick={() => setTab(tab === "login" ? "register" : "login")} className="font-semibold text-[#10b981] hover:underline">
+                    <button onClick={() => setTab(tab === "login" ? "register" : "login")} className="font-semibold text-[#10b981] hover:underline">
                         {tab === "login" ? "Đăng ký ngay" : "Quay lại đăng nhập"}
-                    </a>
+                    </button>
                 </p>
             </div>}
         </div>
