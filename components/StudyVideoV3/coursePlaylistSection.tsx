@@ -207,9 +207,9 @@ export default function CoursePlaylist() {
                                                         {item.name || "Không có tiêu đề"}
                                                     </h3>
                                                     <div className="flex items-center justify-between text-sm text-[#6b7280]">
-                                                        <div className="flex items-center gap-2 flex-wrap">
+                                                        <div className="flex items-center gap-1 flex-wrap">
                                                             <span className="text-[10px]">{item.duration || "0:00"}</span>
-                                                            <span className="rounded-full px-2 py-0.5 text-[11px] font-medium bg-[#DCFCE7] text-[#16A34A]">
+                                                            <span className="rounded-full px-2 py-0.5 text-[10px] lg:text-[11px] font-normal bg-[#DCFCE7] text-[#16A34A]">
                                                                 Người mới bắt đầu
                                                             </span>
                                                         </div>
