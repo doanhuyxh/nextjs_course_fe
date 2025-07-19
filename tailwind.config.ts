@@ -24,8 +24,6 @@ export default {
         extend: {
           backgroundClip: ['hover', 'focus'],
           fontFamily: {
-            alegreya: ['Alegreya', 'serif'],
-            bebas: ['Bebas Neue', 'sans-serif'],
             inter: ['Inter', 'sans-serif'],
           },
         },
@@ -256,12 +254,6 @@ export default {
       aspectRatio: {
         "4/3": "4 / 3",
         "21/9": "21 / 9",
-      },
-      backgroundImage: {
-        video: "url('../images/video/video.png')",
-      },
-      content: {
-        "icon-copy": 'url("../images/icon/icon-copy-alt.svg")',
       },
       transitionProperty: { width: "width", stroke: "stroke" },
       borderWidth: {

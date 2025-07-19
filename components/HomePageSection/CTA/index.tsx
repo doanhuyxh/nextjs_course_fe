@@ -13,8 +13,8 @@ export default function CTA() {
                     <p className="text-lg text-[#dcfce7] max-w-2xl">
                         Xem ngay video đầu tiên và tạo FlashBot của bạn chỉ trong chưa đầy 10 phút.
                     </p>
-                    <div className="flex flex-col sm:flex-row gap-3.5 items-center">
-                        <Link href="/study">
+                    <div className="flex flex-col lg:flex-row gap-3.5 lg:items-center lg:justify-center items-stretch w-full">
+                        <Link href="/study" className='flex justify-center items-center gap-2 bg-white lg:bg-transparent rounded-xl px-4 py-4 w-full sm:w-auto'>
                             <Button
                                 size="lg"
                                 className="bg-white !text-[#16a34a] rounded-xl hover:!bg-[#f0fdf4] hover:!text-[#15803d] transition-colors duration-200"
@@ -27,15 +27,15 @@ export default function CTA() {
                                 Bắt đầu học ngay
                             </Button>
                         </Link>
-                        <a href="https://flashbot.vn/" className="flex lg:items-center gap-2 bg-[linear-gradient(90deg,#3b82f6_0%,#7c3aed_100%)] rounded-xl px-4 py-4">
+                        <a href="https://flashbot.vn/" className="flex justify-center items-center gap-2 bg-[linear-gradient(90deg,#3b82f6_0%,#7c3aed_100%)] rounded-xl px-4 py-4">
                             <img src="/images_v2/img_svg_white_a700_20x20.svg" alt="" className="lg:w-5 lg:h-5 w-10 h-10" />
                             <div className="flex gap-1 lg:flex-row flex-col">
-                                <span className="text-lg font-bold text-white text-left text-wrap text-[17px] leading-[28px]">
+                                <p className="text-lg font-bold text-white text-left text-wrap text-[17px] leading-[28px]">
                                     Đã xem xong? Đăng ký
-                                </span>
-                                <span className="text-lg font-bold text-white text-left text-wrap text-[17px] leading-[28px]">
+                                </p>
+                                <p className="text-lg font-bold text-white text-left text-wrap text-[17px] leading-[28px]">
                                      chatbot của bạn ngay!
-                                </span>
+                                </p>
                             </div>
                         </a>
                     </div>

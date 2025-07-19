@@ -2,7 +2,7 @@ import Button from '@/components/Button';
 
 export default function ProblemsAndSolutions() {
   return (
-    <section className="w-full bg-white pb-16 pt-12 sm:py-20 md:py-24">
+    <section className="w-full bg-white pb-16 pt-12 sm:py-20 md:py-24" id='problems-and-solutions'>
       <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-10 sm:gap-12 md:gap-16">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center">

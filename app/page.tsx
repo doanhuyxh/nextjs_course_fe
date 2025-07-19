@@ -8,6 +8,7 @@ import LearningCenter from '@/components/HomePageSection/LearningCenter';
 import IndustryTemplate from '@/components/HomePageSection/IndustryTemplate';
 import Testimonials from '@/components/HomePageSection/Testimonials';
 import CTA from '@/components/HomePageSection/CTA';
+import ButtonOverlay from '@/components/HomePageSection/common/ButtonOverLay';
 
 
 const Home: React.FC = () => {
@@ -29,6 +30,8 @@ const Home: React.FC = () => {
       <CTA />
       {/* Footer */}
       <Footer />
+
+      <ButtonOverlay />
     </div>
   );
 };

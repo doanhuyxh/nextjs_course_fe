@@ -66,6 +66,8 @@ export default function FormScript({open, onClose}: { open: boolean, onClose:()=
             .get("/email/get-list-condition")
             .then((response) => {
                 response.data.forEach((item) => {
+                    
+
                     item.conditionKey = JSON.parse(item.conditionKey);
                 });
                 setConditions(response.data);
@@ -77,6 +79,9 @@ export default function FormScript({open, onClose}: { open: boolean, onClose:()=
 
 
     useEffect(() => {
+        if (!open) {
+            return;
+        }
         form_data.resetFields();
         const initData = sessionStorage.getItem("data-script");
         const data = initData ? JSON.parse(initData) : null;
@@ -95,7 +100,7 @@ export default function FormScript({open, onClose}: { open: boolean, onClose:()=
             setData(data);
             sessionStorage.removeItem("data-script")
         }
-    }, [open]);
+    }, []);
 
 
     return (

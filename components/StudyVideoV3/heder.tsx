@@ -49,6 +49,7 @@ const DesktopMenu = ({ user, userName, items }: { user: Customer, userName: stri
 }
 
 
+
 const MobileDrawer = ({ user, openDrawer, setOpenDrawer, handleLogout }: {
     user: Customer,
     openDrawer: boolean,
@@ -59,7 +60,7 @@ const MobileDrawer = ({ user, openDrawer, setOpenDrawer, handleLogout }: {
         <>
             <Button
                 onClick={() => setOpenDrawer(true)}
-                className="!bg-transparent text-white rounded-full px-4 py-2 text-sm font-medium"
+                className="!bg-transparent text-white rounded-full px-4 py-2 text-sm"
             >
                 <Image src="/images_v2/icon_menu.svg" alt="menu" width={24} height={24} />
             </Button>
@@ -69,16 +70,16 @@ const MobileDrawer = ({ user, openDrawer, setOpenDrawer, handleLogout }: {
                 open={openDrawer}
                 width="80%"
             >
-                <div className="flex flex-col gap-4 mt-4">
-                    <Link href="#" className="flex items-center gap-3 text-[16px] text-[#1e293b]">
+                <div className="flex flex-col gap-2">
+                    <Link href="#" className="flex items-center gap-3 text-[16px] text-[#1e293b] text-base">
                         <Image src="/images_v2/ring_notify.svg" alt="noti" width={20} height={20} />
                         Notifications
                     </Link>
-                    <Link href="https://www.facebook.com/flashbot247" className="flex items-center gap-3 text-[16px] text-[#1e293b]">
+                    <Link href="https://www.facebook.com/flashbot247" className="flex items-center gap-3 text-[16px] text-[#1e293b] text-base">
                         <Image src="/images_v2/icon_facebook.svg" alt="facebook" width={20} height={20} />
                         Fanpage
                     </Link>
-                    <a href="https://www.facebook.com/messages/t/541293975723906" className="flex items-center gap-3 text-[16px] text-[#1e293b]">
+                    <a href="https://www.facebook.com/messages/t/541293975723906" className="flex items-center gap-3 text-[16px] text-[#1e293b] text-base">
                         <Image src="/images_v2/icon_suport.svg" alt="support" width={20} height={20} />
                         Support
                     </a>
@@ -86,27 +87,27 @@ const MobileDrawer = ({ user, openDrawer, setOpenDrawer, handleLogout }: {
                     {user.type !== "premium" && (
                         <Link
                             href="https://flashbot.vn/"
-                            className="mt-4 h-[50px] w-full bg-gradient-to-r from-[#2563EB] to-[#9333EA] text-white rounded-lg px-4 py-2 text-sm font-medium flex items-center justify-start gap-2"
+                            className="w-full bg-gradient-to-r from-[#2563EB] to-[#9333EA] text-white text-base rounded-lg px-2 py-2 text-sm font-medium flex items-center justify-start gap-2"
                         >
                             <Crown className="w-4 h-4" />
                             Nâng cấp
                         </Link>
                     )}
 
-                    <Link href="#" className="flex items-center gap-3 text-[16px] text-[#1e293b]">
+                    <Link href="#" className="flex items-center gap-3 text-[16px] text-[#1e293b] text-base">
                         <UserOutlined />
                         Hồ sơ của tôi
                     </Link>
-                    <Link href="#" className="flex items-center gap-3 text-[16px] text-[#1e293b]">
+                    <Link href="#" className="flex items-center gap-3 text-[16px] text-[#1e293b] text-base">
                         <SettingOutlined />
                         Cài đặt
                     </Link>
-                    <Link href="#" className="flex items-center gap-3 text-[16px] text-[#1e293b]">
+                    <Link href="#" className="flex items-center gap-3 text-[16px] text-[#1e293b] text-base">
                         <HistoryOutlined />
                         Lịch sử
                     </Link>
 
-                    <button onClick={handleLogout} className="flex items-center gap-3 text-[16px] text-red-500">
+                    <button onClick={handleLogout} className="flex items-center gap-3 text-[16px] text-red-500 text-base">
                         <LogoutOutlined />
                         Đăng xuất
                     </button>

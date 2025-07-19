@@ -19,7 +19,7 @@ export default function Mobile() {
                     <Button
                         variant="primary"
                         size="xl"
-                        className="bg-[linear-gradient(90deg,#22c55e_0%,#059669_100%)] rounded-xl shadow-[0px_8px_10px_#00000019] w-fit"
+                        className="bg-[linear-gradient(90deg,#22c55e_0%,#059669_100%)] rounded-xl shadow-[0px_8px_10px_#00000019] w-fit !p-[17.27px 13.76px 18.73px 32px]"
                         leftImage={{
                             src: "/images_v2/img_svg_white_a700_24x24.svg",
                             width: 24,
@@ -32,15 +32,15 @@ export default function Mobile() {
                 <div className="flex flex-wrap flex-col lg:flex-row lg:flex-nowrap items-center gap-4 sm:gap-6 md:gap-8">
                     <div className="flex items-center gap-2">
                         <img src="/images_v2/img_svg_green_400.svg" alt="" className="w-4 h-4" />
-                        <span className="text-xs sm:text-sm text-[#bfdbfe] lg:text-nowrap">Video hướng dẫn từng bước</span>
+                        <span className="text-[18px] text-[#bfdbfe] lg:text-nowrap">Video hướng dẫn từng bước</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <img src="/images_v2/img_svg_green_400.svg" alt="" className="w-4 h-4" />
-                        <span className="text-xs sm:text-sm text-[#bfdbfe] lg:text-nowrap">Không cần lập trình</span>
+                        <span className="text-[18px] text-[#bfdbfe] lg:text-nowrap">Không cần lập trình</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <img src="/images_v2/img_svg_green_400.svg" alt="" className="w-4 h-4" />
-                        <span className="text-xs sm:text-sm text-[#bfdbfe] lg:text-nowrap">Đã bao gồm mẫu theo từng ngành</span>
+                        <span className="text-[18px] text-[#bfdbfe] lg:text-nowrap">Đã bao gồm mẫu theo từng ngành</span>
                     </div>
                 </div>
             </div>
