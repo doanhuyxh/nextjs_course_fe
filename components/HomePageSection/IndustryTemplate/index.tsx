@@ -7,7 +7,7 @@ export default function IndustryTemplate() {
             <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col gap-12 sm:gap-16">
                     <div className="text-center">
-                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
+                        <h2 className="text-[28px] sm:text-3xl md:text-4xl font-bold">
                             <span className="text-[#111827]">💼 Mẫu theo ngành – </span>
                             <span className="text-[#7c3aed]">Tải xuống và áp dụng</span>
                         </h2>

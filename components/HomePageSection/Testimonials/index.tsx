@@ -4,7 +4,7 @@ export default function Testimonials() {
         <section className="w-full bg-[linear-gradient(176deg,#eff6ff_0%,#eef2ff_100%)] py-16 sm:py-20">
             <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col gap-10 sm:gap-12">
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center leading-tight">
+                    <h2 className="text-[28px] sm:text-3xl md:text-4xl font-bold text-center leading-tight">
                         <span className="text-[#111827]">Người dùng thật, kết quả thật - </span>
                         <span className="text-[#16a34a]">xem họ nói gì sau khi trải nghiệm</span>
                     </h2>

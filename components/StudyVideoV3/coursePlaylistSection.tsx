@@ -116,7 +116,7 @@ export default function CoursePlaylist() {
 
     return (
         <div className="w-full !lg:min-w-[410px] rounded-2xl bg-white py-2 px-1 shadow-lg">
-            <div className="px-5 mb-6 flex items-center gap-2">
+            <div className="px-5 mb-6 mt-2 flex items-center gap-2">
                 <Sparkles className="h-6 w-6 text-[#a855f7]" />
                 <h1 className="lg:text-2xl text-[19px] font-bold text-[#0f172a]">Course Playlist</h1>
             </div>

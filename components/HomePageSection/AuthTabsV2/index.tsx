@@ -108,7 +108,7 @@ export default function AuthTabsV2() {
                 </div>
 
                 {useCheckLogin == "study" && tab === "login" &&
-                    <p className="mb-3 text-center font-normal text-[11px] text-red-500 leading-[12px] animate-bounce">
+                    <p className="mb-3 text-center font-normal text-[14px] text-red-500 leading-[12px] animate-bounce">
                         Vui lòng đăng nhập để xem video
                     </p>
                 }

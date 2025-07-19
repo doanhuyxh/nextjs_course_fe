@@ -9,7 +9,7 @@ export default function Hero() {
   const isMobile = useIsMobile();
 
   return (
-    <section className="w-full bg-[linear-gradient(173deg,#3b82f6_0%,#4f46e5_50%,#6d28d9_100%)] py-16 sm:py-20 md:py-24 lg:py-32 tranform transition-all duration-500">
+    <section className="w-full bg-[linear-gradient(173deg,#3b82f6_0%,#4f46e5_50%,#6d28d9_100%)] py-16 sm:pb-20 pt-12 md:py-24 lg:py-32 tranform transition-all duration-500">
       <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-12">
           {/* Left Content */}
