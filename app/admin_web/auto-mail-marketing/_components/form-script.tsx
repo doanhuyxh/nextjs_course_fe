@@ -66,9 +66,12 @@ export default function FormScript({open, onClose}: { open: boolean, onClose:()=
             .get("/email/get-list-condition")
             .then((response) => {
                 response.data.forEach((item) => {
-                    
-
-                    item.conditionKey = JSON.parse(item.conditionKey);
+                    try {
+                        item.conditionKey = JSON.parse(item.conditionKey);
+                    }
+                    catch (e) {
+                        item.conditionKey = [];
+                    }
                 });
                 setConditions(response.data);
             })

@@ -44,15 +44,15 @@ const ConditionSelector = ({ data, onChange, intData }) => {
         }
     };
 
-    useEffect(() => {
-        onChange(selectedCondition);
-    }, [selectedCondition, condition, data, onChange]);
+    // useEffect(() => {
+    //     onChange(selectedCondition);
+    // }, [selectedCondition, condition, data, onChange]);
 
     useEffect(() => {
         if (intData) {
             setSelectedCondition({ ...intData });
         }
-    }, [intData]);
+    }, []);
 
 
     return (

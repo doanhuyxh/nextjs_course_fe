@@ -53,18 +53,21 @@ export default function Register() {
                 password: values.password,
                 firstName: values.fullName
             })
-
+            
             if (response.status === 201) {
                 Swal.fire({
                     icon: "success",
                     title: "Đăng ký thành công",
                     text: "Vui lòng đăng nhập để tiếp tục",
                 })
-                setFormData({
-                    email: "",
-                    password: "",
-                    fullName: ""
-                });
+
+            } else if (response.status === 409) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Email đã được sử dụng",
+                    text: "Vui lòng sử dụng email khác để đăng ký",
+                })
+
             } else {
                 Swal.fire({
                     icon: "error",
@@ -73,8 +76,17 @@ export default function Register() {
                 })
             }
 
-        } catch (error) {
-            console.error("Error registering:", error)
+        } catch (error:any) {
+
+            if (error.response && error.response.status === 409) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Email đã được sử dụng",
+                    text: "Vui lòng sử dụng email khác để đăng ký",
+                });
+                return;
+            }
+            
             Swal.fire({
                 icon: "error",
                 title: "Đăng ký thất bại",

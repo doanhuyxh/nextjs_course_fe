@@ -70,7 +70,12 @@ export default function FormSchedulingEmails({ visible, onClose }: { visible: bo
             .get("/email/get-list-condition")
             .then((response) => {
                 response.data.forEach((item) => {
-                    item.conditionKey = JSON.parse(item.conditionKey);
+                    try {
+                        item.conditionKey = JSON.parse(item.conditionKey);
+                    }
+                    catch (e) {
+                        item.conditionKey = [];
+                    }
                 });
                 setCondition(response.data);
             })
