@@ -50,7 +50,9 @@ export default function CourseLesson() {
         isOutstanding: false,
         courseId: courseId,
         totalView: 0,
-        type : 'video'
+        type : 'video',
+        order: 0,
+        progress: 0,
     })
 
     const HandleCreateOrUpdateLesson = (id: string) => {
@@ -70,6 +72,8 @@ export default function CourseLesson() {
                 courseId: courseId,
                 totalView: 0,
                 isImportant: false,
+                progress: 0,
+                order: courseLesson.length + 1,
             })
         } else {
             const lesson = courseLesson.find((item: LessonItem) => item.id == id)
@@ -89,6 +93,8 @@ export default function CourseLesson() {
                     isOutstanding: false,
                     courseId: courseId,
                     totalView: 0,
+                    progress: 0,
+                    order: courseLesson.length + 1,
                 })
             } else {
                 setLesson(lesson)

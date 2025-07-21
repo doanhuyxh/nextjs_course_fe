@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 import Hls from 'hls.js';
-import useSearchParamsClient from '@/libs/hooks/useSearchParamsClient';
+import useLocalStorage from '@/libs/hooks/useLocalStorage';
 
 export default function VideoM3U8({ url }: { url: string }) {
     const videoRef = useRef<HTMLVideoElement>(null);
@@ -12,7 +12,7 @@ export default function VideoM3U8({ url }: { url: string }) {
     const [selectedQuality, setSelectedQuality] = useState(-1); // -1 = auto
     const [playbackRate, setPlaybackRate] = useState(1);
     const reportedRef = useRef<Set<number>>(new Set());
-    const [useVideoProgress, setUseVideoProgress] = useSearchParamsClient<number>("vt", 0);
+    const [useVideoProgress, setUseVideoProgress] = useLocalStorage<number>("vt", 0);
 
     // Gửi tiến độ xem về server
     const reportProgress = useCallback(async (percent: number) => {

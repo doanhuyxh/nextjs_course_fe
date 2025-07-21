@@ -9,7 +9,7 @@ import { Table, Input, Button, Pagination, Avatar, Space, Popconfirm, Breadcrumb
 import { SearchOutlined } from "@ant-design/icons";
 import toast from "react-hot-toast";
 import moment from "moment";
-import Swal from "sweetalert2";
+import { handleRedirectAdmin } from "@/libs/hooks/useRedirect";
 const { Option } = Select;
 
 export default function CustomerPage() {
@@ -33,6 +33,7 @@ export default function CustomerPage() {
     const [listTemplate, setListTemplate] = useState<any[]>([]);
     const [selectedTemplate, setSelectedTemplate] = useState<string>('');
     const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([]);
+    const [isWaitingDelete, setIsWaitingDelete] = useState(false);
     const router = useRouter();
 
     const rowSelection = {
@@ -48,36 +49,35 @@ export default function CustomerPage() {
         router.push(`/admin_web/students/all/detail?id=${id}`);
     };
 
-    const handleDeleteCustomer = (id: string) => {
-        axiosInstance.get(`/customer/delete?id=${id}`)
-            .then(() => {
-                fetchCustomerData();
-                toast.success("Xoá học viên thành công", {
-                    duration: 4000,
-                    style: {
-                        backgroundColor: '#00cc00',
-                        color: '#fff',
-                    }
-                });
-            })
-            .catch(() => {
-                toast.error("Xoá học viên thất bại", {
-                    duration: 4000,
-                    style: {
-                        backgroundColor: '#ff4444',
-                        color: '#fff',
-                    }
-                });
+    const handleLoginBotChat = async  (id: string) => {
+        await handleRedirectAdmin(id, "train");
+    };
+
+    const handleDeleteCustomer = async (id: string) => {
+        setIsWaitingDelete(true);
+        try {
+            await axiosInstance.get(`/customer/delete?id=${id}`);
+            fetchCustomerData();
+            toast.success("Xoá học viên thành công", {
+                duration: 4000,
+                style: {
+                    backgroundColor: '#00cc00',
+                    color: '#fff',
+                }
             });
-        // Swal.fire({
-        //     icon: "warning",
-        //     title: "Tính năng đang được phát triển",
-        //     text:"chúng tôi dang phát triển tính năng này, vui lòng quay lại sau.",
-        //     showCancelButton: false,
-        //     confirmButtonText: "Oke",
-        //     cancelButtonText: "Hủy",
-        // })
-    }
+        } catch (error) {
+            toast.error("Xoá học viên thất bại", {
+                duration: 4000,
+                style: {
+                    backgroundColor: '#ff4444',
+                    color: '#fff',
+                }
+            });
+        } finally {
+            setIsWaitingDelete(false);
+        }
+    };
+
 
     const fetchCustomerData = useCallback(async () => {
         setLoading(true);
@@ -237,6 +237,11 @@ export default function CustomerPage() {
                     <Button type="primary" onClick={() => handleViewCustomer(record.id)}>
                         Xem
                     </Button>
+
+                    <Button type="link" className="!bg-green-300" onClick={() => handleLoginBotChat(record.id)}>
+                        <i className="fa-solid fa-robot"></i> Chat
+                    </Button>
+
                     <Popconfirm
                         title="Bạn có chắc chắn muốn xoá?"
                         description="Hành động này không thể hoàn tác."
@@ -247,7 +252,7 @@ export default function CustomerPage() {
                         }}
                         onCancel={() => console.log('Đã hủy thao tác.')}
                     >
-                        <Button type="default" className='bg-red-500 text-white'>Xoá</Button>
+                        <Button loading={isWaitingDelete} disabled={isWaitingDelete} type="default" className='bg-red-500 text-white'>Xoá</Button>
                     </Popconfirm>
                 </Space>
             ),

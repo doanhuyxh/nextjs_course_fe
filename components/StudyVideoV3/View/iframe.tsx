@@ -2,7 +2,11 @@
 
 import { useEffect } from 'react';
 
+import useLocalStorage from '@/libs/hooks/useLocalStorage';
+
 export default function IframeVideo({ iframe }: { iframe: string }) {
+  const [, setUseVideoProgress] = useLocalStorage<number>("vt", 0);
+
   useEffect(() => {
     // 1. Load player.js Bunny nếu chưa có
     const script = document.createElement('script');
@@ -15,14 +19,13 @@ export default function IframeVideo({ iframe }: { iframe: string }) {
 
       player.on('ready', () => {
         player.getDuration((duration: number) => {
-          console.log('⏱️ Video duration:', duration, 'giây');
         });
       });
 
       player.on('timeupdate', (data: any) => {
         const { seconds, duration } = data;
         const percent = (seconds / duration) * 100;
-        console.log('👁️ Watched:', Math.floor(percent), '%');
+        setUseVideoProgress(percent);
       });
     };
 

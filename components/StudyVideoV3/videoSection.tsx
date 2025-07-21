@@ -11,16 +11,21 @@ import VideoM3U8 from "./View/videom3u8"
 import VideoMp4 from "./View/videomp4"
 import PDFViewer from "./View/pdf"
 import { LessonItem } from "@/libs/types"
-import useSearchParamsClient from "@/libs/hooks/useSearchParamsClient"
 import IframeVideo from "./View/iframe"
+import useLocalStorage from "@/libs/hooks/useLocalStorage"
+import axiosInstance from "@/libs/configs/ApiConfig/axiosCustomerConfig"
+
 
 export default function VideoSectionV3({ lessonId }: { lessonId: string }) {
 
     const [lesson, setLesson] = useState<LessonItem | null>(null)
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [, setActiveLesson] = useSearchParamsClient<string>("atl", "");
+    const [, setActiveLesson] = useLocalStorage<string>("atl", "");
+    const [useVideoProgress] = useLocalStorage<number>("vt", 0);
     const fetchVideoUrl = useCallback(async () => {
         try {
+            if (!lessonId) return;
+            if (lesson != null) return;
             setActiveLesson(lessonId);
             const response: any = await axiosCustomerConfig.get(`/course/get-lesson-by-id?id=${lessonId}`);
             if (response.code !== 200) {
@@ -35,13 +40,12 @@ export default function VideoSectionV3({ lessonId }: { lessonId: string }) {
             setLesson(response.data);
             setIsLoading(false);
 
-
         } catch (error) {
             console.error("Error fetching video URL:", error);
         } finally {
             setIsLoading(false);
         }
-    }, [lessonId, setActiveLesson]);
+    }, [lessonId, setActiveLesson, lesson]);
 
     useEffect(() => {
         if (lessonId) {
@@ -50,6 +54,17 @@ export default function VideoSectionV3({ lessonId }: { lessonId: string }) {
         }
     }, [lessonId, fetchVideoUrl, lesson?.name]);
 
+
+    useEffect(() => {
+
+        if (!lesson) return;
+        if (!lessonId) return;
+        if (useVideoProgress <= 10) return;
+        if (lesson.progress > 95) return;
+
+        axiosInstance.get(`/course/update-lesson?progress=${useVideoProgress}&lessonOrder=${lesson?.order}&lesson_user_id=${lessonId}`)
+
+    }, [useVideoProgress, lesson?.order, lessonId, lesson]);
 
     return (
         <div className="bg-white rounded-lg shadow-md p-6 col-span-1 lg:col-span-2">

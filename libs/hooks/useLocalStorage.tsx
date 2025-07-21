@@ -1,4 +1,3 @@
-
 "use client";
 import { useEffect, useState } from "react";
 
@@ -6,14 +5,12 @@ type SetValue<T> = T | ((val: T) => T);
 
 function useLocalStorage<T>(
   key: string,
-  initialValue: T,
+  initialValue: T
 ): [T, (value: SetValue<T>) => void] {
-  const [storedValue, setStoredValue] = useState(() => {
+  const [storedValue, setStoredValue] = useState<T>(() => {
     try {
-      if (typeof window !== "undefined") {
-        const item = window.localStorage.getItem(key);
-        return item ? JSON.parse(item) : initialValue;
-      }
+      const item = window.localStorage.getItem(key);
+      return item ? JSON.parse(item) : initialValue;
     } catch (error) {
       console.log(error);
       return initialValue;
@@ -24,15 +21,27 @@ function useLocalStorage<T>(
     try {
       const valueToStore =
         typeof storedValue === "function"
-          ? storedValue(storedValue)
+          ? (storedValue as (val: T) => T)(storedValue)
           : storedValue;
-      if (typeof window !== "undefined") {
-        window.localStorage.setItem(key, JSON.stringify(valueToStore));
-      }
+      window.localStorage.setItem(key, JSON.stringify(valueToStore));
     } catch (error) {
       console.log(error);
     }
   }, [key, storedValue]);
+
+  useEffect(() => {
+    const handleStorage = (event: StorageEvent) => {
+      if (event.key === key) {
+        try {
+          setStoredValue(event.newValue ? JSON.parse(event.newValue) : initialValue);
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    };
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
+  }, [key, initialValue]);
 
   return [storedValue, setStoredValue];
 }

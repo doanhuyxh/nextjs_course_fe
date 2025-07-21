@@ -1,6 +1,5 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import React, { useState } from "react";
@@ -8,6 +7,7 @@ import axiosCustomerNestJsConfig from "@/libs/configs/ApiConfig/axiosBackEndNesj
 import axiosCustomerConfig from "@/libs/configs/ApiConfig/axiosCustomerConfig";
 import Image from "next/image";
 import Swal from "sweetalert2";
+import useSearchParamsClient from "@/libs/hooks/useSearchParamsClient";
 
 interface RegisterForm {
     email: string
@@ -21,6 +21,7 @@ export default function Register() {
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
     const [googleLoading, setGoogleLoading] = useState<boolean>(false);
+    const [utm_source] = useSearchParamsClient('utm_source', '')
     const [formData, setFormData] = useState<RegisterForm>({
         email: "",
         password: "",
@@ -46,28 +47,46 @@ export default function Register() {
 
     const handleRegister = async (values: RegisterForm) => {
         setLoading(true)
+        if (!values.email || !values.password || !values.fullName) {
+            Swal.fire({
+                icon: "warning",
+                title: "Thông tin không đầy đủ",
+                text: "Vui lòng điền đầy đủ thông tin đăng ký",
+            })
+            setLoading(false)
+            return;
+        }
+
+        const nameParts = values.fullName.trim().split(" ");
+        let firstName = "";
+        let lastName = "";
+        if (nameParts.length < 2) {
+            firstName = values.fullName.trim();
+        } else {
+            firstName = nameParts.slice(0, -1).join(" ").trim();
+            lastName = nameParts[nameParts.length - 1].trim();
+        }
 
         try {
             const response: any = await axiosCustomerNestJsConfig.post("/auth/register", {
                 email: values.email,
                 password: values.password,
-                firstName: values.fullName
+                firstName: firstName,
+                lastName: lastName,
+                utm_source: utm_source ? utm_source : ""
             })
-            
             if (response.status === 201) {
                 Swal.fire({
                     icon: "success",
                     title: "Đăng ký thành công",
                     text: "Vui lòng đăng nhập để tiếp tục",
                 })
-
             } else if (response.status === 409) {
                 Swal.fire({
                     icon: "warning",
                     title: "Email đã được sử dụng",
                     text: "Vui lòng sử dụng email khác để đăng ký",
                 })
-
             } else {
                 Swal.fire({
                     icon: "error",
@@ -76,7 +95,7 @@ export default function Register() {
                 })
             }
 
-        } catch (error:any) {
+        } catch (error: any) {
 
             if (error.response && error.response.status === 409) {
                 Swal.fire({
@@ -86,7 +105,7 @@ export default function Register() {
                 });
                 return;
             }
-            
+
             Swal.fire({
                 icon: "error",
                 title: "Đăng ký thất bại",

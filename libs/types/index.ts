@@ -38,8 +38,10 @@ export interface LessonItem {
     description: string;
     duration: string;
     totalView: number;
+    order: number;
     memberType: string;
     isImportant: boolean;
+    progress: number;
     isOutstanding: boolean
     courseId: string | null;
 }

@@ -72,6 +72,10 @@ export default function StudyPageV3() {
     setIsMounted(true);
   }, []);
 
+  if (loading) {
+    return <div className="flex items-center justify-center h-screen">Loading...</div>;
+  }
+
   return (
     <div className="min-h-screen bg-[#f9fafb] flex flex-col">
       {/* Top Navigation Bar */}

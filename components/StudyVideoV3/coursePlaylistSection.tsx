@@ -17,15 +17,16 @@ import { Progress } from "@/components/ui/progress"
 import axiosCustomerConfig from "@/libs/configs/ApiConfig/axiosCustomerConfig"
 import Link from "next/link"
 
-import useSearchParamsClient from "@/libs/hooks/useSearchParamsClient"
 import { useIsMobile } from "@/libs/hooks/use-mobile"
+import useLocalStorage from "@/libs/hooks/useLocalStorage"
 
 export default function CoursePlaylist() {
     const [user, setUser] = useState<any>(null)
+    const [isMounted, setIsMounted] = useState(false)
     const isMobile = useIsMobile()
     const [openSections, setOpenSections] = useState<Set<string>>(new Set())
     const [courseData, setCourseData] = useState<any[]>([])
-    const [activeLesson, setActiveLesson] = useSearchParamsClient<string>("atl", "")
+    const [activeLesson, setActiveLesson] = useLocalStorage<string>("atl", "")
 
     const getAllCourse = useCallback(async () => {
         try {
@@ -39,6 +40,8 @@ export default function CoursePlaylist() {
             setCourseData(response.data || [])
         } catch (error) {
             console.error("Error fetching course data:", error)
+        } finally {
+            setIsMounted(true)
         }
     }, [])
 
@@ -101,7 +104,7 @@ export default function CoursePlaylist() {
             setUser(JSON.parse(storedUser))
         }
         getAllCourse()
-    }, [])
+    }, [getAllCourse])
 
     useEffect(() => {
         if (activeLesson) {
@@ -113,6 +116,14 @@ export default function CoursePlaylist() {
         }
     }, [activeLesson, setActiveLesson, courseData])
 
+    if (!isMounted) {
+        return <div className="w-full !lg:min-w-[410px] rounded-2xl bg-white py-2 px-1 shadow-lg">
+            <div className="flex items-center justify-center h-full">
+                <Sparkles className="h-6 w-6 text-[#a855f7]" />
+                <span className="text-lg font-bold text-[#0f172a]">Loading...</span>
+            </div>
+        </div>
+    }
 
     return (
         <div className="w-full !lg:min-w-[410px] rounded-2xl bg-white py-2 px-1 shadow-lg">
@@ -174,6 +185,9 @@ export default function CoursePlaylist() {
                                         return (
                                             <Link href={`${activeLesson === item.id ? "#" : `/study/${item.slug}`}`}
                                                 key={item.id}
+                                                onClick={() => {
+                                                    setActiveLesson(item.id)
+                                                }}
                                                 className={`flex items-center gap-3 rounded-lg p-3 shadow-sm border border-[#FDE68A] cursor-pointer`}
                                             >
                                                 <div className="relative h-16 w-24 shrink-0 overflow-hidden rounded-md bg-[#94a3b8]">
