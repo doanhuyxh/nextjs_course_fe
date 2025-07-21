@@ -39,7 +39,7 @@ export default function ButtonOverlay() {
 
     return (
         <>
-            {visible && <div className="w-full fixed bottom-0 left-0 z-50 bg-white shadow-lg flex items-center justify-center p-4">
+            {visible && <div className="w-full fixed bottom-0 left-0 z-50 bg-transparent shadow-lg flex items-center justify-center p-4">
                 <Link href="/study" className="m-auto">
                     <Button
                         variant="primary"

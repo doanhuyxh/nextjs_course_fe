@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { AdminSideBar } from '@/components/Sidebar';
 import AdminHeader from '@/components/Header/AdminWeb';
 import Loading from '@/components/Loading';
-
+import { Toaster } from 'react-hot-toast';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   
@@ -52,6 +52,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </main>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 }
