@@ -49,18 +49,34 @@ export default function CustomerPage() {
     };
 
     const handleDeleteCustomer = (id: string) => {
-        // axiosInstance.get(`/customer/delete?id=${id}`)
-        //     .then(() => {
-        //         fetchCustomerData();
-        //     });
-        Swal.fire({
-            icon: "warning",
-            title: "Tính năng đang được phát triển",
-            text:"chúng tôi dang phát triển tính năng này, vui lòng quay lại sau.",
-            showCancelButton: false,
-            confirmButtonText: "Oke",
-            cancelButtonText: "Hủy",
-        })
+        axiosInstance.get(`/customer/delete?id=${id}`)
+            .then(() => {
+                fetchCustomerData();
+                toast.success("Xoá học viên thành công", {
+                    duration: 4000,
+                    style: {
+                        backgroundColor: '#00cc00',
+                        color: '#fff',
+                    }
+                });
+            })
+            .catch(() => {
+                toast.error("Xoá học viên thất bại", {
+                    duration: 4000,
+                    style: {
+                        backgroundColor: '#ff4444',
+                        color: '#fff',
+                    }
+                });
+            });
+        // Swal.fire({
+        //     icon: "warning",
+        //     title: "Tính năng đang được phát triển",
+        //     text:"chúng tôi dang phát triển tính năng này, vui lòng quay lại sau.",
+        //     showCancelButton: false,
+        //     confirmButtonText: "Oke",
+        //     cancelButtonText: "Hủy",
+        // })
     }
 
     const fetchCustomerData = useCallback(async () => {
