@@ -12,6 +12,8 @@ import { useSearchParams, usePathname } from "next/navigation"
 import { useIsMobile } from "@/libs/hooks/use-mobile"
 import { Dropdown, Drawer } from "antd";
 import type { MenuProps } from 'antd';
+import { handleRedirectCustomer } from "@/libs/hooks/useRedirect"
+
 
 const DesktopMenu = ({ user, userName, items }: { user: Customer, userName: string, items: MenuProps['items'] }) => {
     return (
@@ -28,13 +30,13 @@ const DesktopMenu = ({ user, userName, items }: { user: Customer, userName: stri
                 Support
             </Link>
             {user.type !== "premium" && (
-                <Link
-                    href="https://flashbot.vn/">
+                <a
+                    onClick={() => handleRedirectCustomer(user?.id, "plans")}>
                     <Button className="bg-[linear-gradient(90deg,_#2563EB_0%,_#9333EA_100%)] hover:bg-opacity-85 text-white rounded-full px-4 py-2 text-sm font-medium flex items-center gap-2">
                         <Crown className="w-4 h-4" />
                         Nâng cấp
                     </Button>
-                </Link>
+                </a>
             )}
             <Dropdown menu={{ items }} placement="bottomRight" trigger={['click']}>
                 <div className="flex items-center gap-2 cursor-pointer hover:text-[#111827]">
@@ -85,13 +87,13 @@ const MobileDrawer = ({ user, openDrawer, setOpenDrawer, handleLogout }: {
                     </a>
 
                     {user.type !== "premium" && (
-                        <Link
-                            href="https://flashbot.vn/"
-                            className="w-full bg-gradient-to-r from-[#2563EB] to-[#9333EA] text-white text-base rounded-lg px-2 py-2 text-sm font-medium flex items-center justify-start gap-2"
+                        <a
+                            onClick={() => handleRedirectCustomer(user?.id, "plans")}
+                            className="w-full bg-gradient-to-r from-[#2563EB] to-[#9333EA] text-white  rounded-lg px-2 py-2 text-sm font-medium flex items-center justify-start gap-2"
                         >
                             <Crown className="w-4 h-4" />
                             Nâng cấp
-                        </Link>
+                        </a>
                     )}
 
                     <Link href="#" className="flex items-center gap-3 text-[16px] text-[#1e293b] text-base">

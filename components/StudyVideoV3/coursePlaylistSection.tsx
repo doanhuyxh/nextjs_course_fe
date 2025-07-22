@@ -19,6 +19,7 @@ import Link from "next/link"
 
 import { useIsMobile } from "@/libs/hooks/use-mobile"
 import useLocalStorage from "@/libs/hooks/useLocalStorage"
+import {handleRedirectCustomer} from "@/libs/hooks/useRedirect"
 
 export default function CoursePlaylist() {
     const [user, setUser] = useState<any>(null)
@@ -260,7 +261,7 @@ export default function CoursePlaylist() {
 
             {isMobile && (
                 <div className="fixed bottom-4 left-4 right-4 z-50">
-                    <a href="https://flashbot.vn" target="_blank"
+                    <a onClick={() => handleRedirectCustomer(user?.id, "plans")}
                         className="h-[56px] w-full bg-gradient-to-r from-[#2563EB] to-[#9333EA] text-white rounded-lg px-4 py-2 text-sm font-medium flex items-center justify-center gap-2 shadow-lg hover:opacity-90 active:scale-95 transition-all duration-200"
                     >
                         Nâng cấp ngay

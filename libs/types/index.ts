@@ -251,6 +251,5 @@ export const MemberType =[
     { value: "free", label: "Miễn phí" },
     { value: "basic", label: "Cơ bản" },
     { value: "pro", label: "Pro" },
-    { value: "premium", label: "Premium" },
-    { value: "enterprise", label: "Doanh nghiệp" }
+    { value: "premium", label: "Premium" }
 ]

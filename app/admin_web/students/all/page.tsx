@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useState } from "react";
-import { Customer } from "@/libs/types";
+import { Customer, MemberType } from "@/libs/types";
 import axiosInstance from "@/libs/configs/ApiConfig/axiosAdminConfig";
 import { formatTime } from "@/libs/utils/index";
 import { useRouter } from "next/navigation";
@@ -267,13 +267,15 @@ export default function CustomerPage() {
                     All ({countUser?.all || 0})
                 </button>
 
-                <button className={`px-3 py-1 ${typeUser == "free" ? "bg-green-500" : "bg-gray-400"} rounded text-white`} onClick={() => setTypeUser("free")}>
-                    Pree ({countUser?.free || 0})
-                </button>
-                <button className={`px-3 py-1 ${typeUser == "pro" ? "bg-green-800" : "bg-gray-400"} rounded text-white`} onClick={() => setTypeUser("pro")}>
-                    Pro ({countUser?.pro || 0})
-                </button>
-
+                {MemberType.map((type) => (
+                    <button
+                        key={type.value || type.label}
+                        className={`px-3 py-1 rounded ${typeUser == type.value ? "bg-green-500" : "bg-gray-400"} text-white`}
+                        onClick={() => setTypeUser(type.value)}
+                    >
+                        {type.label} ({countUser?.[type.value] || 0})
+                    </button>
+                ))}
                 <button className={`px-3 py-1 rounded ${typeUser == "watched_5_videos" ? "bg-green-500" : "bg-gray-400"} text-white`} onClick={() => setTypeUser("watched_5_videos")}>
                     Học trên 5 video ({countUser?.learning_5_videos || 0})
                 </button>

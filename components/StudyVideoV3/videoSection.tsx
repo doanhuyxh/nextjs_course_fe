@@ -14,6 +14,7 @@ import { LessonItem } from "@/libs/types"
 import IframeVideo from "./View/iframe"
 import useLocalStorage from "@/libs/hooks/useLocalStorage"
 import axiosInstance from "@/libs/configs/ApiConfig/axiosCustomerConfig"
+import { handleRedirectCustomer } from "@/libs/hooks/useRedirect"
 
 
 export default function VideoSectionV3({ lessonId }: { lessonId: string }) {
@@ -46,6 +47,14 @@ export default function VideoSectionV3({ lessonId }: { lessonId: string }) {
             setIsLoading(false);
         }
     }, [lessonId, setActiveLesson, lesson]);
+
+    const handleRedirect = () => {
+        const user = JSON.parse(sessionStorage.getItem("user") || "{}");
+        if (!user || !user.id) {
+            return;
+        }
+        handleRedirectCustomer(user.id, "train");        
+    };
 
     useEffect(() => {
         if (lessonId) {
@@ -123,8 +132,9 @@ export default function VideoSectionV3({ lessonId }: { lessonId: string }) {
                     <Users className="w-4 h-4" />
                     Cộng đồng
                 </Button>
-                <a href="https://flashbot.vn/">
+                <a>
                     <Button
+                        onClick={() => handleRedirect()}
                         variant="outline"
                         className="rounded-full px-4 py-2 text-sm font-medium flex items-center gap-2 text-[#F59E0B] border-[#e2e8f0] bg-[#FFF2BD]"
                     >
