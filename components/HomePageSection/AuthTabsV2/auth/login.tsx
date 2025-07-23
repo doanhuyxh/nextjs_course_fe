@@ -45,6 +45,16 @@ export default function Login() {
   }
 
     const handleLogin = async (values: LoginForm) => {
+
+        if (!values.email || !values.password) {
+            Swal.fire({
+                icon: "warning",
+                title: "Thông tin không đầy đủ",
+                text: "Vui lòng nhập địa chỉ email và mật khẩu",
+            });
+            return;
+        }
+
         setLoading(true)
         try {
             const response: any = await axiosCustomerConfig.post("/Auth/Login", values)

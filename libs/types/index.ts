@@ -44,6 +44,7 @@ export interface LessonItem {
     progress: number;
     isOutstanding: boolean
     courseId: string | null;
+    lessonUserId: string | null;
 }
 
 export interface LessonDataItem {

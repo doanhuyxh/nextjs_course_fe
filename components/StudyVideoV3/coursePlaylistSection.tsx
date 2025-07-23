@@ -157,7 +157,7 @@ export default function CoursePlaylist() {
                                     <p className="text-sm text-[#6b7280] text-left">
                                         ({section.numberOfLessons || 0} videos)
                                     </p>
-                                    <h2 className="text-[#0f172a] font-[700] line-clamp-2 text-left">
+                                    <h2 className="text-[#0f172a] font-[700] line-clamp-2 text-left mr-2">
                                         {section.name}
                                     </h2>
                                     <div className="mt-1 flex items-center gap-2">

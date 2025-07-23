@@ -22,7 +22,8 @@ export default function VideoSectionV3({ lessonId }: { lessonId: string }) {
     const [lesson, setLesson] = useState<LessonItem | null>(null)
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [, setActiveLesson] = useLocalStorage<string>("atl", "");
-    const [useVideoProgress] = useLocalStorage<number>("vt", 0);
+    const [, setBufferedPercent] = useLocalStorage<number>("vt", 0);
+
     const fetchVideoUrl = useCallback(async () => {
         try {
             if (!lessonId) return;
@@ -38,6 +39,7 @@ export default function VideoSectionV3({ lessonId }: { lessonId: string }) {
                 });
                 return;
             }
+            setBufferedPercent(0);
             setLesson(response.data);
             setIsLoading(false);
 
@@ -46,14 +48,14 @@ export default function VideoSectionV3({ lessonId }: { lessonId: string }) {
         } finally {
             setIsLoading(false);
         }
-    }, [lessonId, setActiveLesson, lesson]);
+    }, [lessonId, setActiveLesson, lesson, setBufferedPercent]);
 
     const handleRedirect = () => {
         const user = JSON.parse(sessionStorage.getItem("user") || "{}");
         if (!user || !user.id) {
             return;
         }
-        handleRedirectCustomer(user.id, "train");        
+        handleRedirectCustomer(user.id, "train");
     };
 
     useEffect(() => {
@@ -65,15 +67,18 @@ export default function VideoSectionV3({ lessonId }: { lessonId: string }) {
 
 
     useEffect(() => {
+        const interval = setInterval(() => {            
+            if (!lesson || !lessonId) return;
+            const useVideoProgress = Number(localStorage.getItem(`vt`)) || 0;
+            if (useVideoProgress <= 10) return;
+            if (lesson.progress > 98) return;
+            if (useVideoProgress) {
+                axiosInstance.get(`/course/update-lesson?progress=${useVideoProgress}&lessonOrder=${lesson.order}&lesson_user_id=${lesson.lessonUserId}`);
+            }
+        }, 5000);
+        return () => clearInterval(interval);
 
-        if (!lesson) return;
-        if (!lessonId) return;
-        if (useVideoProgress <= 10) return;
-        if (lesson.progress > 95) return;
-
-        axiosInstance.get(`/course/update-lesson?progress=${useVideoProgress}&lessonOrder=${lesson?.order}&lesson_user_id=${lessonId}`)
-
-    }, [useVideoProgress, lesson?.order, lessonId, lesson]);
+    }, [lessonId, lesson]);
 
     return (
         <div className="bg-white rounded-lg shadow-md p-6 col-span-1 lg:col-span-2">
