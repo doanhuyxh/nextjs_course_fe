@@ -73,7 +73,7 @@ export default function VideoSectionV3({ lessonId }: { lessonId: string }) {
             if (useVideoProgress <= 10) return;
             if (lesson.progress > 98) return;
             if (useVideoProgress) {
-                axiosInstance.get(`/course/update-lesson?progress=${useVideoProgress}&lessonOrder=${lesson.order}&lesson_user_id=${lesson.lessonUserId}`);
+                axiosInstance.get(`/course/update-lesson?progress=${Math.round(useVideoProgress)}&lessonOrder=${lesson.order}&lesson_user_id=${lesson.lessonUserId}`);
             }
         }, 5000);
         return () => clearInterval(interval);
