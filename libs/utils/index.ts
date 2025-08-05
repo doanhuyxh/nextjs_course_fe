@@ -146,6 +146,14 @@ function formatNumber(number: number) {
   return new Intl.NumberFormat().format(number);
 }
 
+function converUtcToLocalTime(utcDate: string) {
+  const date = new Date(utcDate.endsWith('Z') ? utcDate : utcDate + 'Z'); // đảm bảo có hậu tố Z
+  return date.toLocaleString("vi-VN", {
+    timeZone: "Asia/Ho_Chi_Minh",
+    hour12: false,
+  });
+}
+
 export {
   unixToDatetime,
   dateToUnixTimestamp,
@@ -154,5 +162,6 @@ export {
   switch_display_label,
   switch_display_subLabel,
   formatTime,
-  formatNumber
+  formatNumber,
+  converUtcToLocalTime,
 };
