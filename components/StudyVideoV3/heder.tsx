@@ -25,7 +25,7 @@ const DesktopMenu = ({ user, userName, items }: { user: Customer, userName: stri
                 <Image src="/images_v2/icon_facebook.svg" alt="facebook" width={20} height={20} />
                 Fanpage
             </Link>
-            <Link href="https://www.facebook.com/messages/t/541293975723906" className="flex items-center gap-2 hover:text-[#111827]">
+            <Link href="https://www.facebook.com/flashbotaivn" className="flex items-center gap-2 hover:text-[#111827]">
                 <Image src="/images_v2/icon_suport.svg" alt="support" width={20} height={20} />
                 Support
             </Link>
@@ -49,8 +49,6 @@ const DesktopMenu = ({ user, userName, items }: { user: Customer, userName: stri
         </nav>
     )
 }
-
-
 
 const MobileDrawer = ({ user, openDrawer, setOpenDrawer, handleLogout }: {
     user: Customer,
@@ -81,7 +79,7 @@ const MobileDrawer = ({ user, openDrawer, setOpenDrawer, handleLogout }: {
                         <Image src="/images_v2/icon_facebook.svg" alt="facebook" width={20} height={20} />
                         Fanpage
                     </Link>
-                    <a href="https://www.facebook.com/messages/t/541293975723906" className="flex items-center gap-3 text-[16px] text-[#1e293b] text-base">
+                    <a href="https://www.facebook.com/flashbotaivn" className="flex items-center gap-3 text-[16px] text-[#1e293b] text-base">
                         <Image src="/images_v2/icon_suport.svg" alt="support" width={20} height={20} />
                         Support
                     </a>
