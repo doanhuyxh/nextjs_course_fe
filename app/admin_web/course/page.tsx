@@ -233,6 +233,7 @@ export default function Course() {
                         selectedRowKeys: checkbox,
                         onChange: (selectedRowKeys) => setCheckbox(selectedRowKeys as string[]),
                     }}
+                    scroll={{ x: "max-content" }}
                 />
             </Spin>
         </div>

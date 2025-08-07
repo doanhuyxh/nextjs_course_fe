@@ -262,7 +262,7 @@ export default function CustomerPage() {
     return (
         <div className="">
 
-            <div className="flex flex-wrap gap-2 mb-3 bg-white p-3 rounded-lg">
+            <div className="flex gap-2 mb-3 bg-white p-3 rounded-lg overflow-auto text-nowrap">
                 <button className={`px-3 py-1 ${typeUser == "all" ? "bg-green-500" : "bg-gray-400"} rounded text-white`} onClick={() => setTypeUser("all")}>
                     All ({countUser?.all || 0})
                 </button>
@@ -315,7 +315,8 @@ export default function CustomerPage() {
                     <button
                         className="px-2 py-0 bg-green-500 text-white rounded"
                         onClick={() => setShowModalAddUser(true)}>
-                        <i className="fa-solid fa-plus"></i> Thêm học viên
+                        <i className="fa-solid fa-plus"></i> 
+                        <span className="hidden lg:block">Thêm học viên</span>
                     </button>
                 </div>
             </div>
@@ -329,6 +330,7 @@ export default function CustomerPage() {
                 columns={columns}
                 pagination={false}
                 bordered
+                scroll={{ x: "max-content" }}
                 rowSelection={rowSelection}
             />
             <div className="flex justify-end">
