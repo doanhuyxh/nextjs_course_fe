@@ -174,28 +174,28 @@ export default function Course() {
 
     return (
         <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', justifyItems: "center", marginBottom: 20 }}>
-                <h1 className="font-bold">Danh sách khoá học</h1>
+            <div className='flex items-center justify-between gap-4 mb-4 flex-col lg:flex-row'>
+                <h1 className="font-bold text-nowrap">Danh sách khoá học</h1>
 
-                <div className="flex gap-2">
+                <div className="flex gap-2 overflow-auto w-full lg:w-fit">
                     <button
-                        className={`${status == 'published' ? 'bg-green-500' : 'bg-gray-500'} text-white px-3 py-0 rounded-md`}
+                        className={`${status == 'published' ? 'bg-green-500' : 'bg-gray-500'} text-white px-3 py-0 rounded-md text-nowrap`}
                         onClick={() => setStatus('published')}>Công khai ({countCourses?.published || 0})
                     </button>
                     <button
-                        className={`${status == 'hidden' ? 'bg-blue-500' : 'bg-gray-500'} text-white px-3 py-0 rounded-md`}
+                        className={`${status == 'hidden' ? 'bg-blue-500' : 'bg-gray-500'} text-white px-3 py-0 rounded-md text-nowrap`}
                         onClick={() => setStatus('hidden')}>Ẩn ({countCourses?.hidden || 0})
                     </button>
                     <button
-                        className={`${status == 'stop' ? 'bg-orange-500' : 'bg-gray-500'} text-white px-3 py-0 rounded-md`}
+                        className={`${status == 'stop' ? 'bg-orange-500' : 'bg-gray-500'} text-white px-3 py-0 rounded-md text-nowrap`}
                         onClick={() => setStatus('stop')}>Tạm dừng ({countCourses?.stop || 0})
                     </button>
                     <button
-                        className={`${status == 'draft' ? 'bg-yellow-500' : 'bg-gray-500'} text-white px-3 py-0 rounded-md`}
+                        className={`${status == 'draft' ? 'bg-yellow-500' : 'bg-gray-500'} text-white px-3 py-0 rounded-md text-nowrap`}
                         onClick={() => setStatus('draft')}>Nháp/Chờ duyệt ({countCourses?.draft || 0})
                     </button>
                     <button
-                        className={`${status == 'delete' ? 'bg-red-500' : 'bg-gray-500'} text-white px-3 py-0 rounded-md`}
+                        className={`${status == 'delete' ? 'bg-red-500' : 'bg-gray-500'} text-white px-3 py-0 rounded-md text-nowrap`}
                         onClick={() => setStatus('delete')}>Thùng rác ({countCourses?.delete || 0})
                     </button>
                     <Space>

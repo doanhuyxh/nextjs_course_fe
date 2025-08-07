@@ -49,7 +49,7 @@ export default function CustomerPage() {
         router.push(`/admin_web/students/all/detail?id=${id}`);
     };
 
-    const handleLoginBotChat = async  (id: string) => {
+    const handleLoginBotChat = async (id: string) => {
         await handleRedirectAdmin(id, "train");
     };
 
@@ -310,12 +310,13 @@ export default function CustomerPage() {
                     <button
                         onClick={() => setShowModalSendMail(true)}
                         className="px-2 py-0 bg-orange-500 text-white rounded">
-                        <i className="fa-solid fa-square-envelope"></i> <span>Gửi mail hàng loạt</span>
+                        <i className="fa-solid fa-square-envelope"></i>
+                        <span>Gửi mail hàng loạt</span>
                     </button>
                     <button
-                        className="px-2 py-0 bg-green-500 text-white rounded"
+                        className="px-2 py-0 bg-green-500 text-white rounded flex items-center gap-2"
                         onClick={() => setShowModalAddUser(true)}>
-                        <i className="fa-solid fa-plus"></i> 
+                        <i className="fa-solid fa-plus"></i>
                         <span className="hidden lg:block">Thêm học viên</span>
                     </button>
                 </div>
