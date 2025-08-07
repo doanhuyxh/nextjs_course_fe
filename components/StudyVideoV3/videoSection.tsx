@@ -30,10 +30,20 @@ export default function VideoSectionV3({ lessonId }: { lessonId: string }) {
             if (lesson != null) return;
             setActiveLesson(lessonId);
             const response: any = await axiosCustomerConfig.get(`/course/get-lesson-by-id?id=${lessonId}`);
+            console.log("Response:", response);
+            if (response.code == 404) {
+                Swal.fire({
+                    icon: "error",
+                    text: "Bài học không tồn tại hoặc đã bị xóa",
+                    showConfirmButton: false,
+                    timer: 2000,
+                });
+                return;
+            }
             if (response.code !== 200) {
                 Swal.fire({
                     icon: "error",
-                    text: "Bạn vui nâng cấp tài khoản để xem video này",
+                    text: "Cần nâng cấp quyền truy cập để xem bài học này",
                     showConfirmButton: false,
                     timer: 2000,
                 });

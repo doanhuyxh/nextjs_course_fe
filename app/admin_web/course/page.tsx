@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState, useCallback } from 'react';
-import { Button, Input, Table, Dropdown, Space, message, Spin, Menu, Popconfirm } from 'antd';
+import { Button, Input, Table, Dropdown, Space, message, Spin, Badge, Popconfirm } from 'antd';
 import type { MenuProps } from 'antd';
 import { useRouter } from 'next/navigation';
 import axiosInstance from '@/libs/configs/ApiConfig/axiosAdminConfig';
@@ -17,6 +17,7 @@ export default function Course() {
     const [checkbox, setCheckbox] = useState<string[]>([]);
     const [totalResult, setTotalResult] = useState(0);
     const [courses, setCourses] = useState([]);
+    const [countCourses, setCountCourses] = useState(null as any);
     const [totalPage, setTotalPage] = useState(0);
 
     const fetchData = useCallback(async () => {
@@ -35,9 +36,21 @@ export default function Course() {
         }
     }, [page, status, searchKeyword]);
 
+    const fetchCountCourses = useCallback(async () => {
+        try {
+            const res: ResponseData = await axiosInstance.get(`/course/GetCountCourse`);
+            if (res.code === 200) {
+                setCountCourses(res.data);
+            }
+        } catch (error) {
+            message.error('Failed to fetch course counts.');
+        }
+    }, [])
+
     useEffect(() => {
         fetchData();
-    }, [fetchData]);
+        fetchCountCourses();
+    }, [fetchData, fetchCountCourses]);
 
     const handleAddOrUpdateCourse = (id: string) => router.push(`/admin_web/course/form?id=${id}`);
     const handleDetailCourse = (id: string) => router.push(`/admin_web/course/lesson?id=${id}`);
@@ -155,6 +168,10 @@ export default function Course() {
         },
     ];
 
+    useEffect(() => {
+        console.log('Count Courses:', countCourses);
+    },[countCourses])
+
     return (
         <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', justifyItems: "center", marginBottom: 20 }}>
@@ -163,23 +180,23 @@ export default function Course() {
                 <div className="flex gap-2">
                     <button
                         className={`${status == 'published' ? 'bg-green-500' : 'bg-gray-500'} text-white px-3 py-0 rounded-md`}
-                        onClick={() => setStatus('published')}>Công khai
+                        onClick={() => setStatus('published')}>Công khai ({countCourses?.published || 0})
                     </button>
                     <button
                         className={`${status == 'hidden' ? 'bg-blue-500' : 'bg-gray-500'} text-white px-3 py-0 rounded-md`}
-                        onClick={() => setStatus('hidden')}>Ẩn
+                        onClick={() => setStatus('hidden')}>Ẩn ({countCourses?.hidden || 0})
                     </button>
                     <button
                         className={`${status == 'stop' ? 'bg-orange-500' : 'bg-gray-500'} text-white px-3 py-0 rounded-md`}
-                        onClick={() => setStatus('stop')}>Tạm dừng
+                        onClick={() => setStatus('stop')}>Tạm dừng ({countCourses?.stop || 0})
                     </button>
                     <button
                         className={`${status == 'draft' ? 'bg-yellow-500' : 'bg-gray-500'} text-white px-3 py-0 rounded-md`}
-                        onClick={() => setStatus('draft')}>Nháp/Chờ duyệt
+                        onClick={() => setStatus('draft')}>Nháp/Chờ duyệt ({countCourses?.draft || 0})
                     </button>
                     <button
                         className={`${status == 'delete' ? 'bg-red-500' : 'bg-gray-500'} text-white px-3 py-0 rounded-md`}
-                        onClick={() => setStatus('delete')}>Thùng rác
+                        onClick={() => setStatus('delete')}>Thùng rác ({countCourses?.delete || 0})
                     </button>
                     <Space>
                         <Input
@@ -190,7 +207,7 @@ export default function Course() {
                             style={{ width: 280 }}
                         />
 
-                        <Dropdown overlay={<Menu items={menuItems} />} placement="bottomLeft" arrow>
+                        <Dropdown menu={{ items: menuItems }} placement="bottomLeft" arrow>
                             <Button style={{ height: 40 }}>Thao tác</Button>
                         </Dropdown>
 
