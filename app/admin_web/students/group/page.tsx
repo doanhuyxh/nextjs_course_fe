@@ -240,9 +240,9 @@ const GroupStudent = () => {
     const handleOpenModalSendMailToGroup = async (values) => {
         let time = "";
         if (values.dateTime) {
-            time = moment(values.dateTime.$d).format("YYYY-MM-DD HH:mm:ss");
+            time = moment(values.dateTime.$d).utc().format("YYYY-MM-DD HH:mm:ss");
         }else{
-            time = moment().format("YYYY-MM-DD HH:mm:ss");
+            time = moment().utc().format("YYYY-MM-DD HH:mm:ss");
         }
 
 
@@ -251,8 +251,6 @@ const GroupStudent = () => {
             dateTime: time,
             emailId: values.emailType
         }
-
-        console.log(jsonData)
 
 
         try {
