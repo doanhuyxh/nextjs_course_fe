@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 export default function StudyPageV3() {
   const router = useRouter();
   const { lessonSlug } = useParams() as { lessonSlug: string };
-  const [isMounted, setIsMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);  
   const [loading, setLoading] = useState(true);
   const [lesson, setLesson] = useState<LessonItem | null>(null);
   
