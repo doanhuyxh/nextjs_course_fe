@@ -10,7 +10,6 @@ import { SearchOutlined } from "@ant-design/icons";
 import toast from "react-hot-toast";
 import moment from "moment";
 import { handleRedirectAdmin } from "@/libs/hooks/useRedirect";
-import { set } from "lodash";
 const { Option } = Select;
 
 export default function CustomerPage() {
@@ -41,8 +40,6 @@ export default function CustomerPage() {
         selectedRowKeys,
         onChange: (keys, rows) => {
             setSelectedRowKeys(keys);
-            console.log("Selected Row Keys: ", keys);
-            console.log("Selected Rows: ", rows);
         },
     };
 
@@ -239,6 +236,17 @@ export default function CustomerPage() {
             render: (lastLoginAt: string) => {
                 if (lastLoginAt) {
                     return convertUtcToLocalTime(lastLoginAt)
+                } else {
+                    return "";
+                }
+            },
+        },
+        {
+            title: "Lần cuối vào trang nâng cấp",
+            dataIndex: "lastVisitSubscriptionPageAt",
+            render: (lastVisitSubscriptionPageAt: string) => {
+                if (lastVisitSubscriptionPageAt) {
+                    return convertUtcToLocalTime(lastVisitSubscriptionPageAt)
                 } else {
                     return "";
                 }
