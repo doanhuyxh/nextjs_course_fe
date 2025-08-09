@@ -12,6 +12,7 @@ import VideoMp4 from "./View/videomp4"
 import PDFViewer from "./View/pdf"
 import { LessonItem } from "@/libs/types"
 import IframeVideo from "./View/iframe"
+import VideoYoutube from "./View/youtube"
 import useLocalStorage from "@/libs/hooks/useLocalStorage"
 import axiosInstance from "@/libs/configs/ApiConfig/axiosCustomerConfig"
 import { handleRedirectCustomer } from "@/libs/hooks/useRedirect"
@@ -108,6 +109,9 @@ export default function VideoSectionV3({ lessonId }: { lessonId: string }) {
                 )}
                 {lesson?.type === "pdf" && lesson?.video && (
                     <PDFViewer url={lesson.video} name={lesson.name} />
+                )}
+                {lesson?.type === "video_youtube" && lesson?.video && (
+                    <VideoYoutube url={lesson.video} />
                 )}
 
             </div>

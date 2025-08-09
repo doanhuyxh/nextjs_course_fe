@@ -84,9 +84,8 @@ export default function FormLesson({ lesson, setLesson, saveLesson }: { lesson: 
                 />
             </div>
 
-            <div className="flex flex-row justify-evenly gap-5 items-center">
-
-                <div className="flex flex-col items-center flex-wrap gap-3">
+            <div className="flex flex-row justify-evenly gap-2 items-center">
+                <div className="flex flex-col gap-3">
                     <label className="font-semibold">Loại bài học</label>
                     <div className="flex flex-row flex-wrap gap-3">
                         <label className="cursor-pointer">YouTube <input type="radio" value={"video_youtube"} checked={lessonTemp.type === "video_youtube"} onChange={(e) => hanleTypeVideoChange(e.target.value)} /></label>
@@ -108,7 +107,7 @@ export default function FormLesson({ lesson, setLesson, saveLesson }: { lesson: 
                     />
                 </div>
 
-                <div className="flex flex-row justify-between gap-4 items-center">
+                <div className="flex flex-row justify-between gap-5 items-center">
                     <div className="flex flex-col gap-2 items-center cursor-pointer">
                         <label className="font-semibold text-nowrap">Loại thành viên </label>
                         <select className="border border-gray-300 rounded-md p-2" value={lessonTemp.memberType} onChange={(e) => setLessonTemp({ ...lessonTemp, memberType: e.target.value })}>
