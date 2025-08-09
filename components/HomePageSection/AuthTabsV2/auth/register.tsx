@@ -1,7 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
-import Button from "@/components/Button";
+import  {Button}  from "@/components/ui/button";
 import React, { useState } from "react";
 import axiosCustomerNestJsConfig from "@/libs/configs/ApiConfig/axiosBackEndNesjs";
 import axiosCustomerConfig from "@/libs/configs/ApiConfig/axiosCustomerConfig";
@@ -169,7 +169,7 @@ export default function Register() {
                     <Button
                         type="button"
                         variant="ghost"
-                        size="sm"
+                        size="icon"
                         className="absolute right-2 top-1/2 h-8 w-8 -translate-y-1/2 text-[#9ca3af] hover:bg-transparent"
                         onClick={() => setShowPassword(!showPassword)}
                     >
