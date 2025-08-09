@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Customer, MemberType } from "@/libs/types";
 import axiosInstance from "@/libs/configs/ApiConfig/axiosAdminConfig";
-import { converUtcToLocalTime } from "@/libs/utils/index";
+import { convertUtcToLocalTime } from "@/libs/utils/index";
 import { useRouter } from "next/navigation";
 import { Table, Input, Button, Pagination, Avatar, Space, Popconfirm, Breadcrumb, DatePicker, Modal, Select } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
@@ -227,7 +227,18 @@ export default function CustomerPage() {
         {
             title: "Ngày tham gia",
             dataIndex: "createdAt",
-            render: (createdAt: string) => converUtcToLocalTime(createdAt),
+            render: (createdAt: string) => convertUtcToLocalTime(createdAt),
+        },
+        {
+            title: "Lần đăng nhập cuối",
+            dataIndex: "lastLoginAt",
+            render: (lastLoginAt: string) => {
+                if (lastLoginAt){
+                    return convertUtcToLocalTime(lastLoginAt)
+                }else{
+                    return "";
+                }
+            },
         },
         {
             title: "Hành động",

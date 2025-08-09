@@ -145,7 +145,7 @@ export interface Page {
     slug: string;
     content: string;
     type: string;
-    createdAt: number;
+    createdAt: string;
 }
 
 

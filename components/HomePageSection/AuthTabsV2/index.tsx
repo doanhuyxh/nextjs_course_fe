@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
+import Button  from "@/components/Button";
 import axiosCustomerConfig from "@/libs/configs/ApiConfig/axiosCustomerConfig";
 import Login from "./auth/login";
 import Register from "./auth/register";

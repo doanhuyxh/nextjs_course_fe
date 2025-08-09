@@ -8,7 +8,7 @@ import { Copy, LogOut, Zap } from "lucide-react"
 import { Drawer } from "antd"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
+import  {Button}  from "@/components/ui/Button";
 import { Separator } from "@/components/ui/separator"
 import { Skeleton } from "@/components/ui/skeleton"
 import {

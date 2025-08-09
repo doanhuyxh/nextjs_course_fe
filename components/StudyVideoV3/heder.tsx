@@ -3,7 +3,7 @@
 import React from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
+import  {Button}  from "@/components/ui/Button";
 import { Crown } from "lucide-react"
 import { UserOutlined, SettingOutlined, HistoryOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Customer } from "@/libs/types"

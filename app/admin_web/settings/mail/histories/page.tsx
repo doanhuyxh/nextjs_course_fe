@@ -4,7 +4,7 @@ import {Table, Tag, Select, DatePicker, Popconfirm, Button} from 'antd';
 import React, {useEffect, useState} from 'react';
 import axiosInstance from "@/libs/configs/ApiConfig/axiosAdminConfig";
 import {ResponseData, Customer, TemplateMail} from "@/libs/types";
-import {formatTime, converUtcToLocalTime} from "@/libs/utils/index";
+import {formatTime, convertUtcToLocalTime} from "@/libs/utils/index";
 import dayjs from "dayjs";
 
 
@@ -37,20 +37,20 @@ export default function Histories() {
             title: 'Thời gian tạo',
             dataIndex: 'createdAt',
             key: 'createdAt',
-            render: (text) => formatTime(converUtcToLocalTime(text)), // Thêm `return` cho giá trị
+            render: (text) => formatTime(convertUtcToLocalTime(text)), // Thêm `return` cho giá trị
         },
         {
             title: 'Khung giờ gửi',
             dataIndex: 'sendAt',
             key: 'sendAt',
-            render: (text) => (text ? formatTime(converUtcToLocalTime(text)) : ''),
+            render: (text) => (text ? formatTime(convertUtcToLocalTime(text)) : ''),
         },
         {
             title: 'Thời gian xem',
             dataIndex: 'readAt',
             key: 'readAt',
             render: (_, record) => {
-                return record.isRead ? formatTime(converUtcToLocalTime(record.readAt)) : 'Chưa xem';
+                return record.isRead ? formatTime(convertUtcToLocalTime(record.readAt)) : 'Chưa xem';
             },
         },
         {

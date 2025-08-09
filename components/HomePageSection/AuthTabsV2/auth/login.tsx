@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -27,22 +27,22 @@ export default function Login() {
     });
 
 
-  const handleLoginGoogle = async () => {
-    setGoogleLoading(true)
-    try {
-      const res = await axiosCustomerConfig.get("/Auth/google-login")
-      window.location.href = res.data
-    } catch (error) {
-        console.error("Error during Google login:", error)
-        Swal.fire({
-            icon: "error",
-            title: "Đăng nhập thất bại",
-            text: "Vui lòng thử lại sau",
-        })
-    } finally {
-      setGoogleLoading(false)
+    const handleLoginGoogle = async () => {
+        setGoogleLoading(true)
+        try {
+            const res = await axiosCustomerConfig.get("/Auth/google-login")
+            window.location.href = res.data
+        } catch (error) {
+            console.error("Error during Google login:", error)
+            Swal.fire({
+                icon: "error",
+                title: "Đăng nhập thất bại",
+                text: "Vui lòng thử lại sau",
+            })
+        } finally {
+            setGoogleLoading(false)
+        }
     }
-  }
 
     const handleLogin = async (values: LoginForm) => {
 

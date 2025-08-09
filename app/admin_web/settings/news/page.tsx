@@ -5,7 +5,7 @@ import axiosInstance from '@/libs/configs/ApiConfig/axiosAdminConfig';
 import toast from 'react-hot-toast';
 import {Page} from '@/libs/types';
 import EditorReactQuill from '@/components/Editor/ReactQuill';
-import {unixToDatetime} from '@/libs/utils/index';
+import {convertUtcToLocalTime} from '@/libs/utils/index';
 import {generateSlug} from '@/libs/utils/index';
 
 export default function News() {
@@ -18,7 +18,7 @@ export default function News() {
         slug: '',
         content: '',
         type: 'news',
-        createdAt: 0
+        createdAt: ''
     });
 
 
@@ -74,7 +74,7 @@ export default function News() {
             slug: '',
             content: '',
             type: 'news',
-            createdAt: 0
+            createdAt: ''
         });
         setIsModalOpen(true);
     }
@@ -118,7 +118,7 @@ export default function News() {
             </div>
 
             <div className="overflow-x-auto">
-                <table className="min-w-full bg-white rounded-lg shadow-md">
+                <table className="min-w-full bg-white rounded-lg shadow-md table-auto">
                     <thead className="bg-gray-100 text-gray-700">
                     <tr>
                         <th className="px-4 py-2 text-left">STT</th>
@@ -135,7 +135,7 @@ export default function News() {
                             <td className="px-4 py-2 border-b">{item.title}</td>
                             <td className="px-4 py-2 border-b">{item.slug}</td>
                             <td className="px-4 py-2 border-b">
-                                {unixToDatetime(item.createdAt)}
+                                {convertUtcToLocalTime(item.createdAt)}
                             </td>
                             <td className="px-4 py-2 border-b">
                                 <button
