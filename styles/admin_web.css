@@ -38,3 +38,7 @@ body {
     color: aliceblue !important;
     font-weight: 600;
 }
+
+.ant-table-container {
+  overflow-x: auto !important;
+}

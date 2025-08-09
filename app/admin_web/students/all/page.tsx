@@ -204,16 +204,6 @@ export default function CustomerPage() {
             render: (_: any, __: any, index: number) => (page - 1) * pageSize + index + 1,
         },
         {
-            title: "Avatar",
-            dataIndex: "avatar",
-            render: (avatar: string) =>
-                avatar ? (
-                    <Avatar src={avatar} size={64} />
-                ) : (
-                    <Avatar size={64} icon={<SearchOutlined />} />
-                ),
-        },
-        {
             title: "Tên khách hàng",
             dataIndex: "name",
             render: (_: any, record: Customer) => `${record.firstName} ${record.lastName}`,
@@ -355,6 +345,7 @@ export default function CustomerPage() {
                 }))}
                 columns={columns}
                 pagination={false}
+                size="middle"
                 bordered
                 scroll={{ x: "max-content" }}
                 rowSelection={rowSelection}
