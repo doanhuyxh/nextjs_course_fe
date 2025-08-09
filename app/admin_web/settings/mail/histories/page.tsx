@@ -1,141 +1,158 @@
 'use client';
 
-import { Table, Tag, Select, DatePicker, Popconfirm, Button } from 'antd';
-import React, { useEffect, useState } from 'react';
+import { Table, Tag, Select, DatePicker, Popconfirm, Button, Input, Space } from 'antd';
+import React, { useEffect, useState, useCallback } from 'react';
 import axiosInstance from "@/libs/configs/ApiConfig/axiosAdminConfig";
 import { ResponseData, Customer, TemplateMail } from "@/libs/types";
 import { formatTime, convertUtcToLocalTime } from "@/libs/utils/index";
 import dayjs from "dayjs";
-
+import { SearchOutlined } from '@ant-design/icons';
+import { ColumnsType } from 'antd/es/table';
+import debounce from 'lodash/debounce';
+import { useStyle } from '@/libs/antd-style-cache'
 
 const { Option } = Select;
 
 export default function Histories() {
+    const { styles } = useStyle();
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState<any[]>([]);
     const [templates, setTemplates] = useState<TemplateMail[]>([]);
     const [users, setUsers] = useState<Customer[]>([]);
-    const [pageSize, setPageSize] = useState(5);
+    const [pageSize, setPageSize] = useState(10);
     const [page, setCurrentPage] = useState(1);
     const [totalItems, setTotalItems] = useState(0);
-
+    const [status, setStatus] = useState("");
+    const [searchText, setSearchText] = useState("");
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
 
-
-    const columns = [
+    const columns: ColumnsType<any> = [
         {
             title: 'Người nhận',
-            dataIndex: 'userId',
-            key: 'userId',
-            render: (userId) => {
-                const user = users.find((item) => item.id === userId);
-                return user ? `${user.firstName} ${user.lastName}` : 'Không có';
-            },
+            dataIndex: 'fullName',
+            key: 'fullName',
+            render: (fullName) => fullName || 'Không có',
+            width: 200,
+        },
+        {
+            title: 'Email nhận',
+            dataIndex: 'userEmail',
+            key: 'userEmail',
+            render: (userEmail) => userEmail || 'Không có',
+            width: 230,
         },
         {
             title: 'Thời gian tạo',
             dataIndex: 'createdAt',
             key: 'createdAt',
-            render: (text) => formatTime(convertUtcToLocalTime(text)), // Thêm `return` cho giá trị
+            render: (text) => formatTime(convertUtcToLocalTime(text)),
+            width: 200,
         },
         {
             title: 'Khung giờ gửi',
             dataIndex: 'sendAt',
             key: 'sendAt',
-            render: (text) => (text ? formatTime(convertUtcToLocalTime(text)) : ''),
+            render: (text) => (text ? formatTime(convertUtcToLocalTime(text)) : 'Chưa gửi'),
+            width: 200,
         },
         {
             title: 'Thời gian xem',
             dataIndex: 'readAt',
             key: 'readAt',
-            render: (_, record) => {
-                return record.isRead ? formatTime(convertUtcToLocalTime(record.readAt)) : 'Chưa xem';
-            },
+            render: (_, record) => record.isRead ? formatTime(convertUtcToLocalTime(record.readAt)) : 'Chưa xem',
+            width: 200,
         },
         {
             title: 'Mẫu mail',
-            dataIndex: 'templateMailId',
-            key: 'templateMailId',
-            render: (templateMailId) => {
-                const template = templates.find((item) => item.id === templateMailId);
-                return template ? template.name : 'Không có';
-            },
+            dataIndex: 'templateMailName',
+            key: 'templateMailName',
+            width: 300,
+            ellipsis: true,
         },
         {
             title: 'Trạng thái',
             dataIndex: 'status',
             key: 'status',
             render: (status) => {
-                let color;
-                switch (status) {
-                    case 'pending':
-                        color = 'orange';
-                        break;
-                    case 'success':
-                        color = 'green';
-                        break;
-                    default:
-                        color = 'red';
-                }
-                return <Tag color={color}>{status}</Tag>;
+                const statusConfig = {
+                    pending: { color: 'orange', label: 'Đang chờ' },
+                    success: { color: 'green', label: 'Thành công' },
+                    failed: { color: 'red', label: 'Thất bại' },
+                };
+                const config = statusConfig[status] || { color: 'red', label: status || 'Không xác định' };
+                return <Tag color={config.color}>{config.label}</Tag>;
             },
+            width: 100,
         },
         {
-            title: '',
+            title: 'Hành động',
             dataIndex: 'action',
             key: 'action',
-            render: (_, record) => {
-                return (<Popconfirm
-                    title="Bạn có chắc chắn muốn hủy?"
+            render: (_, record) => (
+                <Popconfirm
+                    title="Xác nhận xóa lịch sử"
                     description="Hành động này không thể hoàn tác."
-                    okText="Đồng ý"
-                    cancelText="Hủy bỏ"
-                    onConfirm={() => {
-                        handleDeleteHistory(record.id);
-                    }}
-                    onCancel={() => console.log('Đã hủy thao tác.')}
+                    okText="Xóa"
+                    cancelText="Hủy"
+                    onConfirm={() => handleDeleteHistory(record.id)}
                 >
-                    <Button type="default" className='bg-red-500 text-white'>Xoá</Button>
-                </Popconfirm>)
-            },
-        }
+                    <Button danger size="small">Xóa</Button>
+                </Popconfirm>
+            ),
+            width: 120,
+        },
     ];
+
+    // Debounced search function
+    const debouncedSearch = useCallback(
+        debounce((value) => {
+            setSearchText(value);
+            setCurrentPage(1);
+        }, 500),
+        []
+    );
+
+    const handleSearch = (e) => {
+        debouncedSearch(e.target.value);
+    };
 
     const handlePageSizeChange = (value) => {
         setPageSize(value);
+        setCurrentPage(1);
+    };
+
+    const handleStatusChange = (value) => {
+        setStatus(value);
+        setCurrentPage(1);
     };
 
     const handleStartDateChange = (date, dateString) => {
-        if (date) {
-            setStartDate(dayjs(dateString).format("YYYY-MM-DD HH:mm"));
-        } else {
-            setStartDate('');
-        }
+        setStartDate(date ? dayjs(dateString).format("YYYY-MM-DD HH:mm") : '');
+        setCurrentPage(1);
     };
-
 
     const handleEndDateChange = (date, dateString) => {
-        if (date) {
-            setEndDate(dayjs(dateString).format("YYYY-MM-DD HH:mm"));
-        } else {
-            setEndDate("");
-        }
+        setEndDate(date ? dayjs(dateString).format("YYYY-MM-DD HH:mm") : '');
+        setCurrentPage(1);
     };
 
-    const getHistorySendEmail = React.useCallback(async () => {
+    const getHistorySendEmail = useCallback(async () => {
         try {
             setLoading(true);
-            const res: ResponseData = await axiosInstance.get(`/email/get-history-send-email?page=${page}&pageSize=${pageSize}&startTime=${startDate}&endTime=${endDate}`);
+            const res: ResponseData = await axiosInstance.get(
+                `/email/get-history-send-email?page=${page}&pageSize=${pageSize}&startTime=${startDate}&endTime=${endDate}&status=${status}&search=${searchText}`
+            );
             if (res.code === 200 && Array.isArray(res.data.data)) {
                 setData(res.data.data.map((item, index) => ({ ...item, key: index })));
                 setTotalItems(res.data.total);
             }
-            setLoading(false);
         } catch (error) {
             console.error("Lỗi khi lấy lịch sử gửi email:", error);
+        } finally {
+            setLoading(false);
         }
-    }, [pageSize, startDate, endDate, page]);
+    }, [page, pageSize, startDate, endDate, status, searchText]);
 
     const getTemplate = async () => {
         try {
@@ -159,7 +176,6 @@ export default function Histories() {
         }
     };
 
-
     const handleDeleteHistory = async (id: string) => {
         try {
             const res: ResponseData = await axiosInstance.get(`/email/delete-history-send-email?id=${id}`);
@@ -169,8 +185,7 @@ export default function Histories() {
         } catch (error) {
             console.error("Lỗi khi xóa lịch sử gửi email:", error);
         }
-    }
-
+    };
 
     useEffect(() => {
         document.title = "Lịch sử gửi mail";
@@ -180,51 +195,86 @@ export default function Histories() {
 
     useEffect(() => {
         getHistorySendEmail();
-    }, [pageSize, startDate, endDate, page, getHistorySendEmail]);
-
+    }, [getHistorySendEmail]);
 
     return (
-        <div className="w-full p-4 rounded mx-4 my-6 bg-white">
-            <h1 className="font-bold my-5">Lịch sử gửi mail</h1>
-            <div style={{ marginBottom: 16 }}>
-                <span style={{ marginRight: 8 }}>Số dòng trên mỗi trang:</span>
-                <Select
-                    value={pageSize}
-                    onChange={handlePageSizeChange}
-                    style={{ width: 100 }}
-                >
-                    <Option value={5}>5</Option>
-                    <Option value={10}>10</Option>
-                    <Option value={25}>25</Option>
-                    <Option value={50}>50</Option>
-                    <Option value={100}>100</Option>
-                </Select>
+        <div className="w-full p-3 bg-white rounded-lg shadow-lg mx-2 my-2">
+            <h1 className="text-2xl font-bold mb-6 text-gray-800">Lịch sử gửi mail</h1>
 
-                <span style={{ marginLeft: 16, marginRight: 8 }}>Từ ngày:</span>
-                <DatePicker
-                    format="YYYY-MM-DD HH:mm"
-                    showTime={{
-                        defaultValue: dayjs("00:00", "HH:mm"),
-                    }}
-                    onChange={handleStartDateChange}
-                    style={{ width: 250 }}
-                />
+            <div className="mb-6 flex flex-wrap gap-4">
+                <Space wrap>
+                    <div className="flex items-center gap-2">
+                        <span className="text-gray-600 text-nowrap">Tìm kiếm:</span>
+                        <Input
+                            placeholder="Tìm theo tên hoặc email"
+                            prefix={<SearchOutlined />}
+                            onChange={handleSearch}
+                            className="w-58"
+                        />
+                    </div>
 
-                <span style={{ marginLeft: 16, marginRight: 8 }}>Đến ngày:</span>
-                <DatePicker
-                    format="YYYY-MM-DD HH:mm"
-                    showTime={{
-                        defaultValue: dayjs("00:00", "HH:mm"),
-                    }}
-                    onChange={handleEndDateChange}
-                    style={{ width: 250 }}
-                />
+                    <div className="flex items-center gap-2">
+                        <span className="text-gray-600">Trạng thái:</span>
+                        <Select
+                            value={status}
+                            onChange={handleStatusChange}
+                            className="w-32"
+                            allowClear
+                            placeholder="Chọn trạng thái"
+                        >
+                            <Option value="">Tất cả</Option>
+                            <Option value="pending">Đang chờ</Option>
+                            <Option value="success">Thành công</Option>
+                            <Option value="error">Thất bại</Option>
+                        </Select>
+                    </div>
 
+                    <div className="flex items-center gap-2">
+                        <span className="text-gray-600">Số dòng:</span>
+                        <Select
+                            value={pageSize}
+                            onChange={handlePageSizeChange}
+                            className="w-24"
+                        >
+                            <Option value={5}>5</Option>
+                            <Option value={10}>10</Option>
+                            <Option value={25}>25</Option>
+                            <Option value={50}>50</Option>
+                            <Option value={100}>100</Option>
+                        </Select>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                        <span className="text-gray-600">Từ ngày:</span>
+                        <DatePicker
+                            format="DD-MM-YYYY"
+                            onChange={handleStartDateChange}
+                            className="w-48"
+                        />
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                        <span className="text-gray-600">Đến ngày:</span>
+                        <DatePicker
+                            format="DD-MM-YYYY"
+                            onChange={handleEndDateChange}
+                            className="w-48"
+                            value={endDate ? dayjs(endDate) : null}
+                            disabledDate={(current) =>
+                                !!startDate && current.isBefore(dayjs(startDate), 'day')
+                            }
+                        />
+                    </div>
+                </Space>
             </div>
+
             <Table
                 loading={loading}
                 dataSource={data}
                 columns={columns}
+                size="middle"
+                className={styles.customTable}
+                bordered
                 pagination={{
                     current: page,
                     pageSize: pageSize,
@@ -232,15 +282,15 @@ export default function Histories() {
                     onChange: (page, size) => {
                         setCurrentPage(page);
                         setPageSize(size);
-                        console.log("Page:", page, "Page Size:", size);
                     },
-                    showSizeChanger: true, // Hiển thị dropdown thay đổi số mục trên mỗi trang
-                    pageSizeOptions: ["10", "20", "50"], // Các tùy chọn số mục trên mỗi trang
-                    showQuickJumper: true, // Cho phép nhập số trang để nhảy trực tiếp
+                    showSizeChanger: false,
+                    showQuickJumper: true,
                     showTotal: (total, range) =>
-                        `Hiển thị ${range[0]}-${range[1]} trong tổng ${total} mục`, // Tùy chỉnh hiển thị tổng số mục
+                        `Hiển thị ${range[0]}-${range[1]} trong ${total} mục`,
                 }}
+                scroll={{ x: '100%', y: 'max-content' }}
             />
+
         </div>
     );
 }

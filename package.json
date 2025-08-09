@@ -41,6 +41,7 @@
     "@tiptap/starter-kit": "^2.10.3",
     "@types/lodash": "^4.17.13",
     "antd": "^5.26.4",
+    "antd-style": "^3.7.1",
     "aos": "^3.0.0-beta.6",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.9",

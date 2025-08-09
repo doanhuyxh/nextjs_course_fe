@@ -18,7 +18,6 @@ export default function VideoYoutube({ url }: { url: string }) {
         src={`https://www.youtube.com/embed/${videoId}`}
         className="w-full h-full"
         title={`YouTube video ${videoId}`}
-        frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       ></iframe>
