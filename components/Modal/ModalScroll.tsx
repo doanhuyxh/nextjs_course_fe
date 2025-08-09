@@ -19,7 +19,7 @@ export default function ModalScroll({ isOpen, onClose, children, title }: ModalS
                 <div
                     className="relative bg-white rounded-lg shadow-xl w-full overflow-hidden"
                     style={{
-                        width: "52%", // 2/3 màn hình
+                        width: "80%", // 2/3 màn hình
                         maxHeight: "90vh",
                         marginTop: "1vh",
                     }}

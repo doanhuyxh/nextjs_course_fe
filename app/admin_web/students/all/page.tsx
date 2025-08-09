@@ -10,6 +10,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import toast from "react-hot-toast";
 import moment from "moment";
 import { handleRedirectAdmin } from "@/libs/hooks/useRedirect";
+import { set } from "lodash";
 const { Option } = Select;
 
 export default function CustomerPage() {
@@ -81,12 +82,17 @@ export default function CustomerPage() {
 
     const fetchCustomerData = useCallback(async () => {
         setLoading(true);
-        const response = await axiosInstance(
-            `/customer/get-all-customer?page=${page}&pageSize=${pageSize}&search_keyword=${searchKeyword}&type_user=${typeUser}&search_date=${searchDate}`
-        );
-        setLoading(false);
-        setCustomerData(response.data.data);
-        setTotalResult(response.data.totalResult);
+        try {
+            const response = await axiosInstance(
+                `/customer/get-all-customer?page=${page}&pageSize=${pageSize}&search_keyword=${searchKeyword}&type_user=${typeUser}&search_date=${searchDate}`);
+            setCustomerData(response.data.data);
+            setTotalResult(response.data.totalResult);
+        } catch {
+            setCustomerData([]);
+            setTotalResult(0);
+        } finally {
+            setLoading(false);
+        }
     }, [page, searchKeyword, pageSize, typeUser, searchDate]);
 
 
@@ -225,6 +231,14 @@ export default function CustomerPage() {
             dataIndex: "utmSource",
         },
         {
+            title: "Số lượng BOT",
+            dataIndex: "totalBot",
+        },
+        {
+            title: "Số lượng Page",
+            dataIndex: "totalPage",
+        },
+        {
             title: "Ngày tham gia",
             dataIndex: "createdAt",
             render: (createdAt: string) => convertUtcToLocalTime(createdAt),
@@ -233,9 +247,9 @@ export default function CustomerPage() {
             title: "Lần đăng nhập cuối",
             dataIndex: "lastLoginAt",
             render: (lastLoginAt: string) => {
-                if (lastLoginAt){
+                if (lastLoginAt) {
                     return convertUtcToLocalTime(lastLoginAt)
-                }else{
+                } else {
                     return "";
                 }
             },
@@ -335,7 +349,7 @@ export default function CustomerPage() {
 
             <Table
                 loading={loading}
-                dataSource={customerData.map((customer) => ({
+                dataSource={customerData && customerData.map((customer) => ({
                     ...customer,
                     key: customer.id,
                 }))}

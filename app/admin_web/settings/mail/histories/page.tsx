@@ -1,14 +1,14 @@
 'use client';
 
-import {Table, Tag, Select, DatePicker, Popconfirm, Button} from 'antd';
-import React, {useEffect, useState} from 'react';
+import { Table, Tag, Select, DatePicker, Popconfirm, Button } from 'antd';
+import React, { useEffect, useState } from 'react';
 import axiosInstance from "@/libs/configs/ApiConfig/axiosAdminConfig";
-import {ResponseData, Customer, TemplateMail} from "@/libs/types";
-import {formatTime, convertUtcToLocalTime} from "@/libs/utils/index";
+import { ResponseData, Customer, TemplateMail } from "@/libs/types";
+import { formatTime, convertUtcToLocalTime } from "@/libs/utils/index";
 import dayjs from "dayjs";
 
 
-const {Option} = Select;
+const { Option } = Select;
 
 export default function Histories() {
     const [loading, setLoading] = useState(true);
@@ -87,17 +87,17 @@ export default function Histories() {
             key: 'action',
             render: (_, record) => {
                 return (<Popconfirm
-                title="Bạn có chắc chắn muốn hủy?"
-                description="Hành động này không thể hoàn tác."
-                okText="Đồng ý"
-                cancelText="Hủy bỏ"
-                onConfirm={() => {
-                    handleDeleteHistory(record.id);
-                }}
-                onCancel={() => console.log('Đã hủy thao tác.')}
-              >
-                <Button type="default" className='bg-red-500 text-white'>Xoá</Button>
-              </Popconfirm>)
+                    title="Bạn có chắc chắn muốn hủy?"
+                    description="Hành động này không thể hoàn tác."
+                    okText="Đồng ý"
+                    cancelText="Hủy bỏ"
+                    onConfirm={() => {
+                        handleDeleteHistory(record.id);
+                    }}
+                    onCancel={() => console.log('Đã hủy thao tác.')}
+                >
+                    <Button type="default" className='bg-red-500 text-white'>Xoá</Button>
+                </Popconfirm>)
             },
         }
     ];
@@ -128,7 +128,7 @@ export default function Histories() {
             setLoading(true);
             const res: ResponseData = await axiosInstance.get(`/email/get-history-send-email?page=${page}&pageSize=${pageSize}&startTime=${startDate}&endTime=${endDate}`);
             if (res.code === 200 && Array.isArray(res.data.data)) {
-                setData(res.data.data.map((item, index) => ({...item, key: index})));
+                setData(res.data.data.map((item, index) => ({ ...item, key: index })));
                 setTotalItems(res.data.total);
             }
             setLoading(false);
@@ -186,12 +186,12 @@ export default function Histories() {
     return (
         <div className="w-full p-4 rounded mx-4 my-6 bg-white">
             <h1 className="font-bold my-5">Lịch sử gửi mail</h1>
-            <div style={{marginBottom: 16}}>
-                <span style={{marginRight: 8}}>Số dòng trên mỗi trang:</span>
+            <div style={{ marginBottom: 16 }}>
+                <span style={{ marginRight: 8 }}>Số dòng trên mỗi trang:</span>
                 <Select
                     value={pageSize}
                     onChange={handlePageSizeChange}
-                    style={{width: 100}}
+                    style={{ width: 100 }}
                 >
                     <Option value={5}>5</Option>
                     <Option value={10}>10</Option>
@@ -200,24 +200,24 @@ export default function Histories() {
                     <Option value={100}>100</Option>
                 </Select>
 
-                <span style={{marginLeft: 16, marginRight: 8}}>Từ ngày:</span>
+                <span style={{ marginLeft: 16, marginRight: 8 }}>Từ ngày:</span>
                 <DatePicker
                     format="YYYY-MM-DD HH:mm"
                     showTime={{
                         defaultValue: dayjs("00:00", "HH:mm"),
                     }}
                     onChange={handleStartDateChange}
-                    style={{width: 250}}
+                    style={{ width: 250 }}
                 />
 
-                <span style={{marginLeft: 16, marginRight: 8}}>Đến ngày:</span>
+                <span style={{ marginLeft: 16, marginRight: 8 }}>Đến ngày:</span>
                 <DatePicker
                     format="YYYY-MM-DD HH:mm"
                     showTime={{
                         defaultValue: dayjs("00:00", "HH:mm"),
                     }}
                     onChange={handleEndDateChange}
-                    style={{width: 250}}
+                    style={{ width: 250 }}
                 />
 
             </div>
@@ -228,18 +228,18 @@ export default function Histories() {
                 pagination={{
                     current: page,
                     pageSize: pageSize,
-                    total: totalItems, 
+                    total: totalItems,
                     onChange: (page, size) => {
-                      setCurrentPage(page);
-                      setPageSize(size); 
-                      console.log("Page:", page, "Page Size:", size);
+                        setCurrentPage(page);
+                        setPageSize(size);
+                        console.log("Page:", page, "Page Size:", size);
                     },
                     showSizeChanger: true, // Hiển thị dropdown thay đổi số mục trên mỗi trang
                     pageSizeOptions: ["10", "20", "50"], // Các tùy chọn số mục trên mỗi trang
                     showQuickJumper: true, // Cho phép nhập số trang để nhảy trực tiếp
                     showTotal: (total, range) =>
-                      `Hiển thị ${range[0]}-${range[1]} trong tổng ${total} mục`, // Tùy chỉnh hiển thị tổng số mục
-                  }}
+                        `Hiển thị ${range[0]}-${range[1]} trong tổng ${total} mục`, // Tùy chỉnh hiển thị tổng số mục
+                }}
             />
         </div>
     );

@@ -3,7 +3,7 @@ import VideoMp4UploadFull from "@/components/FileHandle/VideoMp4";
 import EditorReactQuill from "../../Editor/ReactQuill";
 import { LessonItem, MemberType } from "@/libs/types";
 import { generateSlug } from "@/libs/utils/index";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FileUploadImage from "../../FileHandle/FileUploadImage";
 import VideoM3U8 from "@/components/FileHandle/VideoM3U8";
 import VideoYoutubeUpload from "@/components/FileHandle/VideoYoutube";
@@ -43,6 +43,11 @@ export default function FormLesson({ lesson, setLesson, saveLesson }: { lesson: 
     const handleSlugChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setLessonTemp({ ...lessonTemp, slug: e.target.value });
     };
+
+
+    useEffect(() => {
+        console.log("lessonTemp", lessonTemp)
+    }, [lessonTemp])
 
     return (
         <div className="flex flex-col gap-4">
@@ -145,7 +150,10 @@ export default function FormLesson({ lesson, setLesson, saveLesson }: { lesson: 
 
 
             {lessonTemp.type === "video_youtube" && (<div>
-                <VideoYoutubeUpload initialLink={lessonTemp.video} onChange={(value) => setLessonTemp({ ...lessonTemp, video: value })} setDuration={(value) => setLessonTemp({ ...lessonTemp, duration: value })} />
+                <VideoYoutubeUpload initialLink={lessonTemp.video} onChange={(value) => {
+                    console.log("value", value)
+                    setLessonTemp(prev => ({ ...prev, video: value }));
+                }} setDuration={(value) => setLessonTemp({ ...lessonTemp, duration: value })} />
             </div>)}
 
             {lessonTemp.type === "video_mp4" && (<div className="flex flex-col gap-2">

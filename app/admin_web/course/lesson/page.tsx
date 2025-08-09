@@ -125,7 +125,7 @@ export default function CourseLesson() {
     const saveLesson = useCallback(async (new_lesson: LessonItem) => {
 
         if (new_lesson.video == "") {
-            const mess = new_lesson.type == 'video' ? 'Vui lòng chọn video' : 'Vui lòng chọn file pdf và tải file lên'
+            const mess = "vui lòng chọn video tải lên"
             toast.error(mess, {
                 duration: 3000,
                 position: "top-right",
