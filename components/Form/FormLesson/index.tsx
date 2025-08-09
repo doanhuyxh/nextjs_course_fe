@@ -22,7 +22,6 @@ export default function FormLesson({ lesson, setLesson, saveLesson }: { lesson: 
         }
     };
 
-
     const handleEditorChangeLessonContent = (content: string) => {
         setLessonTemp({ ...lessonTemp, lessonContent: content });
     };
@@ -87,19 +86,19 @@ export default function FormLesson({ lesson, setLesson, saveLesson }: { lesson: 
 
             <div className="flex flex-row justify-evenly gap-5 items-center">
 
-                <div className="flex flex-row items-center gap-3">
+                <div className="flex flex-col items-center flex-wrap gap-3">
                     <label className="font-semibold">Loại bài học</label>
-                    <div className="flex flex-row gap-2">
-                        <label className="cursor-pointer">Video YouTube <input type="radio" value={"video_youtube"} checked={lessonTemp.type === "video_youtube"} onChange={(e) => hanleTypeVideoChange(e.target.value)} /></label>
-                        <label className="cursor-pointer">Video MP4 <input type="radio" value={"video_mp4"} checked={lessonTemp.type === "video_mp4"} onChange={(e) => hanleTypeVideoChange(e.target.value)} /></label>
+                    <div className="flex flex-row flex-wrap gap-3">
+                        <label className="cursor-pointer">YouTube <input type="radio" value={"video_youtube"} checked={lessonTemp.type === "video_youtube"} onChange={(e) => hanleTypeVideoChange(e.target.value)} /></label>
+                        <label className="cursor-pointer">MP4 <input type="radio" value={"video_mp4"} checked={lessonTemp.type === "video_mp4"} onChange={(e) => hanleTypeVideoChange(e.target.value)} /></label>
                         <label className="cursor-pointer">Video M3u8 <input type="radio" value={"video_m3u8"} checked={lessonTemp.type === "video_m3u8"} onChange={(e) => hanleTypeVideoChange(e.target.value)} /></label>
-                        <label className="cursor-pointer">Video Iframe <input type="radio" value={"video_iframe"} checked={lessonTemp.type === "video_iframe"} onChange={(e) => hanleTypeVideoChange(e.target.value)} /></label>
+                        <label className="cursor-pointer">Iframe <input type="radio" value={"video_iframe"} checked={lessonTemp.type === "video_iframe"} onChange={(e) => hanleTypeVideoChange(e.target.value)} /></label>
                         <label className="cursor-pointer">PDF <input type="radio" value={"pdf"} checked={lessonTemp.type === "pdf"} onChange={(e) => hanleTypeVideoChange(e.target.value)} /></label>
                     </div>
                 </div>
 
-                <div className="flex flex-row items-center gap-2">
-                    <label className="font-semibold">Thời lượng</label>
+                <div className="flex flex-col items-center gap-2">
+                    <label className="font-semibold text-nowrap">Thời lượng</label>
                     <input
                         type="text"
                         className="border border-gray-300 rounded-md p-2"
@@ -110,8 +109,8 @@ export default function FormLesson({ lesson, setLesson, saveLesson }: { lesson: 
                 </div>
 
                 <div className="flex flex-row justify-between gap-4 items-center">
-                    <div className="flex gap-2 items-center  cursor-pointer">
-                        <label className="font-semibold">Loại thành viên </label>
+                    <div className="flex flex-col gap-2 items-center cursor-pointer">
+                        <label className="font-semibold text-nowrap">Loại thành viên </label>
                         <select className="border border-gray-300 rounded-md p-2" value={lessonTemp.memberType} onChange={(e) => setLessonTemp({ ...lessonTemp, memberType: e.target.value })}>
                             {MemberType.map((item) => (
                                 <option key={item.value} value={item.value.trim()}>
@@ -121,24 +120,24 @@ export default function FormLesson({ lesson, setLesson, saveLesson }: { lesson: 
                         </select>
                     </div>
 
-                    <div className="flex gap-2 items-center  cursor-pointer">
+                    <div className="flex flex-col gap-2 items-center  cursor-pointer">
+                        <label htmlFor="isOutstanding" className="cursor-pointer text-nowrap">Nổi bật</label>
                         <input
                             id="isOutstanding"
                             type="checkbox"
                             checked={lessonTemp.isOutstanding}
                             onChange={(e) => handleCheckboxChange('isOutstanding', e.target.checked)}
                         />
-                        <label htmlFor="isOutstanding" className="cursor-pointer">Nổi bật</label>
                     </div>
 
-                    <div className="flex gap-2 items-center cursor-pointer">
+                    <div className="flex flex-col gap-2 items-center cursor-pointer">
+                        <label htmlFor="isImportant" className="cursor-pointer text-nowrap">Quan trọng</label>
                         <input
                             id="isImportant"
                             type="checkbox"
                             checked={lessonTemp.isImportant}
                             onChange={(e) => handleCheckboxChange('isImportant', e.target.checked)}
                         />
-                        <label htmlFor="isImportant" className="cursor-pointer">Quan trọng</label>
                     </div>
                 </div>
 
@@ -152,7 +151,7 @@ export default function FormLesson({ lesson, setLesson, saveLesson }: { lesson: 
             {lessonTemp.type === "video_youtube" && (<div>
                 <VideoYoutubeUpload initialLink={lessonTemp.video} onChange={(value) => {
                     console.log("value", value)
-                    setLessonTemp(prev => ({ ...prev, video: value }));
+                    setLessonTemp({ ...lessonTemp, video: value })
                 }} setDuration={(value) => setLessonTemp({ ...lessonTemp, duration: value })} />
             </div>)}
 

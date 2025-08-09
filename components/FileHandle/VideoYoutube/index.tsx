@@ -25,10 +25,10 @@ const VideoYoutubeUpload: React.FC<VideoUploadProps> = ({ initialLink, onChange,
   const handleLinkChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setVideoUrl(value);
+    onChange(value);
 
     if (isYouTubeUrl(value)) {
-      onChange(value);
-      setDuration('0:00'); // Không thể lấy duration trực tiếp
+      //setDuration('0:00');
     } else {
       toast.error('Chỉ hỗ trợ đường dẫn YouTube hợp lệ.', {
         duration: 5000,
