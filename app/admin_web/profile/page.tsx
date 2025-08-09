@@ -50,7 +50,7 @@ export default function ProfilePage() {
         if (file) {
             const formData = new FormData()
             formData.append("file", file)
-            axiosCustomerConfig.post("/upload/image", formData, {
+            axiosCustomerConfig.post("/upload/image_safe_host", formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -65,7 +65,7 @@ export default function ProfilePage() {
         <div className="w-full h-auto flex gap-10 p-4">
             <label
                 htmlFor={"image_handle"}
-                className="w-full md:w-1/3 p-4 shadow-lg rounded-2xl flex flex-col justify-center items-center gap-2">
+                className="w-full md:w-1/3 p-4 bg-white shadow-lg rounded-2xl flex flex-col justify-center items-center gap-2">
                 <Image
                     src={staff?.avatar || "/images/user/user-01.png"}
                     alt="Admin Profile Picture"
@@ -76,35 +76,35 @@ export default function ProfilePage() {
                 <input hidden type='file' id="image_handle" onChange={handleImageChange}/>
                 <p className="text-xs opacity-25">click để cập nhật</p>
             </label>
-            <div className="w-full md:w-2/3 p-4 shadow-lg rounded-3xl flex flex-col gap-4">
-                <p className="text-lg font-semibold">Quyền hạn: <span className="font-normal">{staff?.role}</span></p>
-                <p className="text-2xl font-semibold">Email/Tài khoản: <span
+            <div className="w-full md:w-2/3 p-4 bg-white shadow-lg rounded-3xl flex flex-col gap-4">
+                <p className="font-semibold">Quyền hạn: <span className="font-normal">{staff?.role}</span></p>
+                <p className="font-semibold">Email/Tài khoản: <span
                     className="font-normal">{staff?.email}</span></p>
-                <div className="text-2xl text-nowrap flex items-center gap-2">
+                <div className="text-nowrap flex items-center gap-2">
                     <label className="font-semibold min-w-[10rem]">Họ:</label>
                     <input
                         type="text"
-                        value={staff?.firstName}
+                        value={staff?.firstName || ''}
                         onChange={(e) => setStaff({...staff, firstName: e.target.value})}
                         className="border rounded p-1 flex-1"
                         disabled={!isEditing}
                     />
                 </div>
-                <div className="text-2xl text-nowrap flex items-center gap-2">
+                <div className="text-nowrap flex items-center gap-2">
                     <label className="font-semibold min-w-[10rem]">Tên:</label>
                     <input
                         type="text"
-                        value={staff?.lastName}
+                        value={staff?.lastName || ""}
                         onChange={(e) => setStaff({...staff, lastName: e.target.value})}
                         className="border rounded p-1 flex-1"
                         disabled={!isEditing}
                     />
                 </div>
-                <div className="text-2xl flex items-center gap-2">
+                <div className="text-nowrap flex items-center gap-2">
                     <label className="font-semibold min-w-[10rem]">Số điện thoại:</label>
                     <input
                         type="text"
-                        value={staff?.phoneNumber}
+                        value={staff?.phoneNumber || ""}
                         onChange={(e) => setStaff({...staff, phoneNumber: e.target.value})}
                         className="border rounded p-1 flex-1"
                         disabled={!isEditing}

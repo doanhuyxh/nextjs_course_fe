@@ -18,7 +18,7 @@ const AdminHeader = (props: {
 
   return (
     <header className="sticky top-0 flex w-full bg-white shadow-5 z-20 border-l-2">
-      <div className="flex flex-grow items-center justify-between px-4 py-4 shadow-2 md:px-6 2xl:px-11">
+      <div className="flex flex-grow items-center justify-between px-4 py-1 shadow-2 md:px-6 2xl:px-11">
         <div className="flex items-center gap-2 sm:gap-4 lg:hidden">
           
           <button
@@ -64,8 +64,8 @@ const AdminHeader = (props: {
 
           <Link className="block flex-shrink-0 lg:hidden" href="/admin_web/dashboard">
             <Image
-              width={32}
-              height={32}
+              width={20}
+              height={20}
               src={"/images/logo/logo-icon.svg"}
               alt="Logo"
             />

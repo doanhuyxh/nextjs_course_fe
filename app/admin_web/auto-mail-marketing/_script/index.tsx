@@ -103,18 +103,12 @@ export default function Page() {
             const toList = dataContext[toId];
             const movedItem = fromList[active.data.current.index];
 
-            console.log('fromList', fromList);
-            console.log('toList', toList);
-            console.log('movedItem', movedItem);
-
             setDataContext((prev) => ({
                 ...prev,
                 [fromId]: fromList.filter((_, index) => index !== active.data.current.index),
                 [toId]: [...toList, movedItem],
             }));
-
         }
-
         setActiveItem(null);
     };
 
@@ -125,18 +119,15 @@ export default function Page() {
 
     useEffect(() => {
         if (loading.scripts || loading.emails) return;
-        console.log("emails", emails);
 
         let email_have_script = [] as string[];
         scripts.forEach((script) => {
             email_have_script = [...email_have_script, ...script.listSchedulingEmails];
         });
-        console.log("email_have_script", email_have_script);
 
         const email_filter = emails.filter((email) => {
             return !email_have_script.some((item) => item === email.id);
         });
-        console.log("email_filter:: ", email_filter);
 
         const initialData = {
             "unknown": email_filter.map((item) => ({

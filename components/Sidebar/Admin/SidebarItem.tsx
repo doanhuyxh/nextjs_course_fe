@@ -20,7 +20,7 @@ const SidebarItem = ({ item, pageName, setPageName }:any) => {
 
   const itemClasses = `${
     isItemActive ? "bg-gray-300" : ""
-  } group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-black duration-300 ease-in-out hover:bg-gray-300 dark:hover:bg-meta-4 cursor-pointer`;
+  } group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-sm text-black duration-300 ease-in-out hover:bg-gray-300 dark:hover:bg-meta-4 cursor-pointer`;
 
   const renderIcon = () => (
     item.children && (

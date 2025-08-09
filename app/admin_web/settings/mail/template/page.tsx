@@ -1,10 +1,9 @@
 'use client'
 
 import { useEffect, useState } from "react";
-import { Table, message, Button, Popconfirm } from "antd";
+import { Table, message, Button, Popconfirm, Modal } from "antd";
 import axiosAdminConfig from "@/libs/configs/ApiConfig/axiosAdminConfig";
 import { TemplateMail } from "@/libs/types";
-
 import AddTemplate from "./_components/add_template";
 
 import ModalViewHtml from "@/components/Modal/ModalViewHtml";
@@ -77,6 +76,8 @@ export default function Template() {
             title: "Tên mẫu",
             dataIndex: "name",
             key: "name",
+            width: 250,
+            ellipsis: true,
         },
         {
             title: "Tên người gửi",
@@ -100,11 +101,9 @@ export default function Template() {
             key: "id",
             render: (_, record) => (
                 <div>
-
                     <Button
                         type="link"
                         onClick={() => handleView(record.id)}
-                        style={{ marginRight: 8 }}
                     >
                         <i className="fa-solid fa-eye"></i> Xem
                     </Button>
@@ -112,7 +111,6 @@ export default function Template() {
                     <Button
                         type="link"
                         onClick={() => handleEdit(record.id)}
-                        style={{ marginRight: 8 }}
                     >
                         <i className="fa-solid fa-pen-to-square"></i> Sửa
                     </Button>
@@ -149,6 +147,7 @@ export default function Template() {
                 columns={columns}
                 dataSource={data}
                 rowKey={(record) => record.id}
+                scroll={{ x: "100%" }}
                 pagination={{
                     current: currentPage,
                     pageSize,
@@ -160,12 +159,14 @@ export default function Template() {
 
             <AddTemplate openModal={isModalVisible} setOpenModal={() => setIsModalVisible(!isModalVisible)} reloadPage={() => fetchTemplates(1)} />
 
-            <ModalViewHtml
-                isOpen={showContentTemplate.length > 0}
-                onClose={() => setShowContentTemplate("")}
-                title="Nội dung mẫu">
+            <Modal
+                title="Nội dung mẫu"
+                open={showContentTemplate.length > 0}
+                onCancel={() => setShowContentTemplate("")}
+                footer={null}
+            >
                 <div dangerouslySetInnerHTML={{ __html: showContentTemplate }} />
-            </ModalViewHtml>
+            </Modal>
         </div>
     );
 }

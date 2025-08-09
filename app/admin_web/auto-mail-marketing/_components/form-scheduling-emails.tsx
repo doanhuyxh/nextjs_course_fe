@@ -5,7 +5,6 @@ import { ConditionSelected } from "@/libs/types";
 import axiosInstance from "@/libs/configs/ApiConfig/axiosAdminConfig";
 import ConditionSelector from "@/components/ConditionSelectAutoMail";
 import moment from "moment";
-
 export default function FormSchedulingEmails({ visible, onClose }: { visible: boolean, onClose: () => void }) {
     const [form] = Form.useForm();
     const [template, setTemplate] = useState([]);
@@ -161,7 +160,7 @@ export default function FormSchedulingEmails({ visible, onClose }: { visible: bo
                             label="Ngày (để trống nếu muốn chạy hàng ngày)"
                             name="date"
                         >
-                            <DatePicker format="YYYY-MM-DD" style={{ width: '100%' }} />
+                            <DatePicker format="DD-MM-YYYY" style={{ width: '100%' }} />
                         </Form.Item>
                     </Col>
                 </Row>
