@@ -222,8 +222,16 @@ export default function CustomerPage() {
             dataIndex: "totalBot",
         },
         {
+            title: "Số lượng BOT đã train",
+            dataIndex: "totalTrainedBot",
+        },
+        {
             title: "Số lượng Page",
             dataIndex: "totalPage",
+        },
+        {
+            title: "Số lượng Page đã gán bot",
+            dataIndex: "totalBotPage",
         },
         {
             title: "Ngày tham gia",

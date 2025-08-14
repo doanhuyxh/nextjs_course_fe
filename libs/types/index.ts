@@ -254,3 +254,16 @@ export const MemberType =[
     { value: "pro", label: "Pro" },
     { value: "premium", label: "Premium" }
 ]
+
+export interface Order {
+    id: string,
+    createdAt: string,
+    total: string,
+    payment: 'Paid' | 'Pending' | 'Failed',
+    numberOfMonths: number,
+    userId: string,    
+    teamId: string, 
+    planId: string,
+    email: string,
+    plan: string
+}
